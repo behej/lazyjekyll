@@ -35,8 +35,9 @@ plugins:
   - jekyll-feed
 
 plainwhite:
-  name: Jérôme Béhé
-  tagline: Developer. Geek
+  name: Lazygeek
+  tagline: Automate yourself !
+  portfolio_image:  "assets/images/logo.png"
   date_format: "%b %-d, %Y"
 
   social_links:

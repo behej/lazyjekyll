@@ -39,6 +39,7 @@ plainwhite:
   tagline: Automate yourself !
   portfolio_image:  "assets/images/logo.png"
   date_format: "%b %-d, %Y"
+  search: false
 
   social_links:
     github: behej

@@ -1,57 +1,47 @@
 ---
-layout: default
 ---
+<!DOCTYPE html>
+<html lang="{{ site.plainwhite.html_lang }}">
 
-{%- if page.title -%}
-  <h1 class="page-heading">{{ page.title }}</h1>
+<head>
+  {%- include head.html -%}
+</head>
+
+{%- if site.plainwhite.condensed_mobile contains page.layout -%}
+{% assign condensed_class = "condensed" %}
+{% else %}
+{% assign condensed_class = "" %}
 {%- endif -%}
 
-{{ content }}
+<body>
+  <main class="container">
+    {% include about.html %}
+    <section class="content">
+      {{ content }}
+      {% include posts.html %}
+    </section>
+    <footer class="{{condensed_class}}">
+      {{ footer }}
+    </footer>
+  </main>
+  {% if site.plainwhite.dark_mode %}
+  <script type="text/javascript" src="{{ "/assets/js/darkmode.js" | relative_url }}"></script>
+  {% endif %}
 
-{%- if site.posts.size > 0 -%}
-  <ul class="posts">
-    <li class="posts-labelgroup" id="posts-labelgroup">
-      <h1 id="posts-label">posts</h1>
-      {% if site.plainwhite.search %}
-      <div class="search-container">
-        <div class="search-section">
-          <i class="icon-search"></i>
-          <input type="text" name="search" id="searchbar" autocomplete="off" aria-label="search in posts">
-        </div>
-        <div class="search-results" id="search-results" data-placeholder="No Results" style="display: none;"></div>
-      </div>
-      {% endif %}
-    </li>
+  {%- if site.plainwhite.analytics_id -%}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.plainwhite.analytics_id }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', '{{ site.plainwhite.analytics_id }}');
+  </script>
+  {%- endif -%}
 
-    {%- for post in site.posts -%}
-      <li>
-        {%- assign date_format = site.plainwhite.date_format | default: "%b %-d, %Y" -%}
-        <a class="post-link" href="{{ post.url | relative_url }}">
-          <h2 class="post-title">{{ post.title | escape }}</h2>
-        </a>
-        <div class="post-meta">
-          <div class="post-date">
-            <i class="icon-calendar"></i>
-            {{ post.date | date: date_format }}
-          </div>
-          {%- if post.categories.size > 0-%}
-          <ul class="post-categories">
-            {%- for tag in post.categories -%}
-            <li>{{ tag }}</li>
-            {%- endfor -%}
-          </ul>
-          {%- endif -%}
-        </div>
-        <div class="post">
-          {%- if site.show_excerpts -%}
-            {{ post.excerpt }}
-          {%- endif -%}
-        </div>
-      </li>
-    {%- endfor -%}
-  </ul>
+  {% if site.plainwhite.search %}
+  <script src="{{ "/assets/js/simple-jekyll-search.min.js" | relative_url }}"></script>
+  <script src="{{ "/assets/js/search.js" | relative_url }}"></script>
+  {% endif %}
+</body>
 
-  <!-- <p class="feed-subscribe"><svg class="svg-icon orange">
-		<use xlink:href="{{ '/assets/minima-social-icons.svg#rss' | relative_url }}"></use>
-	</svg><a href="{{ "/feed.xml" | relative_url }}">Subscribe</a></p> -->
-{%- endif -%}
+</html>

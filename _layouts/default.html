@@ -15,7 +15,9 @@
 
 <body>
   <main class="container">
-    {% include about.html %}
+    {%- if layout.sidebar == "home" -%}
+      {% include about.html %}
+    {% endif %}
     <section class="content">
       {{ content }}
     </section>

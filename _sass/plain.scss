@@ -78,6 +78,7 @@ main {
   .content {
     flex-grow: 1;
     width: 75vw;
+    margin-right: 40px;
 
     @media screen and (min-width: $mobileW + 1) {
       // max-width: calc(100% - #{$leftWidth});

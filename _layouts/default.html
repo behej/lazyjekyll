@@ -15,9 +15,13 @@
 
 <body>
   <main class="container">
-    {%- if layout.sidebar == "home" -%}
-      {% include about.html %}
-    {% endif %}
+    <section class="left_panel">
+      {%- if layout.sidebar == "home" -%}
+        {% include about.html %}
+      {% else %}
+        {% include menu.html %}
+      {% endif %}
+    </section>
     <section class="content">
       {{ content }}
     </section>

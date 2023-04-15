@@ -6,7 +6,7 @@ $linkColor: #0a59b0;
 $mobileW: 768px;
 $smallMobileW: 480px;
 $bigScreenW: 1600px;
-$leftWidth: 220px;
+$leftWidth: 25vw;
 
 *,
 *:before,
@@ -33,6 +33,7 @@ video {
 a {
   color: #000;
   transition: color 0.3s;
+  text-decoration: none;
   &:hover {
     color: $linkColor;
   }
@@ -44,54 +45,75 @@ h2 {
     margin: 0.3em 0;
   }
 }
+
+
 main {
-  margin: 0 90px;
+  margin: 0 0px;
   display: flex;
+  flex-direction: row;
+  // align-content: stretch;
   height: 100%;
+  
+
 
   @media screen and (min-width: $bigScreenW) {
-    margin: 0 auto;
-    max-width: 1440px;
+    // margin: 0 auto;
+    // max-width: 1440px;
   }
-  @media screen and (max-width: 1280px) {
-    margin: 0 75px;
-  }
-  @media screen and (max-width: 1024px) {
-    margin: 0 35px;
-  }
+  // @media screen and (max-width: 1280px) {
+  //   margin: 0 75px;
+  // }
+  // @media screen and (max-width: 1024px) {
+  //   margin: 0 35px;
+  // }
 
-  @media screen and (max-width: $mobileW) {
-    margin: 0 10px;
-    flex-direction: column;
-  }
-  @media screen and (max-width: $smallMobileW) {
-    margin: 0;
-  }
+  // @media screen and (max-width: $mobileW) {
+  //   // margin: 0 10px;
+  //   flex-direction: column;
+  // }
+  // @media screen and (max-width: $smallMobileW) {
+  //   margin: 0;
+  // }
 
   .content {
+    flex-grow: 1;
+    width: 75vw;
+
     @media screen and (min-width: $mobileW + 1) {
-      max-width: calc(100% - #{$leftWidth});
-      margin-left: $leftWidth;
-      width: 100%;
+      // max-width: calc(100% - #{$leftWidth});
+      // margin-left: $leftWidth;
+      // width: 100%;
+      
     }
   }
-  .about {
+
+  
+  .left_panel {
+    width: $leftWidth;
+    // min-width: $leftWidth;
+    max-width: 250px;
+    
     display: flex;
-    height: 100vh;
+    height: 100%;
     padding-bottom: 15vh;
-    margin-top: 10vh;
+    margin-top: 3vh;
+
+    @media screen and (max-width: $mobileW) {
+      display: none;
+    }
+
     @media screen and (max-width: $mobileW) {
       height: auto;
-      padding: 5vh 30px;
+      // padding: 5vh 30px;
     }
     @media screen and (max-width: $smallMobileW) {
-      padding: 5vh 20px;
+      // padding: 5vh 20px;
     }
     @media screen and (min-width: $mobileW + 1) {
-      position: fixed;
-      max-width: 280px;
+      // position: fixed;
+      // max-width: 250px;
     }
-    min-width: $leftWidth;
+    
     justify-content: start;
     flex-direction: column;
     align-items: center;
@@ -125,6 +147,26 @@ main {
         align-items: center;
         margin-bottom: 17px;
       }
+    }
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: left;
+
+    a {
+      padding-left: 3vw;
+      border-left: 5px solid #00000000;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      margin: 0;
+    }
+
+    a:hover {
+      // color: #333;
+      border-left: 5px solid #ddd;
     }
   }
 }
@@ -322,8 +364,12 @@ footer {
     }
     .about-footer.condensed {
       display: none;
+      text-align: center;
     }
   }
+
+
+
   footer.condensed {
     display: flex;
     flex-direction: column;

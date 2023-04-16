@@ -103,6 +103,7 @@ Le constructeur de copie est le constructeur utilisé lorsqu'on crée un objet �
 Il est également utilisé
 * lorsqu'on passe un objet en tant que paramètre d'une fonction sans utiliser de référence. L'objet est dupliqué (grâce au constructeur de copie) pour être utilisé à l'intérieur de la fonction.
 * lorsqu'une méthode retourne un objet, une copie de l'objet est créée pour être retournée à la fonction appelante
+
 ```cpp
  NomClasse objet2(objet1);
  NomClasse objet2 = objet1;

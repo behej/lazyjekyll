@@ -1,12 +1,15 @@
+<div>
+  <a href="{{ "/" | relative_url}}">
+    {% if site.plainwhite.portfolio_image_dark and site.plainwhite.dark_mode %}
+    <img class="light" src="{{site.baseurl }}/{{ site.plainwhite.portfolio_image }}" alt="{{ site.plainwhite.name }}" />
+    <img class="dark" src="{{site.baseurl }}/{{ site.plainwhite.portfolio_image_dark }}" alt="{{ site.plainwhite.name }}" />
+    {% else %}
+    <img src="{{site.baseurl }}/{{ site.plainwhite.portfolio_image }}" alt="{{ site.plainwhite.name }}" />
+    {% endif %}
+  </a>
+</div>
 <nav class="menu">    
-      <a href="{{ "/" | relative_url}}">
-        {% if site.plainwhite.portfolio_image_dark and site.plainwhite.dark_mode %}
-        <img class="light" src="{{site.baseurl }}/{{ site.plainwhite.portfolio_image }}" alt="{{ site.plainwhite.name }}" />
-        <img class="dark" src="{{site.baseurl }}/{{ site.plainwhite.portfolio_image_dark }}" alt="{{ site.plainwhite.name }}" />
-        {% else %}
-        <img src="{{site.baseurl }}/{{ site.plainwhite.portfolio_image }}" alt="{{ site.plainwhite.name }}" />
-        {% endif %}
-      </a>
+      
       
       {% for c in site.collections %}
         {% if c.label != "posts" %}

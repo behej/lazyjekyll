@@ -5,7 +5,7 @@
 $linkColor: #0a59b0;
 $mobileW: 768px;
 $smallMobileW: 480px;
-$bigScreenW: 1440px;
+$bigScreenW: 1600px;
 $leftWidth: 25vw;
 
 *,
@@ -58,12 +58,12 @@ main {
   flex-direction: row;
   // align-content: stretch;
   height: 100%;
-  
+  max-width: $bigScreenW;
 
 
   @media screen and (min-width: $bigScreenW) {
     margin: 0 auto;
-    max-width: 1440px;
+    
   }
   // @media screen and (max-width: 1280px) {
   //   margin: 0 75px;
@@ -84,9 +84,12 @@ main {
 
   
   .left_panel {
+    // background-color: lightcyan;
     width: 25%;
     // min-width: $leftWidth;
     max-width: 250px;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0;
     
     display: flex;
     height: 100%;
@@ -167,10 +170,16 @@ main {
   }
 
   .main_panel {
+    // background-color: lightblue;
     flex-grow: 1;
     margin: 0;
+    margin-left: min(25%, 250px);
     width: 75%;
     margin-bottom: 40px;
+
+    @media screen and (max-width: $mobileW) {
+      margin-left: 0;
+    }
 
     .header {
       height: 10vh;

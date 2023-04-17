@@ -53,6 +53,9 @@ collections:
   web:
     output: true
     name: Web
+  sweng:
+    output: true
+    name: Ingénierie logicielle
 
 
 # Exclude from processing.

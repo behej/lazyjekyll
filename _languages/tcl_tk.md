@@ -16,47 +16,110 @@ layout: default
 
 # Commandes de base
 
-| Instructions | Description |
-| -- | -- |
-| **puts** *param* | affiche le paramètre à l'écran |
-| **set** *variable* valeur* | Affecter la *valeur* à la *variable*. Si *valeur* n'est pas spécifiée, la commande affiche le contenu de la *'variable* |
-| **unset** *variable* | Détruit la variable |
-| **expr*** {*expression*} | Evalue l'expression (généralement mathématique) passée en paramètre. Les accolades ne sont pas obligatoires mais fortement conseillées pour éviter l'injection de code |
-| **if** {*cond*} { | Conditions If Then Else |
-{*cmd1*} |  |
-} **else/elseif** {*cmd2*} | |
-| **switch* *var* { | Switch |
-|   **case** *chaine* { | |
-|    cmd1} |  |
-|  '''default''' { | |
-|    cmd2} | |
-|  } | |
-| **while** *cond* | boucle while |
-|   *cmd* | |
-| **for** ''init cond step | Boucle for |
-| *cmd* |  |
-| **break** | Interrompt totalement l'exécution d'une boucle |
-| **continue** | Interrompt l'itération courante de la boucle et passe à l'itération suivante |
-| **incr** *var* | Incrémentation |
-| **proc** *nom arguments* { | Définition d'une fonction. On peut déclarer plusieurs arguments si on les place entre accolades. Lors de l'exécution de la fonction les arguments sont définis en tant que variables locales. Le return est optionnel. Il définit la valeur de retour de la fonction. Si omis, c'est la valeur de retour de la dernière instruction qui est utilisée.
-| *code* | |
-| **return** } | |
-| **proc** nom {arg1 {arg2 **defVal**}} { | La valeur par défaut *defVal* est assignée à l'argument 2 si la valeur n'est pas définie lors de l'appel de la fonction
-| code | |
-| **return** } | | 
-| **proc** nom {arg1 **args**} { | La fonction accepte un nombre variable de paramètres. Les paramètres supplémentaires sont assignés à la variable *args* (sous forme de liste si plus de 1) |
-| code | |
-| **return** } | |
-| **global** *var* | Crée une variable local ''var'' qui est un lien vers la variable globale du même nom |
-| **upvar** *level $param var* | Crée une variable locale *var* qui pointe vers la variable du niveau supérieur passée en paramètre. *level* est facultatif et vaut par défaut 1 (1 niveau au dessus). Si level vaut *i*, on remonte au i-ème niveau supérieur. Si level vaut `#i`, on va au i-ème niveau sous le niveau global |
-| **exec** *programme args ?&?* | Exécute *programme*. Les paramètres *args* sont passés au programme exécuté. Si le symbole & est ajouté à la fin, le programme est exécuté en arrière plan. |
-| **open** *programme* | ??? |
-| **info** *sous-commande* | Renvoie des infos diverses sur l'environnement. Généralement, renvoie la liste des éléments existants. commands / exists varName / functions / globals / locals / procs / vars / cmdcount / level / patchlevel / script / tclversion / args procname / body procname / default procname arg varName |
-| **pid** | Renvoie le PID du script tcl |
-| **source** *fichier* | Charge et exécute le fichier. Utile pour structurer un programme en plusieurs fichiers/modules |
-| **cd** *dir* | change le répertoire courant |
-| **pwd** | Affiche le répertoire courant |
-| **time** *{commande} ?count?* | Exécute la commande et renvoie le temps d'exécution. Si *count* est spécifié, le script est exécuté *count* fois et time renvoie le temps d'exécution moyen | 
+**puts** *param*
+* affiche le paramètre à l'écran
+
+**set** *variable* valeur*
+* Affecter la *valeur* à la *variable*. Si *valeur* n'est pas spécifiée, la commande affiche le contenu de la *'variable*
+
+**unset** *variable*
+* Détruit la variable
+
+**expr*** {*expression*}
+* Evalue l'expression (généralement mathématique) passée en paramètre. Les accolades ne sont pas obligatoires mais fortement conseillées pour éviter l'injection de code
+
+**Conditions If/Then/Else**
+```tcl
+if {cond} {
+  {cmd1}
+} else/elseif {
+  {cmd2}
+}
+```
+
+**Switch**
+```tcl
+switch var {
+  case chaine {
+    cmd1}
+  default {
+    cmd2}
+  }
+```
+
+**Boucle while**
+```tcl
+while cond
+  cmd
+  ```
+
+**Boucle For**
+```tcl
+for init cond step
+  cmd
+  ```
+
+**break**
+* Interrompt totalement l'exécution d'une boucle
+
+**continue**
+* Interrompt l'itération courante de la boucle et passe à l'itération suivante
+
+**incr** *var*
+* Incrémentation
+
+**Définition d'une fonction**
+```tcl
+proc nom arguments {
+  code
+  return }
+```
+* On peut déclarer plusieurs arguments si on les place entre accolades. Lors de l'exécution de la fonction les arguments sont définis en tant que variables locales. Le return est optionnel. Il définit la valeur de retour de la fonction. Si omis, c'est la valeur de retour de la dernière instruction qui est utilisée.
+
+```tcl
+proc nom {arg1 {arg2 defVal}} {
+  code
+  return }
+```
+* La valeur par défaut *defVal* est assignée à l'argument 2 si la valeur n'est pas définie lors de l'appel de la fonction
+
+```tcl
+proc nom {arg1 args} { 
+  code
+  return }
+```
+* La fonction accepte un nombre variable de paramètres. Les paramètres supplémentaires sont assignés à la variable *args* (sous forme de liste si plus de 1)
+
+**global** *var*
+* Crée une variable local *var* qui est un lien vers la variable globale du même nom
+
+**upvar** *level $param var*
+* Crée une variable locale *var* qui pointe vers la variable du niveau supérieur passée en paramètre. *level* est facultatif et vaut par défaut 1 (1 niveau au dessus). Si level vaut *i*, on remonte au i-ème niveau supérieur. Si level vaut `#i`, on va au i-ème niveau sous le niveau global
+
+**exec** *programme args ?&?*
+* Exécute *programme*. Les paramètres *args* sont passés au programme exécuté. Si le symbole & est ajouté à la fin, le programme est exécuté en arrière plan.
+
+
+**open** *programme*
+
+**info** *sous-commande*
+* Renvoie des infos diverses sur l'environnement. Généralement, renvoie la liste des éléments existants. commands / exists varName / functions / globals / locals / procs / vars / cmdcount / level / patchlevel / script / tclversion / args procname / body procname / default procname arg varName
+
+**pid**
+* Renvoie le PID du script tcl
+
+**source** *fichier*
+* Charge et exécute le fichier. Utile pour structurer un programme en plusieurs fichiers/modules
+
+**cd** *dir*
+* change le répertoire courant
+
+
+**pwd**
+* Affiche le répertoire courant
+
+**time** *{commande} ?count?*
+* Exécute la commande et renvoie le temps d'exécution. Si *count* est spécifié, le script est exécuté *count* fois et time renvoie le temps d'exécution moyen
 
 # Substitutions
 Tcl procède en 2 étapes:
@@ -181,7 +244,7 @@ Les fonctions liées aux tableaux sont des sous-commandes de la commande **`arra
 
 |Instruction|Description|
 |-|-|
-| **exists** *nomTab* | Renvoie 1 si *nomTab** existe ET si est un tableau |
+| **exists** *nomTab* | Renvoie 1 si *nomTab* existe ET si est un tableau |
 | **names** *tab pattern* | Renvoie la liste des clés du tableau qui correspondent au pattern. *pattern* est facultatif, si omis la liste complète des clés est retournée. |
 | **size** *tab* | Renvoie le nombre d'éléments contenus dans le tableau |
 | **get** *tab* | Convertit le tableau en liste de la forme {cle1 val1 cle2 val2 ...} |

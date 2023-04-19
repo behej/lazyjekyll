@@ -242,6 +242,20 @@ main {
   height: 100px;
   background-color: lightgreen;
   padding: 20px;
+
+  .card_icon {
+    height: 100%;
+    float: left;
+    // content :"assets/images/cpp.svg";
+  }
+
+  .card_name {
+    float: right;
+    margin-top: 10px;
+    margin-right: 10px;
+    font-size: 1.4em;
+    font-weight: bold;
+  }
 }
 
 #title {

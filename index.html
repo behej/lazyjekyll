@@ -5,27 +5,23 @@
 layout: home
 title: Home
 ---
-<h1>Titre</h1>
-<div class="grid_cards">
-    {% assign items = site.languages %}
-    {% for item in items %}
-    <a class="card" href="{{ item.url }}">
-            <img src="assets/images/cpp.svg" class="card_icon" />
-        <div class="card_name">
-            {{ item.title }}
-        </div>
-    </a>
-    {% endfor %}
-</div>
-<h1>Titre</h1>
-<div class="grid_cards">
-    {% assign items = site.languages %}
-    {% for item in items %}
-    <a class="card" href="{{ item.url }}">
-            <img src="assets/images/cpp.svg" class="card_icon" />
-        <div class="card_name">
-            {{ item.title }}
-        </div>
-    </a>
-    {% endfor %}
-</div>
+
+{% for c in site.collections %}
+    {% if c.label != "posts" %}
+    <a href="{{c.label | absolute_url }}"><h2>{{c.name}}</h2></a>
+    <div class="grid_cards">
+        {% assign items = c.docs %}
+        {% for item in c.docs %}
+        {% if item.url contains 'index.html' %}
+        {% else %}
+            <a class="card" href="{{ item.url }}">
+                <img src="assets/images/cpp.svg" class="card_icon" />
+                <div class="card_name">
+                    {{ item.title }}
+                </div>
+            </a>
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endfor %}

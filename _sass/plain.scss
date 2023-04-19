@@ -193,11 +193,22 @@ main {
 
     .content {
       margin: 0 40px;
+      color: #303030;
   
       @media screen and (min-width: $mobileW + 1) {
         // max-width: calc(100% - #{$leftWidth});
         // margin-left: $leftWidth;
         // width: 100%;        
+      }
+
+      h1 {
+        border-bottom: solid 2px #eee;
+        padding-bottom: 5px;
+      }
+      
+      h2 {
+        border-bottom: solid 1px #eee;
+        padding-bottom: 5px;
       }
     }
   }
@@ -239,7 +250,7 @@ main {
   // width: 30%;
   height: 100px;
   //background-color: lightgreen;
-  border: 1px solid lightgray;
+  border: 1px solid #eee;
   border-radius: 5px;
   padding: 20px;
 
@@ -253,9 +264,9 @@ main {
     float: right;
     margin-top: 10px;
     margin-right: 10px;
-    font-size: 1.4em;
+    font-size: 1.2em;
     font-weight: bold;
-    color: rgb(109, 109, 109);
+    color: #404040;
   }
 }
 

@@ -188,18 +188,16 @@ main {
     .header {
       height: 10vh;
       background-color: lightblue;
+      display: none;
     }
 
     .content {
-      
-      
       margin: 0 40px;
   
       @media screen and (min-width: $mobileW + 1) {
         // max-width: calc(100% - #{$leftWidth});
         // margin-left: $leftWidth;
-        // width: 100%;
-        
+        // width: 100%;        
       }
     }
   }
@@ -240,7 +238,9 @@ main {
 
   // width: 30%;
   height: 100px;
-  background-color: lightgreen;
+  //background-color: lightgreen;
+  border: 1px solid lightgray;
+  border-radius: 5px;
   padding: 20px;
 
   .card_icon {
@@ -255,6 +255,7 @@ main {
     margin-right: 10px;
     font-size: 1.4em;
     font-weight: bold;
+    color: rgb(109, 109, 109);
   }
 }
 

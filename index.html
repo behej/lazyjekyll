@@ -7,21 +7,25 @@ title: Home
 ---
 <h1>Titre</h1>
 <div class="grid_cards">
-    
-    <a class="card" href="/">
+    {% assign items = site.languages %}
+    {% for item in items %}
+    <a class="card" href="{{ item.url }}">
             <img src="assets/images/cpp.svg" class="card_icon" />
         <div class="card_name">
-            Test
+            {{ item.title }}
         </div>
     </a>
-    <a class="card" href="/"">Hello</a>
-    <a class="card" href="/"">Hello</a>
-    <a class="card" href="/"">Hello</a>
-
+    {% endfor %}
 </div>
-
-test
-{% assign items = site.languages %}
-{% for item in items %}
-[{{ item.title }}]({{ item.url }})
-{% endfor %}
+<h1>Titre</h1>
+<div class="grid_cards">
+    {% assign items = site.languages %}
+    {% for item in items %}
+    <a class="card" href="{{ item.url }}">
+            <img src="assets/images/cpp.svg" class="card_icon" />
+        <div class="card_name">
+            {{ item.title }}
+        </div>
+    </a>
+    {% endfor %}
+</div>

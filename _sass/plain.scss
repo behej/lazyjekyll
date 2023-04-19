@@ -203,9 +203,47 @@ main {
       }
     }
   }
+}
 
+.grid_cards {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+
+  @media screen and (max-width: 1440px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media screen and (max-width: 425px) {
+    grid-template-columns: 1fr;
+  }
+
+  // display: flex;
+  // flex-direction: row;
+  // flex-wrap: wrap;
+  // column-gap: 5%;
+  // row-gap: 30px;
   
 }
+
+
+.card {
+  // background-color: #ccc;
+  // padding: 20px;
+  // font-size: 30px;
+  // text-align: center;
+
+  // width: 30%;
+  height: 100px;
+  background-color: lightgreen;
+  padding: 20px;
+}
+
 #title {
   a {
     text-decoration: none;

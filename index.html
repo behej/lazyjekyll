@@ -15,7 +15,9 @@ title: Home
         {% if item.url contains 'index.html' %}
         {% else %}
             <a class="card" href="{{ item.url }}">
-                <img src="assets/images/cpp.svg" class="card_icon" />
+                {% if item.icon %}
+                <img src="assets/images/{{item.icon}}" class="card_icon" />
+                {% endif %}
                 <div class="card_name">
                     {{ item.title }}
                 </div>

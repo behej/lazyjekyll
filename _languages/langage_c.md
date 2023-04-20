@@ -1,6 +1,7 @@
 ---
 title: Langage C
 layout: default
+icon: c.svg
 ---
 # Commentaires
 ```c

@@ -1,6 +1,7 @@
 ---
 title: Docker
 layout: default
+icon: docker.png
 ---
 # Intro
 * **image** : Description d'un environnement

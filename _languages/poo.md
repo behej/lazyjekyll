@@ -1,6 +1,7 @@
 ---
 title: POO
 layout: default
+icon: oop.png
 ---
 # Présentation générale
 ## Fichier header: NomClasse.h

@@ -1,6 +1,7 @@
 ---
 title: Tcl/Tk
 layout: default
+icon: tcl_tk.png
 ---
 # Généralités
 * Une ligne d'instruction commence toujours par une commande

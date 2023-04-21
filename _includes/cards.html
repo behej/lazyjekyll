@@ -1,0 +1,21 @@
+{% for c in site.collections %}
+    {% if c.label == include.collec %}
+    <a href="{{c.label | absolute_url }}"><h2>{{c.name}}</h2></a>
+    <div class="grid_cards">
+        {% assign items = c.docs %}
+        {% for item in c.docs %}
+        {% if item.url contains 'index.html' %}
+        {% else %}
+            <a class="card" href="{{ item.url }}">
+                {% if item.icon %}
+                <img src="{{site.url}}/assets/images/{{item.icon}}" class="card_icon" />
+                {% endif %}
+                <div class="card_name">
+                    {{ item.title }}
+                </div>
+            </a>
+        {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endfor %}

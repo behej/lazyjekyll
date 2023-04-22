@@ -35,13 +35,13 @@ plugins:
   - jekyll-feed
 
 dark_mode: true
+portfolio_image:  "assets/images/logo.png"
+portfolio_image_dark:  "assets/images/logo.png"
 
 
 plainwhite:
   name: Lazygeek
   tagline: Automate yourself !
-  portfolio_image:  "assets/images/logo.png"
-  portfolio_image_dark:  "assets/images/logo.png"
   date_format: "%b %-d, %Y"
   search: false
   

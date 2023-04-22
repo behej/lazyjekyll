@@ -66,15 +66,6 @@ portfolio_image:      "assets/portfolio.png"
 portfolio_image_dark: "assets/portfolio_dark.png"
 ```
 
-**Comments (Disqus)**
-
-Comments on posts can be enabled by specifying your disqus_shortname under plainwhite in `_config.yml`. For example,
-
-```yaml
-plainwhite:
-  disqus_shortname: games
-```
-
 **Google Analytics**
 
 It can be enabled by specifying your analytics id in `_config.yml`

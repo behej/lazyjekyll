@@ -42,6 +42,8 @@ social_links:
   # telegram
   # soundcloud
 
+date_format: "%b %-d, %Y"
+
 # Build settings
 # theme: plainwhite
 plugins:
@@ -53,11 +55,8 @@ portfolio_image_dark:  "assets/images/logo.png"
 
 
 plainwhite:
-  date_format: "%b %-d, %Y"
   search: false
   
-
-
 
 
 collections:

@@ -2,7 +2,7 @@
   <ul class="posts">
     <li class="posts-labelgroup" id="posts-labelgroup">
       <h1 id="posts-label">posts</h1>
-      {% if site.plainwhite.search %}
+      {% if site.search %}
       <div class="search-container">
         <div class="search-section">
           <i class="icon-search"></i>
@@ -15,7 +15,7 @@
 
     {%- for post in site.posts -%}
       <li>
-        {%- assign date_format = site.plainwhite.date_format | default: "%b %-d, %Y" -%}
+        {%- assign date_format = site.date_format | default: "%b %-d, %Y" -%}
         <a class="post-link" href="{{ post.url | relative_url }}">
           <h2 class="post-title">{{ post.title | escape }}</h2>
         </a>

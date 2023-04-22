@@ -3,11 +3,11 @@
 
 @import "plain";
 
-{% if site.plainwhite.search %}
+{% if site.search %}
   @import "search";
 {% endif %}
 
-{%- if site.plainwhite.dark_mode -%}
+{%- if site.dark_mode -%}
   @import "toggle";
   @import "dark";
 {%- endif -%}

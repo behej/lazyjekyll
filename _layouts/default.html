@@ -1,17 +1,11 @@
 ---
 ---
 <!DOCTYPE html>
-<html lang="{{ site.plainwhite.html_lang }}">
+<html lang="{{ site.html_lang | default: "en"}}">
 
 <head>
   {%- include head.html -%}
 </head>
-
-{%- if site.plainwhite.condensed_mobile contains page.layout -%}
-{% assign condensed_class = "condensed" %}
-{% else %}
-{% assign condensed_class = "" %}
-{%- endif -%}
 
 <body>
   <main class="container">
@@ -30,25 +24,25 @@
         {{ content }}
     </section>
     </section>
-    <footer class="{{condensed_class}}">
+    <footer>
       {{ footer }}
     </footer>
   </main>
-  {% if site.plainwhite.dark_mode %}
+  {% if site.dark_mode %}
   <script type="text/javascript" src="{{ "/assets/js/darkmode.js" | relative_url }}"></script>
   {% endif %}
 
-  {%- if site.plainwhite.analytics_id -%}
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.plainwhite.analytics_id }}"></script>
+  {%- if site.analytics_id -%}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.analytics_id }}"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-    gtag('config', '{{ site.plainwhite.analytics_id }}');
+    gtag('config', '{{ site.analytics_id }}');
   </script>
   {%- endif -%}
 
-  {% if site.plainwhite.search %}
+  {% if site.search %}
   <script src="{{ "/assets/js/simple-jekyll-search.min.js" | relative_url }}"></script>
   <script src="{{ "/assets/js/search.js" | relative_url }}"></script>
   {% endif %}

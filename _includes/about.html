@@ -106,17 +106,6 @@
       {%- endif -%}
     </ul>
     {%- endif -%}
-    {%- if site.plainwhite.navigation -%}
-    <nav class="navigation about-footer {{condensed_class}}">
-      <ul>
-        {% for link in site.plainwhite.navigation %}
-        <li>
-          <a href="{{ link.url }}">{{ link.title }}</a>
-        </li>
-        {% endfor %}
-      </ul>
-    </nav>
-    {%- endif -%}
     <p class="about-footer {{condensed_class}}">&copy;
       {{ "now" | date: "%Y" }}</p>
     {%- if site.dark_mode -%}

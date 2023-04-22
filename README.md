@@ -107,19 +107,6 @@ show_excerpts: true
 - Page
 - Post
 
-**Navigation**
-
-Navigation can be enabled by adding the following line to your `_config.yml`
-
-```yaml
-plainwhite:
-  navigation:
-    - title: My Work
-      url: "/my-work"
-    - title: Resume
-      url: "/resume"
-```
-
 **Mobile**
 
 By default, Plainwhite places the sidebar (logo, name, tagline etc.) above the content on mobile (narrow screens).

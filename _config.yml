@@ -55,8 +55,6 @@ dark_mode: true
 portfolio_image:  "assets/images/logo.png"
 portfolio_image_dark:  "assets/images/logo.png"
 
-
-
 collections:
   languages:
     output: true

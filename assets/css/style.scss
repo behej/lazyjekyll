@@ -3,7 +3,7 @@
 
 @import "plain";
 
-{% if site.plainwhite.search %}
+{% if site.search %}
   @import "search";
 {% endif %}
 

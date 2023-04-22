@@ -49,14 +49,12 @@ date_format: "%b %-d, %Y"
 plugins:
   - jekyll-feed
 
+search: false
+
 dark_mode: true
 portfolio_image:  "assets/images/logo.png"
 portfolio_image_dark:  "assets/images/logo.png"
 
-
-plainwhite:
-  search: false
-  
 
 
 collections:

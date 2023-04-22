@@ -165,8 +165,7 @@ Third Line.
 Search-bar can be enabled by adding the following line to `config.yml`
 
 ```yaml
-plainwhite:
-  search: true
+search: true
 ```
 
 Search is powered by [Simple-Jekyll-Search](https://github.com/christian-fei/Simple-Jekyll-Search) Jekyll plugin. A `search.json` containing post meta and contents will be generated in site root folder. Plugin JavaScript will then match for posts based on user input. More info and `search.json` customization documentation can be found in plugin repository.

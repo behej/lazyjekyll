@@ -1,10 +1,10 @@
 <div>
   <a href="{{ "/" | relative_url}}">
-    {% if site.plainwhite.portfolio_image_dark and site.dark_mode %}
-    <img class="light" src="{{site.baseurl }}/{{ site.plainwhite.portfolio_image }}" alt="{{ site.plainwhite.name }}" />
-    <img class="dark" src="{{site.baseurl }}/{{ site.plainwhite.portfolio_image_dark }}" alt="{{ site.plainwhite.name }}" />
+    {% if site.portfolio_image_dark and site.dark_mode %}
+    <img class="light" src="{{site.baseurl }}/{{ site.portfolio_image }}" alt="{{ site.title }}" />
+    <img class="dark" src="{{site.baseurl }}/{{ site.portfolio_image_dark }}" alt="{{ site.title }}" />
     {% else %}
-    <img src="{{site.baseurl }}/{{ site.plainwhite.portfolio_image }}" alt="{{ site.plainwhite.name }}" />
+    <img src="{{site.baseurl }}/{{ site.portfolio_image }}" alt="{{ site.title }}" />
     {% endif %}
   </a>
 </div>
@@ -23,15 +23,15 @@
     <!-- <div class="about-header {{condensed_class}}">
     <div class="about-title">
     <a href="{{ "/" | relative_url}}">
-      {% if site.plainwhite.portfolio_image_dark and site.dark_mode %}
-      <img class="light" src="{{site.baseurl }}/{{ site.plainwhite.portfolio_image }}" alt="{{ site.plainwhite.name }}" />
-      <img class="dark" src="{{site.baseurl }}/{{ site.plainwhite.portfolio_image_dark }}" alt="{{ site.plainwhite.name }}" />
+      {% if site.portfolio_image_dark and site.dark_mode %}
+      <img class="light" src="{{site.baseurl }}/{{ site.portfolio_image }}" alt="{{ site.title }}" />
+      <img class="dark" src="{{site.baseurl }}/{{ site..portfolio_image_dark }}" alt="{{ site.title }}" />
       {% else %}
-      <img src="{{site.baseurl }}/{{ site.plainwhite.portfolio_image }}" alt="{{ site.plainwhite.name }}" />
+      <img src="{{site.baseurl }}/{{ site.portfolio_image }}" alt="{{ site.title }}" />
       {% endif %}
     </a>
     <h2 id="title">
-      <a href="{{ "/" | relative_url }}">{{ site.plainwhite.name }}</a>
+      <a href="{{ "/" | relative_url }}">{{ site.title }}</a>
     </h2>
     </div>
     {%- if site.plainwhite.tagline -%}

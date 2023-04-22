@@ -145,8 +145,7 @@ Dark mode can be enabled by setting the `dark_mode` flag in your `_config.yml`
 The website will check the OS preferred color scheme and set the theme accordingly, the preference will then be saved in a cookie
 
 ```yaml
-plainwhite:
-  dark_mode: true
+dark_mode: true
 ```
 
 ![plainwhite dark theme previe](/dark.png)

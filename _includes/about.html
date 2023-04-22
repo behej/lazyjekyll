@@ -2,7 +2,7 @@
     <div class="about-header {{condensed_class}}">
     <div class="about-title">
     <a href="{{ "/" | relative_url}}">
-      {% if site.plainwhite.portfolio_image_dark and site.plainwhite.dark_mode %}
+      {% if site.plainwhite.portfolio_image_dark and site.dark_mode %}
       <img class="light" src="{{site.baseurl }}/{{ site.plainwhite.portfolio_image }}" alt="{{ site.plainwhite.name }}" />
       <img class="dark" src="{{site.baseurl }}/{{ site.plainwhite.portfolio_image_dark }}" alt="{{ site.plainwhite.name }}" />
       {% else %}
@@ -119,7 +119,7 @@
     {%- endif -%}
     <p class="about-footer {{condensed_class}}">&copy;
       {{ "now" | date: "%Y" }}</p>
-    {%- if site.plainwhite.dark_mode -%}
+    {%- if site.dark_mode -%}
     <div class="about-footer {{condensed_class}}">
       <p>Dark Mode
         <i class="icon-moon"></i>

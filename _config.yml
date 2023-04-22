@@ -34,6 +34,9 @@ github_username:  jekyll
 plugins:
   - jekyll-feed
 
+dark_mode: true
+
+
 plainwhite:
   name: Lazygeek
   tagline: Automate yourself !
@@ -41,7 +44,7 @@ plainwhite:
   portfolio_image_dark:  "assets/images/logo.png"
   date_format: "%b %-d, %Y"
   search: false
-  dark_mode: true
+  
 
   social_links:
     github: behej

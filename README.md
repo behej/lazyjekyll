@@ -41,15 +41,14 @@ Or install it yourself as:
 The "plainwhite" key in \_config.yml is used to customize the theme data.
 
 ```yaml
-plainwhite:
-  name: Adam Denisov
-  tagline: Developer. Designer
-  date_format: "%b %-d, %Y"
+name: Adam Denisov
+tagline: Developer. Designer
+date_format: "%b %-d, %Y"
 
-  social_links:
-    twitter: samarsault
-    github: samarsault
-    linkedIn: in/samarsault # format: locale/username
+social_links:
+  twitter: samarsault
+  github: samarsault
+  linkedIn: in/samarsault # format: locale/username
 ```
 
 **Updating Placeholder Image**
@@ -153,13 +152,12 @@ dark_mode: true
 Tagline can be multiline in this way
 
 ```yaml
-plainwhite:
-  tagline: |
-  First Line. 
+tagline: |
+First Line. 
 
-  Second Line. 
+Second Line. 
 
-  Third Line.
+Third Line.
 ```
 
 **Search-bar**

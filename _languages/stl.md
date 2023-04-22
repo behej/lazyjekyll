@@ -94,9 +94,9 @@ Seules ces 3 méthodes sont autorisées
 
 ### Map
 * Une map est une table associative. L'index des éléments peuvent être de n'importe quel type
-* La déclaration est: **`map\<typeCle, typeValeur\> nomTable;`**
+* La déclaration est: **`map<typeCle, typeValeur> nomTable;`**
   * Dans ce cas, le type utilisé pour la clé doit impérativement contenir une définition de l'opérateur **`<`**
-* Autre déclaration: **`map\<typeCle, typeValeur, classePourTri> nomTable;`**
+* Autre déclaration: **`map<typeCle, typeValeur, classePourTri> nomTable;`**
   * avec `classePourTri` une classe qui définit un foncteur prenant 2 arguments de type `typeCle` et retournant un bool. Ce foncteur sert à définir une nouvelle méthodologie de classement des objets de type `typeCle`
 * On accède à une élément avec les crochets []: **`nomTable[ValeurCle]`**
   * Si l'élément accédé n'existe pas, il est créé (même en cas de lecture de l'élément)

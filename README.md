@@ -77,11 +77,10 @@ plainwhite:
 
 **Google Analytics**
 
-It can be enabled by specifying your analytics id under plainwhite in `_config.yml`
+It can be enabled by specifying your analytics id in `_config.yml`
 
 ```yaml
-plainwhite:
-  analytics_id: "< YOUR ID >"
+analytics_id: "< YOUR ID >"
 ```
 
 **Sitemap**

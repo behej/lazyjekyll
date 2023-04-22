@@ -7,12 +7,6 @@
   {%- include head.html -%}
 </head>
 
-{%- if site.plainwhite.condensed_mobile contains page.layout -%}
-{% assign condensed_class = "condensed" %}
-{% else %}
-{% assign condensed_class = "" %}
-{%- endif -%}
-
 <body>
   <main class="container">
     <section class="left_panel">
@@ -30,7 +24,7 @@
         {{ content }}
     </section>
     </section>
-    <footer class="{{condensed_class}}">
+    <footer>
       {{ footer }}
     </footer>
   </main>

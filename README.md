@@ -155,9 +155,9 @@ baseurl: "/blog"
 You can set the `lang` attribute of the `<html>` tag on your pages by changing the following line in `_config.yml`:
 
 ```yaml
-plainwhite:
-  html_lang: "en"
+html_lang: "en"
 ```
+> Defaults to English if not specified.
 
 [See here for a full list of available language codes](https://www.w3schools.com/tags/ref_country_codes.asp)
 

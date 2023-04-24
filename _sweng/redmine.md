@@ -140,7 +140,7 @@ Ajouter un hook post réception pour envoyer une commande HTTP au serveur à cha
 
 Voir sur le site officiel pour pls d'infos : [HowTo setup automatic refresh of repositories in Redmine on commit](https://www.redmine.org/projects/redmine/wiki/HowTo_setup_automatic_refresh_of_repositories_in_Redmine_on_commit)
 
-
+> ⚠️ Si Redmine est hébergé sur des containers Docker, la requête HTTP ne doit pas être dirigée vers localhost mais vers le container qui héberge le serveur web.
 
 
 

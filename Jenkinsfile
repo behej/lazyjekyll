@@ -6,11 +6,6 @@ pipeline {
 
   }
   stages {
-    stage('Who am I') {
-      steps {
-        sh 'whoami'
-      }
-    }
 
     stage('ls') {
       steps {

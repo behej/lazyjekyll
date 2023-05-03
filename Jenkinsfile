@@ -21,6 +21,7 @@ pipeline {
 
     stage('Versions') {
       steps {
+        sh 'su root'
         sh 'bundle -v'
         sh 'jekyll -v'
       }

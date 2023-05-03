@@ -2,7 +2,7 @@ pipeline {
   agent {
     docker {
       image 'jekyll:1.1'
-      args '-v /etc/passwd:/etc/passwd:ro -u root'
+      args '-u root'
     }
 
   }

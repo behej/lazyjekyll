@@ -30,6 +30,7 @@ pipeline {
 
         stage('Versions') {
           steps {
+            sh 'cd ~'
             sh 'bundle -v'
             sh 'jekyll -v'
           }

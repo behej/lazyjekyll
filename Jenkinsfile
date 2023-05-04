@@ -41,7 +41,9 @@ pipeline {
         }
 
         stage('build') {
-          sh 'bundle exec jekyll build'
+          steps {
+            sh 'bundle exec jekyll build'
+          }
         }
       }
     }

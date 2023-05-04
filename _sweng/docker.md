@@ -54,6 +54,7 @@ Un container s'exécute tant qu'un process démarré dans le container est en co
     * L'avantage des volumes par rapport au bind: les volumes sont gérés par docker. On est indépendant par rapport à l'architecture de l'hote (pas besoin de s'assurer que le dossier monté est existant sur l'hôte.)
     * Un fois l'exécution du container terminée, le volume reste présent (sauf si le container a été démarré avec l'option `--rm`). Il est possible d'y accéder ou de le supprimer.
   * **docker container run \-\-publish *\<portSrc\>:\<portDst\> \<nomImage\>*** : mappe le port source de l'hote vers le port destination du container
+  * **docker container run -u \<username\>** : démarre le container et y exécute les commande en tant qu'utilisateur particulier
 
 **docker container logs *\<nomContainer\>***
 * Affiche les logs du container

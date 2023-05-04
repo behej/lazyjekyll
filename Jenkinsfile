@@ -18,6 +18,7 @@ pipeline {
         stage('ls') {
           steps {
             sh 'ls -al /usr/bin/'
+            sh 'ls -al'
           }
         }
 

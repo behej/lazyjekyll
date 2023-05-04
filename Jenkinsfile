@@ -15,6 +15,12 @@ pipeline {
           }
         }
 
+        stage('gems') {
+          steps {
+            sh 'gem list'
+          }
+        }
+
         stage('ls') {
           steps {
             sh 'ls -al /usr/bin/'

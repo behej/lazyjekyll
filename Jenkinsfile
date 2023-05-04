@@ -32,7 +32,7 @@ pipeline {
           steps {
             sh 'cd ~'
             sh 'bundle -v'
-            sh 'jekyll -v'
+            sh '/usr/bin/jekyll -v'
           }
         }
 

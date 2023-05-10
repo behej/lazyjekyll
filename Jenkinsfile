@@ -8,11 +8,6 @@ pipeline {
   stages {
     stage('all') {
       parallel {
-        stage('Who am I') {
-          steps {
-            sh 'whoami'
-          }
-        }
 
         stage('gems') {
           steps {

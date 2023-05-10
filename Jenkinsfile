@@ -50,9 +50,12 @@ pipeline {
         stage('build') {
           steps {
             sh 'bundle exec jekyll build'
+            archiveArtifacts '_site/**'
           }
         }
+
       }
     }
+
   }
 }

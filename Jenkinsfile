@@ -38,7 +38,7 @@ pipeline {
           steps {
             sh 'cd ~'
             sh 'bundle -v'
-            sh '/usr/bin/jekyll -v'
+            sh 'cd ~ && /usr/bin/jekyll -v'
           }
         }
 

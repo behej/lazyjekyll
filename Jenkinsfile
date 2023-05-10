@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'jekyll:1.1'
+      image 'jekyll:1.2'
       args '-u root:root'
     }
 
@@ -36,9 +36,8 @@ pipeline {
 
         stage('Versions') {
           steps {
-            sh 'cd ~'
             sh 'bundle -v'
-            sh 'cd ~ && /usr/bin/jekyll -v'
+            sh '/usr/bin/jekyll -v'
           }
         }
 

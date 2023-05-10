@@ -8,7 +8,6 @@ pipeline {
   stages {
     stage('all') {
       parallel {
-
         stage('gems') {
           steps {
             sh 'gem list'
@@ -44,6 +43,7 @@ pipeline {
         stage('build') {
           steps {
             sh 'bundle exec jekyll build'
+            stash(name: 'Generated HTML', includes: '_site/**')
             archiveArtifacts '_site/**'
           }
         }

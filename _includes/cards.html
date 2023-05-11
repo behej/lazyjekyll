@@ -6,7 +6,7 @@
         {% for item in c.docs %}
         {% if item.url contains 'index.html' %}
         {% else %}
-            <a class="card" href="{{ item.url }}">
+            <a class="card" href="{{ item.url | absolute_url}}">
                 {% if item.icon %}
                 <img src="{{site.url}}/assets/images/{{item.icon}}" class="card_icon" />
                 {% endif %}

@@ -1,10 +1,10 @@
 <div>
-  <a href="{{ "/" | relative_url}}">
+  <a href="{{ "/" | absolute_url}}">
     {% if site.portfolio_image_dark and site.dark_mode %}
-    <img class="light" src="{{site.baseurl }}/{{ site.portfolio_image }}" alt="{{ site.title }}" />
-    <img class="dark" src="{{site.baseurl }}/{{ site.portfolio_image_dark }}" alt="{{ site.title }}" />
+    <img class="light" src="{{site.url }}/{{ site.portfolio_image }}" alt="{{ site.title }}" />
+    <img class="dark" src="{{site.url }}/{{ site.portfolio_image_dark }}" alt="{{ site.title }}" />
     {% else %}
-    <img src="{{site.baseurl }}/{{ site.portfolio_image }}" alt="{{ site.title }}" />
+    <img src="{{site.url }}/{{ site.portfolio_image }}" alt="{{ site.title }}" />
     {% endif %}
   </a>
 </div>

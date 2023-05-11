@@ -44,6 +44,9 @@ pipeline {
           steps {
             sh 'bundle exec jekyll build'
             stash(name: 'Generated HTML', includes: '_site/**')
+            ftpPublisher continueOnError: false,
+                 failOnError: true,
+                 publishers: [[configName: 'Lazyjekyll', transfers: [[asciiMode: false, cleanRemote: false, excludes: '', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: 'jekyll', remoteDirectorySDF: false, removePrefix: '_site', sourceFiles: '_site/**']], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: true]]
             archiveArtifacts '_site/**'
           }
         }

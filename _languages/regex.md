@@ -2,6 +2,7 @@
 title: Expressions régulières
 layout: default
 icon: c.svg
+sfd
 ---
 **grep:** commande de base qui renvoie toutes les lignes contenant la chaine recherchée
 * *grep*: **G**lobally **R**egular **E**xpression **P**rint
@@ -10,7 +11,7 @@ icon: c.svg
 
 Renvoie toute les lignes de **fichier.txt** qui contiennent *maChaine*
 
-**Attention:** grep est *case sensitive*
+**Attention:** grep est *case sensitive* par défaut.
 
 # Options de recherche
 

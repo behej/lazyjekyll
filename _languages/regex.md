@@ -1,8 +1,7 @@
 ---
 title: Expressions régulières
 layout: default
-icon: c.svg
-sfd
+icon: regex.png
 ---
 **grep:** commande de base qui renvoie toutes les lignes contenant la chaine recherchée
 * *grep*: **G**lobally **R**egular **E**xpression **P**rint

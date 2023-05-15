@@ -102,3 +102,13 @@ Pour un montage automatique au démarrage du PC, ajouter les lecteurs à monter 
 `mount -a` : Effectue tous les montages décrits dans le fichier *fstab*.
 
 
+# Hardware
+
+* `lspci`: Liste tous les périphériques PCI
+* `lsusb`: Liste tous les périphériques USB
+* `lshw`: Liste les périphériques matériel
+  * `lshw -C <categorie>`: Filtre par catégorie (ex: *lshw -C network*)
+* `lsmod`: Liste les modules du kernel qui sont chargés (mise en forme du fichier */proc/modules*)
+
+
+

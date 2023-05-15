@@ -24,7 +24,26 @@ icon: linux.png
 |/var/|Variables files. Fichiers utilisés par l'OS et les app pour stocker des infos en cours d'utilisation.|
 
 
+# Cron
+Planification de tâches à heure ou intervalle fixe
 
+```sh
+min   hour   day   month  weekday  command
+0     *      *     *      *        script   # toutes les heures: n'importe quelle heure, jour quand les minutes sont à 0
+0     2      *     *      *        script   # tous les jours à 2h: n'importe quel jour, mois à 2h00
+*/15  *      *     *      *        script   # toutes les 15 min
+0     */4    *     *      *        script   # toutes les 4h
+0     5      1     *      *        script   # tous les 1er du mois à 5h
+```
+
+Editer le fichier cron de l'utilisateur:
+```sh
+crontab -e
+```
+
+A noter qu'un fichier crontab général est existant dans le dosser `/etc/`. On peut également trouver des dossiers `/etc/cron.daily, hourly, ...` qui contiennent des scripts qui seront tous lancé périodiquement.
+
+Faire attention à bien démarrer le service cron (cron deamon) `crond`
 
 # Réseau
 ## Associer des noms à des adresses IP
@@ -79,5 +98,7 @@ Pour un montage automatique au démarrage du PC, ajouter les lecteurs à monter 
 192.168.0.xxx:/media/	/media/nas-media	nfs	defaults,auto,nofail,noatime,bg	0	0
 192.168.0.xxx:/Documents/	/media/nas-doc	nfs	defaults,auto,nofail,noatime,bg	0	0
 ```
+
+`mount -a` : Effectue tous les montages décrits dans le fichier *fstab*.
 
 

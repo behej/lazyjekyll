@@ -5,6 +5,7 @@ icon: linux.png
 ---
 # Général
 ## Description du filesystem
+
 |Dossier|Usage|
 |---|---|
 |/bin|Binaires essentiels pour le fonctionnement de l'OS|

@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'jekyll:1.2'
+      image 'jekyll:1.0'
     }
 
   }

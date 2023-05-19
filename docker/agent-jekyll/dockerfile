@@ -1,0 +1,23 @@
+FROM alpine
+RUN apk update
+# RUN apk --no-cache add ruby ruby-dev
+RUN apk --no-cache add ruby-full ruby-dev
+
+RUN apk --no-cache add \
+  zlib-dev \
+  libffi-dev \
+  build-base \
+  libxml2-dev \
+  imagemagick-dev \
+  readline-dev \
+  libxslt-dev \
+  libffi-dev \
+  yaml-dev \
+  zlib-dev \
+  vips-dev \
+  vips-tools \
+  sqlite-dev \
+  cmake
+
+RUN gem install jekyll bundler jekyll-feed
+

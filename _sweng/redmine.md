@@ -121,7 +121,7 @@ On peut lier le SCM directement à Redmine. Pour cela, le repo doit être cloné
 **Solution**
 
 1. Cloner le repo avec l'option mirroir: `git clone --mirror <url>`
-2. Le repo doit recupérer régulièrement les dernières modifs du repo distant. Le plus simple est de créer une tâche cron qui effectue périodiquement une requête `pull`
+2. Le repo doit recupérer régulièrement les dernières modifs du repo distant. Le plus simple est de créer une tâche cron qui effectue périodiquement une requête `fetch`
 
 Plus d'infos ici: 
 * [Cloner les repos](https://github.com/behej/redmine_docker_rpi#first-usage)
@@ -134,13 +134,25 @@ Une fois Redmine installé et opérationel, il est possible de lier automatiquem
 Le problème décrit ici est qu'il obligatoirement déclencher l'affichage de la page *dépôt* pour que le lien soit créé.
 
 
-**Solution**
+### Solution 1 (non fonctionnelle)
 
 Ajouter un hook post réception pour envoyer une commande HTTP au serveur à chaque fois que des données sont reçues depuis origin.
 
 Voir sur le site officiel pour pls d'infos : [HowTo setup automatic refresh of repositories in Redmine on commit](https://www.redmine.org/projects/redmine/wiki/HowTo_setup_automatic_refresh_of_repositories_in_Redmine_on_commit)
 
 > ⚠️ Si Redmine est hébergé sur des containers Docker, la requête HTTP ne doit pas être dirigée vers localhost mais vers le container qui héberge le serveur web.
+
+**Note:** Le script fonctionne correctement mais le hook *post-receive* n'est pas déclenché après la commande `git fetch`.
+
+### Solution 2 (non adaptée)
+
+La mise à jour des trackers redmine peut être effectuée lors de chaque modification sous Github par l'intermédiaire du plugin redmine [Github hooks](https://github.com/koppen/redmine_github_hook).
+
+**Note:** Cette solution impose que le serveur redmine soit accessible depuis Internet. Inadapté dans notre cas.
+
+### Solution 3 (**OK**)
+
+La dernière solution consiste à ajouter la commande *curl* de la solution 1 dans le script exécuté périodiquement par le *cron*.
 
 
 

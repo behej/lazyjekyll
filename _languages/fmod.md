@@ -22,7 +22,7 @@ FMOD_System_Init(system, nbMaxChannels, FMOD_INIT_NORMAL, NULL);
 ```
 
 # Gestion des sons
-Banque de sons: http://www.findsounds.com/
+Banque de sons: [findsounds.com](http://www.findsounds.com/)
 
 **Pour les sons courts**: on charge le son en mémoire en entier
 ```c

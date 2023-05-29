@@ -275,6 +275,13 @@ main {
     text-decoration: none;
   }
 }
+
+blockquote p {
+  background-color: #f4f4f4;
+  border-left: 5px solid gray;
+  padding: 5px 10px;
+}
+
 .social {
   list-style-type: none;
   padding: 0;

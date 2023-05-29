@@ -210,6 +210,13 @@ main {
         border-bottom: solid 1px #eee;
         padding-bottom: 5px;
       }
+
+      p a {
+        color: #119bb3;
+        font-style: italic;
+        font-weight: bold;
+        text-decoration: underline;
+      }
     }
   }
 }

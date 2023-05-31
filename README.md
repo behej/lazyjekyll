@@ -2,7 +2,12 @@
 
 Simplistic jekyll portfolio-style theme for writers.
 
-**Demo**: [thelehhman.com](https://thelehhman.com)
+# Prerequisites
+To run this project and generate HTML pages, you will need jekyll installed and therefore ruby
+```sh
+sudo apt install ruby-full build-essential zlib1g-dev
+gem install bundler jekyll jekyll-feed
+```
 
 ## Installation on Github Pages
 

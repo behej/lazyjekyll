@@ -21,6 +21,7 @@ icon: linux.png
 |/tmp/|Dossier temporaire. Est effacé à chaque redémarrage du système|
 |/usr/bin/|Binaires destinés à l'utilisateur final de la machine|
 |/usr/local/bin/|Binaires compilés manuellement et non gérés par le gestionnaire de paquets|
+|/usr/local/lib/| Libs compilées manuellement et non gérées par le gestionnaire de paquets|
 |/var/|Variables files. Fichiers utilisés par l'OS et les app pour stocker des infos en cours d'utilisation.|
 
 

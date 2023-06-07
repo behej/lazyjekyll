@@ -532,3 +532,11 @@ Les TU peuvent être appelés:
 | assertRaises(exception, fonction, arguments) |
 
 La dernière assertion vérifie que l'appel de la fonction lève l'exception attendue
+
+
+# Librairies utiles
+Une sélection de librairies à connaitre en Python
+* [argparse](https://docs.python.org/3/library/argparse.html): Gérer facilement les arguments passés en entrée des scripts
+* [configparser](https://docs.python.org/3/library/configparser.html): Gérer facilement des fichiers de configuration (fichiers .ini)
+* [logging](https://docs.python.org/3/library/logging.html): Créer facilement des fichiers de log (avec niveau de détails des logs, timestamp, etc.)
+* [docx](https://python-docx.readthedocs.io/en/latest/): Manipuler des fichiers Microsoft Word

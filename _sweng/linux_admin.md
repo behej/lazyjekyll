@@ -11,7 +11,7 @@ icon: linux.png
   * ps x : affiche tous les processus (même ceux non liés à un terminal)
   * ps o : spécifie les champs à affichage. *ex:* `ps o user:20,pid,start,time,cmd`
 
-## Gestion des disques
+## 💽 Gestion des disques
 * du \<folder\> : Disque Usage - liste tous le fichiers et leur taille dans le dossier indiqué
   * du -d*n* : limite la profondeur du scan à *n*
   * du -s : affichage l'espace total utilisé
@@ -19,7 +19,7 @@ icon: linux.png
 * df : affiche les disques montés et les espaces occupés/libres
   * option -h : Human readable
 
-## Gestion des utilisateurs et des droits
+## 👥 Gestion des utilisateurs et des droits
 * adduser \<user\> : Ajoute un utilisateur
   * adduser \<user\> \<group\> : Ajoute l'utilisateur au groupe
 * deluser \<user\>
@@ -44,6 +44,64 @@ icon: linux.png
 
 
 # Réseau
+## Associer des noms à des adresses IP
+
+Permet de donner des noms à des IP du réseau local (plus simple de retenir un nom qu'une IP)
+* fichier `/etc/hosts`
+
+```sh
+192.168.0.xxx	nas
+192.168.0.yyy	raspberry4
+```
+## Montage de lecteurs réseau
+### Prérequis
+Nécessite l'installation d'utilitaires NFS si montage NFS.
+```sh
+sudo apt install nfs-common
+```
+*Note:* Cela va installer l'utilitaire `/sbin/mount.nfs`
+
+### Montage
+La commande `mount` permet de monter un lecteur (USB, réseau, etc.) vers un point de montage n'importe où dans le filesystem. Néanmoins, les montages se feront généralement dans `/media/`.
+
+Le dossier sur lequel sera monté le lecteur doit préalablement exister (dans l'exemple ci-dessous, le dossier `stock` doit exister).
+
+```sh
+sudo mount -t [type] -o [options] /dev/sdc3 /media/stock
+```
+
+|Option|Signification|
+|---|---|
+|defaults|paramètres de montage par défaut (équivalent à `rw,suid,dev,exec,auto,nouser,async`)|
+| rw | Lecture/Ecriture |
+| ro | Read-only |
+|exec/noexec|	Autorise l'exécution des programmes (par défaut)|
+|users|permet à n'importe quel utilisateur de monter/démonter le système de fichiers (cela implique noexec,nosuid,nodev).|
+|nouser|autorise seulement le compte root à monter le fichier système (par défaut). **Note:** si le montage est effectué par un service (ex dans fichier fstab), il sera nécessairement monté en tant que root. Cette option n'empêche donc pas les utilisateurs d'avoir un lecteur monté sur leur session. |
+|auto|le système de fichiers sera monté automatiquement au démarrage, ou quand la commande `mount -a` sera jouée|
+| nofail|si la partition n'est pas disponible au démarrage, elle n'est pas montée et ne bloque pas le démarrage|
+|noatime|ne pas mettre à jour la date d'accès sur l'inode pour le système de fichier|
+|bg|Montage en arrière plan. Si le montage échoue, le process parent continue et des retry sont effectués en arrière-plan|
+
+
+> 📚 *Biblio*: [https://doc.ubuntu-fr.org/mount_fstab](https://doc.ubuntu-fr.org/mount_fstab)
+
+ 
+### Montage automatique
+Pour un montage automatique au démarrage du PC, ajouter les lecteurs à monter ainsi que les options dans le fichier `/etc/fstab`.
+
+> ✏️ **Note:** Le montage des lecteurs sera alors effectué par un service en tant que root. 
+
+```sh
+192.168.0.xxx:/media/	/media/nas-media	nfs	defaults,auto,nofail,noatime,bg	0	0
+192.168.0.xxx:/Documents/	/media/nas-doc	nfs	defaults,auto,nofail,noatime,bg	0	0
+```
+
+`mount -a` : Effectue tous les montages décrits dans le fichier *fstab*.
+
+
+
+
 ## UFW
 **UFW** (**U**ncomplicated **F**ire**W**all) est un utilitaire simplifié de configuration du firewall.
 * ufw app list : Affiche la liste des applications connues
@@ -66,13 +124,23 @@ Gérer les services
 systemd est un daemon d'init du system (généralement PID 1). Il est en charge de démarrer les autres démons et services.
 Toute appli démarrée à l'aide de systemd (via une commande systemctl) voit ses sorties standard (stdout et stderr) redirigées vers journald.
 
-> *Bibliographie:* [https://guillaume.fenollar.fr/blog/journald-tutoriel-journald-journalctl/](https://guillaume.fenollar.fr/blog/journald-tutoriel-journald-journalctl/)
+> 📚 *Bibliographie:* [https://guillaume.fenollar.fr/blog/journald-tutoriel-journald-journalctl/](https://guillaume.fenollar.fr/blog/journald-tutoriel-journald-journalctl/)
 
 
 ## dmesg
 * dmesg (pour display messages) permet d'afficher les messages du kernel linux. Utile pour le boot du système ou lorsqu'on connecte/déconnecte un device.
 * on peut écrire des message dans les logs kernel: `echo "mesage" > /dev/kmsg`
 
+
+# Hardware
+
+* `lspci`: Liste tous les périphériques PCI
+* `lsusb`: Liste tous les périphériques USB
+* `lshw`: Liste les périphériques matériel
+  * `lshw -C <categorie>`: Filtre par catégorie (ex: *lshw -C network*)
+* `lsmod`: Liste les modules du kernel qui sont chargés (mise en forme du fichier */proc/modules*)
+
 # Divers
 * free -h : Affiche la mémoire dispo sur le système
 * cat /sys/class/thermal/thermal_zone0/temp : Affiche la température CPU (en m°C)
+

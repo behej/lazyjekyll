@@ -4,7 +4,7 @@ layout: default
 icon: linux.png
 ---
 # Général
-## Description du filesystem
+## 📂 Description du filesystem
 
 |Dossier|Usage|
 |---|---|
@@ -109,7 +109,7 @@ Les tâches en arrière plan restent quand même attachées au shell. Si on ferm
   * echo "a;b;c;d" | cut -d';' -f2,3 --> b;c
 * **rev** : Renverse une chaine de caractère
 
-## Archives
+## 🗜 Archives
 * tar -cf archive.tar file1 file2 ... : compresse les fichiers dans une archive au format tar
 * tar -czf archive.tar file1 file2 ... : compresse les fichiers dans une archive au format tar.gz
 * tar -cjf archive.tar file1 file2 ... : compresse les fichiers dans une archive au format tar.bz2
@@ -123,7 +123,7 @@ Les tâches en arrière plan restent quand même attachées au shell. Si on ferm
 
 
 
-# Cron
+# 🕞 Cron
 Planification de tâches à heure ou intervalle fixe
 
 ```sh
@@ -145,15 +145,7 @@ A noter qu'un fichier crontab général est existant dans le dosser `/etc/`. On 
 Faire attention à bien démarrer le service cron (cron deamon) `crond`
 
 # Réseau
-## Associer des noms à des adresses IP
 
-Permet de donner des noms à des IP du réseau local (plus simple de retenir un nom qu'une IP)
-* fichier `/etc/hosts`
-
-```sh
-192.168.0.xxx	nas
-192.168.0.yyy	raspberry4
-```
 
 ## Scan réseau
 * **nmap** : scan réseau
@@ -170,56 +162,3 @@ Permet de donner des noms à des IP du réseau local (plus simple de retenir un 
   * `ssh -i <path_to_private_key> <login>@<address>`: Utilise la clé privée indiquée pour l'authentification (note: le serveur doit être configuré avec la clé publique correspondante)
 
 
-## Montage de lecteurs réseau
-### Prérequis
-Nécessite l'installation d'utilitaires NFS si montage NFS.
-```sh
-sudo apt install nfs-common
-```
-*Note:* Cela va installer l'utilitaire `/sbin/mount.nfs`
-
-### Montage
-La commande `mount` permet de monter un lecteur (USB, réseau, etc.) vers un point de montage n'importe où dans le filesystem. Néanmoins, les montages se feront généralement dans `/media/`.
-
-Le dossier sur lequel sera monté le lecteur doit préalablement exister (dans l'exemple ci-dessous, le dossier `stock` doit exister).
-
-```sh
-sudo mount -t [type] -o [options] /dev/sdc3 /media/stock
-```
-
-|Option|Signification|
-|---|---|
-|defaults|paramètres de montage par défaut (équivalent à `rw,suid,dev,exec,auto,nouser,async`)|
-| rw | Lecture/Ecriture |
-| ro | Read-only |
-|exec/noexec|	Autorise l'exécution des programmes (par défaut)|
-|users|permet à n'importe quel utilisateur de monter/démonter le système de fichiers (cela implique noexec,nosuid,nodev).|
-|nouser|autorise seulement le compte root à monter le fichier système (par défaut). **Note:** si le montage est effectué par un service (ex dans fichier fstab), il sera nécessairement monté en tant que root. Cette option n'empêche donc pas les utilisateurs d'avoir un lecteur monté sur leur session. |
-|auto|le système de fichiers sera monté automatiquement au démarrage, ou quand la commande `mount -a` sera jouée|
-| nofail|si la partition n'est pas disponible au démarrage, elle n'est pas montée et ne bloque pas le démarrage|
-|noatime|ne pas mettre à jour la date d'accès sur l'inode pour le système de fichier|
-|bg|Montage en arrière plan. Si le montage échoue, le process parent continue et des retry sont effectués en arrière-plan|
-
-
-*Biblio*: https://doc.ubuntu-fr.org/mount_fstab
-
-### Montage automatique
-Pour un montage automatique au démarrage du PC, ajouter les lecteurs à monter ainsi que les options dans le fichier `/etc/fstab`.
-
-**Note:** Le montage des lecteurs sera alors effectué par un service en tant que root. 
-
-```sh
-192.168.0.xxx:/media/	/media/nas-media	nfs	defaults,auto,nofail,noatime,bg	0	0
-192.168.0.xxx:/Documents/	/media/nas-doc	nfs	defaults,auto,nofail,noatime,bg	0	0
-```
-
-`mount -a` : Effectue tous les montages décrits dans le fichier *fstab*.
-
-
-# Hardware
-
-* `lspci`: Liste tous les périphériques PCI
-* `lsusb`: Liste tous les périphériques USB
-* `lshw`: Liste les périphériques matériel
-  * `lshw -C <categorie>`: Filtre par catégorie (ex: *lshw -C network*)
-* `lsmod`: Liste les modules du kernel qui sont chargés (mise en forme du fichier */proc/modules*)

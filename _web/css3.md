@@ -136,7 +136,7 @@ Style à appliquer à une balise lorsque l'action correspondante se produite. Ap
 | display: inline / block / inline-block / none | Transforme le type d'un élément: **inline**: l'élément sera aligné / **block**: l'élément sera de type block, on pourra préciser ses dimensions / **inline-block**: l'élément sera aligné mais on pourra préciser ses dimensions / **none**: l'élément sera masqué |
 | vertical-align: top / middle / bottom / baseline | Alignement vertical des élements: alignés en haut, au milieu, en bas, sur la ligne de base (en bas) |
 | vertical-align: 10px / 5% | Alignement vertical à 10px / 5% de la baseline |
-| position: absolute / fixed / relative | Positionnement d'un élément: **absolu**: L'élément est positionné n'importe où sur la page (il se positionne par dessus les autres éléments) / **fixe**: Idem absolu mais l'élément reste à sa position lorsqu'on scrolle dans la page / **relatif**: L'élément est re-positionné par rapport à sa propre position d'origine |
+| position: absolute / fixed / relative | Positionnement d'un élément: **absolu**: L'élément est positionné n'importe où sur la page (il se positionne par dessus les autres éléments) / **fixed**: Idem absolu mais l'élément reste à sa position lorsqu'on scrolle dans la page / **relatif**: L'élément est re-positionné par rapport à sa propre position d'origine |
 | left: 10px / 5% ; right ; top ; bottom | Indication de positionnement: 10px / 5% en partant de la gauche (ou droite, ou haut, ou bas) de la page ou du bloc parent. |
 | list-style-image: url("image") | Charge une image pré-définie à la place des puces standard pour les listes |
 | z-position: 1 | Priorité d'affichage des couches (plus le chiffre est élevé, plus l'élément sera au-dessus) |

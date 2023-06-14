@@ -75,10 +75,10 @@ Une classe commence par un point et un ID par un dièse :
 * *balise1[attribut="valeur"]*: Concerne toute les balise de type 1 qui possèdent l'attribut indiqué à la valeur indiquée
 
 
-## Eléments dynamiques
+## Pseudo-classes
 Style à appliquer à une balise lorsque l'action correspondante se produite. Applicable à toutes les balises (même si appliqué dans la pratique plutôt aux liens)
 
-| Propriété | Description |
+| Pseudo-classe | Description |
 |-----------|------------|
 | balise:hover | Apparence lors du survol avec la souris |
 | balise:active | Apparence au moment du clic (moment très furtif) |
@@ -86,6 +86,24 @@ Style à appliquer à une balise lorsque l'action correspondante se produite. Ap
 | balise:visited | Apparence d'un lien lorsqu'il a déjà été consulté |
 | :required | Eléménts de formulaire obligatoires |
 | :invalid | Eléments de formulaire invalides (ie mal remplis) |
+
+## Pseudo-éléments
+Crée un pseudo-élément juste avant ou après l'élément HTML associé. Permet notamment d'ajouter un contenu cosmétique grâce au CSS juste avant ou après un élément HTML.
+
+
+| Pseudo-élément | Description |
+|-----------|------------|
+| balise::before | Crée un pseudo-élément juste avant l'élément HTML associé | 
+| balise::after  | Crée un pseudo-élément juste après l'élément HTML associé | 
+
+> Généralement utilisé avec la propriété `content` afin de spécifier le contenu à afficher dans cet élément
+
+**Exemple:**
+```css
+a::before {
+    content: '🔗';
+}
+``` 
 
 # Propriétés
 
@@ -142,6 +160,7 @@ Style à appliquer à une balise lorsque l'action correspondante se produite. Ap
 | z-position: 1 | Priorité d'affichage des couches (plus le chiffre est élevé, plus l'élément sera au-dessus) |
 | border-collapse: collapse / separate | Les bordures des différentes cases d'un tableau sont confondues / dissociées. Propriété applicable à un tableau. |
 | caption-side: top / bottom | Position de la légende de tableaux ou figures. |
+| content | Remplace le contenu de la balise HTML concernée par le contenu défini dans le CSS. Le contenu peut etre une image, une url, un texte, un emoji, etc. | 
 
 
 # Police
@@ -185,6 +204,19 @@ Il existe différents formats de police pris en charge ou non par les différent
 | *balise*:last-child | élément | Définit les propriétés du derniers élément du type *balise* |
 | flex: *n* | élément | Les éléments sont étirés selon l'attribut *n*. Un élément avec n=2 sera 2 fois plus large qu'un élément avec n=1 |
 
+# Calculs
+Le CSS permet aussi de déterminer les valeurs numériques de certaines propriétés par la réalisation de calculs.
+**Exemple:
+```css
+width: calc(100px - {$variable})
+```
+
+
+| Instruction | Description |
+|-------------|-------------|
+| calc        | Réalise une opération mathématique |
+| min         | Retourne la valeur mini parmi les 2 paramètres |
+| max         | Retourne la valeur maxi parmi les 2 paramètres |
 
 # Media Queries
 Les media queries sont des requêtes permettant d'obtenir des infos sur le média afin d'adapter le style.

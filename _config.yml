@@ -65,6 +65,9 @@ collections:
   sweng:
     output: true
     name: Ingénierie logicielle
+  rpi:
+    output: true
+    name: Raspberry Pi
 
 
 # Exclude from processing.

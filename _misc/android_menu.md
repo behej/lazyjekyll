@@ -1,9 +1,9 @@
 ---
-title: Android - menu
+title: Android - Menu
 layout: default
 icon: android.png
 ---
-# Menus
+# Menu
 1. Créer un menu (dans les ressources)
 2. Ajouter le menu à l'activité
 3. Gérer les actions lorsqu'on clique sur un item du menu

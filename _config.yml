@@ -68,6 +68,9 @@ collections:
   rpi:
     output: true
     name: Raspberry Pi
+  misc:
+    output: true
+    name: Divers
 
 
 # Exclude from processing.

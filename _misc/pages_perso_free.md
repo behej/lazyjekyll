@@ -1,5 +1,5 @@
 ---
-title: Pages person Free
+title: Pages perso Free
 layout: default
 icon: free.png
 ---

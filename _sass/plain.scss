@@ -266,14 +266,17 @@ main {
   padding: 20px;
 
   .card_icon {
-    height: 80%;
     float: left;
+    max-height: 80%;
+    max-width: 30%;;
     // content :"assets/images/cpp.svg";
   }
 
   .card_name {
     float: right;
     margin-top: 10px;
+    width: calc((100% - 10px) * 0.65);
+    text-align: right;
     margin-right: 10px;
     font-size: 1.2em;
     font-weight: bold;

@@ -46,9 +46,6 @@ h1 {
 }
 h2 {
   margin: 1.2em 0 0.7em 0;
-  // @media screen and (max-width: $mobileW) {
-  //   margin: 0.3em 0;
-  // }
 }
 
 code {
@@ -60,37 +57,16 @@ main {
   margin: 0 0px;
   display: flex;
   flex-direction: row;
-  // align-content: stretch;
   height: 100%;
   max-width: $bigScreenW;
 
 
   @media screen and (min-width: $bigScreenW) {
-    margin: 0 auto;
-    
+    margin: 0 auto;  
   }
-  // @media screen and (max-width: 1280px) {
-  //   margin: 0 75px;
-  // }
-  // @media screen and (max-width: 1024px) {
-  //   margin: 0 35px;
-  // }
-
-  // @media screen and (max-width: $mobileW) {
-  //   // margin: 0 10px;
-  //   flex-direction: column;
-  // }
-  // @media screen and (max-width: $smallMobileW) {
-  //   margin: 0;
-  // }
-
-
-
   
   .left_panel {
-    // background-color: lightcyan;
     width: 25%;
-    // min-width: $leftWidth;
     max-width: 250px;
     position: fixed; /* Set the navbar to fixed position */
     top: 0;
@@ -106,14 +82,10 @@ main {
 
     @media screen and (max-width: $mobileW) {
       height: auto;
-      // padding: 5vh 30px;
     }
     @media screen and (max-width: $smallMobileW) {
-      // padding: 5vh 20px;
     }
     @media screen and (min-width: $mobileW + 1) {
-      // position: fixed;
-      // max-width: 250px;
     }
     
     justify-content: start;
@@ -157,7 +129,6 @@ main {
     flex-direction: column;
     width: 100%;
     margin-top: 20px;
-    // align-items: left;
 
     a {
       padding-left: 20px;
@@ -168,13 +139,11 @@ main {
     }
 
     a:hover {
-      // color: #333;
       border-left: 5px solid #ddd;
     }
   }
 
   .main_panel {
-    // background-color: lightblue;
     flex-grow: 1;
     margin: 0;
     margin-left: min(25%, 250px);
@@ -196,9 +165,6 @@ main {
       color: #303030;
   
       @media screen and (min-width: $mobileW + 1) {
-        // max-width: calc(100% - #{$leftWidth});
-        // margin-left: $leftWidth;
-        // width: 100%;        
       }
 
       h1 {
@@ -242,25 +208,11 @@ main {
   @media screen and (max-width: 530px) {
     grid-template-columns: 1fr;
   }
-
-  // display: flex;
-  // flex-direction: row;
-  // flex-wrap: wrap;
-  // column-gap: 5%;
-  // row-gap: 30px;
-  
 }
 
 
 .card {
-  // background-color: #ccc;
-  // padding: 20px;
-  // font-size: 30px;
-  // text-align: center;
-
-  // width: 30%;
   height: 100px;
-  //background-color: lightgreen;
   border: 1px solid #eee;
   border-radius: 5px;
   padding: 20px;
@@ -269,7 +221,6 @@ main {
     float: left;
     max-height: 80%;
     max-width: 30%;;
-    // content :"assets/images/cpp.svg";
   }
 
   .card_name {

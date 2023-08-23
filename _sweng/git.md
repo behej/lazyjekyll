@@ -12,6 +12,7 @@ icon: git.png
   * git config \-\-global alias.st 'status'
   * git config \-\-global alias.lg 'log \-\-oneline \-\-graph'
   * git config \-\-global alias.amend 'commit \-\-amend \-\-no-edit'
+* git config \-\-global core.editor 'vim' (ouu n'importe quel éditeur)
 
 Les alias sont stockés dans le fichier ~/.gitconfig
 

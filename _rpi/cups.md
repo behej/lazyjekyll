@@ -33,7 +33,7 @@ icon: cups.png
 * onglet administration, cliquer sur "**add printer**"
   * si un login/password est demandé, utiliser le login/password de l'utilisateur Pi (comme on l'a ajouté au groupe lpadmin, il a le droit d'administrer CUPS)
 * L'imprimante est normalement disponible et est affichée dans la liste.
-* Cliquer sur "**continue**" et confurer l'imprimante.
+* Cliquer sur "**continue**" et configurer l'imprimante.
   * ne pas oublier de cocher la case pour partage l'imprimante
 
 ## Côté Windows

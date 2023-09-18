@@ -40,7 +40,7 @@ target_include_directories(ProgramName PUBLIC path/to/include/files)
 cmake_minimum_required(VERSION 3.5)
 ```
 
-## Configure le projet
+## Configurer le projet
 ```
 project(modernCpp
         VERSION 1.0.0.0
@@ -59,43 +59,18 @@ project(modernCpp
 * `set(CMAKE_CXX_STANDARD_REQUIRED ON)`: Requiert l'application du standard C++ indiqué. CMake ne choisira pas tout seul une version antérieure si aucun compilateur comaptible n'est détecté. (OFF par défaut)
 * `set(CMAKE_CXX_EXTENSIONS OFF)` 
 
-## Déclaration des répertoires d'include
-```
-include_directories(path/to/include/files)
-```
-Inclus le dossier indiqué pour la recherche des headers lors de la compilation. Cette directive est applicable à toutes les cibles.
-```
-target_include_directories(ProgramName PUBLIC path/to/include/files)
-```
-Inclus le dossier indiqué pour la recherche des headers lors de la compilation. Cette directive n'est applicable que pour la cible indiquée. Cette directive doit figurer **après** la déclaration de la cible.
 
-## Découpage du projet en modules
-Permet de découper le projet en plusieurs modules. Chaque module étant rangé dans son propre sous-répertoire avec son propre fichier CMakeLists.txt.
-```
-add_subdirectory(path/to/dir/that/contains/another/CMakelists/file)
-```
-Au moment de l'exécution de la directive, le fichier CMakeLists.txt contenu dans le dossier est immédiatement parcouru et interprété.
-
-# Création d'un binaire
-## Exe
-**Création d'un exécutable par compilation et link des fichiers source indiqués**
-```
-add_executable(ProgramName source1 source2)
-```
+# Compilation
+* add_executable(ProgramName source1 source2): Crée un exécutable en compilant et linkant tous les fichiers source indiqués
+* add_library(LibName source1 source2): Idem mais pour créer une lib
+* target_link_libraries(ProgramName PUBLIC LibName): Lie la lib avec l'exécutable
+* target_include_directories(ProgramName PUBLIC path/to/include/files): Inclut le dossier indiqué pour chercher les headers (directive applicable uniquement à la cible indiquée)
+  * Voir aussi include_directories
+* target_compile_definitions(ProgramNale PRIVATE CUSTOM_DEFINE): Permet de créer une definition qui sera utilisable dans le code (#ifdef)
+  * Voir aussi add_compile_definitions 
+* add_subdirectory(path/to/dir/that/contains/another/CMakelists/file): Ajoute un sous-dossier au projet. Le sous-dossier est analysé et le fichier CMakeLists.txt s'y trouvant est interprété immédiatement.
 
 
-
-## lib
-**Création d'une lib par compilation et link des fichiers source indiqués**
-```
-add_library(LibName source1 source2)
-```
-
-## Lier la lib avec l'exe
-``
-target_link_libraries(ProgramName
-                    PUBLIC LibName)
-```
 
 # Gestion des dépendances externes
 Find_package
@@ -115,3 +90,22 @@ Copie le fichier *input* et le renomme en *output*. Lors de la copie, CMake remp
 
 > 💡 Les fichiers seront copiés dans le dossier de build. Il ne faudra pas oublier d'ajouter ce dossier à la liste des répertoires à inclure
 
+## Création d'un option
+```
+option(MyOption "Description" ON)
+```
+Permet de définir une variable qui pourra être configurée différement à l'appel de la commande cmake. Cette variable peut ensuite être réutilisée dans le fichier pour des traitements conditionnels par exemple.
+
+La valeur de la variables est conservée dans le cache.
+
+On peut passer une valeur dans la commande cmake: `cmake . -DMY_VAR=ON`
+
+## Traitement conditionnel
+```
+if(<test>)
+    ...
+else()
+    ...
+endif()
+```
+Le test peut être de nature variée: test d'un booléen, 

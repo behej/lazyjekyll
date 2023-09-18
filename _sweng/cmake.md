@@ -17,6 +17,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)   # Requires C++ standard to be applied. CMa
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(ProgramName source1 source2)
+
+target_include_directories(ProgramName path/to/include/files)
 ```
 
 
@@ -53,12 +55,26 @@ project(modernCpp
 add_executable(ProgramName source1 source2)
 ```
 
+**Déclaration des répertoires d'include**
+```
+include_directories(path/to/include/files)
+```
+Inclus le dossier indiqué pour la recherche des headers lors de la compilation. Cette directive est applicable à toutes les cibles.
+```
+target_include_directories(ProgramName path/to/include/files)
+```
+Inclus le dossier indiqué pour la recherche des headers lors de la compilation. Cette directive n'est applicable que pour la cible indiquée. Cette directive doit figurer **après** la déclaration de la cible.
+
+
 ## lib
 ## Lier la lib avec l'exe
 
 # Gestion des dépendances externes
 Find_package
 
+# Variables prédéfinies utiles
+* PROJECT_BINARY_DIR: Dossier de build
+* 
 
 # Options avancées
 ## Copie et modification de fichiers
@@ -66,5 +82,8 @@ Cette commande permet de copier des fichiers en les modifiant pour y insérer de
 ```
 configure_file(<input file> <output file>)
 ```
-Copie le fichier *input* et le renomme en *output*. Lors de la copie, CMake remplace toutes les variables identifiées `@VAR@`, `${VAR}` ou encore `$ENV{VAR}` par leur valeur qui doit avoir préalablement été définie dans le fichier CMkakeLists.txt.
+Copie le fichier *input* et le renomme en *output*. Lors de la copie, CMake remplace toutes les variables identifiées `@VAR@`, `${VAR}` ou encore `$ENV{VAR}` par leur valeur qui doit avoir **préalablement** été définie dans le fichier CMkakeLists.txt.
 > 💡 L'option `@ONLY` permet de ne remplacer que les variables du type `@VAR@`, ceci afin d'éviter de remplacer d'éventuelles variables avec la syntaxe `${VAR}` qui est normalement propre aux scripts bash.
+
+> 💡 Les fichiers seront copiés dans le dossier de build. Il ne faudra pas oublier d'ajouter ce dossier à la liste des répertoires à inclure
+

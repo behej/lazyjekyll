@@ -66,6 +66,7 @@ project(modernCpp
 * target_link_libraries(ProgramName PUBLIC LibName): Lie la lib avec l'exécutable
 * target_include_directories(ProgramName PUBLIC path/to/include/files): Inclut le dossier indiqué pour chercher les headers (directive applicable uniquement à la cible indiquée)
   * Voir aussi include_directories
+* target_include_directories(LibName INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}) : Permet de déclarer le dossier indiqué comme contenant les includes d'une lib. Le dossier sera alors automatiquement inclus pour tous les exécutables qui sont linkés avec cette lib.
 * target_compile_definitions(ProgramNale PRIVATE CUSTOM_DEFINE): Permet de créer une definition qui sera utilisable dans le code (#ifdef)
   * Voir aussi add_compile_definitions 
 * add_subdirectory(path/to/dir/that/contains/another/CMakelists/file): Ajoute un sous-dossier au projet. Le sous-dossier est analysé et le fichier CMakeLists.txt s'y trouvant est interprété immédiatement.
@@ -77,7 +78,10 @@ Find_package
 
 # Variables prédéfinies utiles
 * PROJECT_BINARY_DIR: Dossier de build
-* PROJECT_SOURCE_DIR: Dossier où se trouvent les sources et donc également le fichier CMakeLists.txt (**NOTE:** Si plusieurs CMakeLists.txt sont imbriqués, cette variable pointe sur le dossier parent)
+* PROJECT_SOURCE_DIR: Dossier parent du projet. Dossier où se trouve le fichier CMakeLists.txt parent de tout le projet
+* CMAKE_CURRENT_SOURCE_DIR: Dossier courrant pour les fichiers en cours de traitement. Sous dossier dans lequel se trouve un CMakeLists.txt enfant
+
+
 
 # Options avancées
 ## Copie et modification de fichiers
@@ -109,3 +113,10 @@ else()
 endif()
 ```
 Le test peut être de nature variée: test d'un booléen, 
+
+## Lib interface
+```
+add_library(target_compiler_flags INTERFACE)
+target_compile_features(target_compiler_flags INTERFACE cxx_std_11)
+```
+Crée une cible virtuelle qui ne génèrera aucun artefact sur le disque. Néanmoins on peut affecter des options à cette cible afin de la réutiliser en la liant aux autres cibles afin d'appliquer les mêmes options.

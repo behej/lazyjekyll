@@ -81,6 +81,34 @@ project(modernCpp
   * La liste peut également contenir des cibles virtuelles définies avec `add_library(<target_name> INTERFACE)`. Cette possibilité est surtout intéressant si on a défini des options de compil activées uniquement en config build associées à cette cible virtuelle.
 * install(FILES <files> DESTINATION <dir/where/to/copy/files>): Copie les fichiers indiqués dans le dossier choisi. On s'en sert notamment pour copier les headers d'une lib dans le dossier /usr/include
 
+# Test
+CMake intègre le module CTest qui permet de lancer des tests. Les commandes ci-dessous permettent de coder les tests directement dans CMakeLists.txt, ce qui n'est pas la meilleure solution.
+
+CMake offre également une bonne compatibilité avec d'autres suites de tests, comme [GoogleTest](https://cmake.org/cmake/help/latest/module/GoogleTest.html#module:GoogleTest) par exemple. 
+
+```
+enable_testing()
+add_test(NAME <test case name> COMMAND <command to launch>)
+set_tests_properties(<test case name> PROPERTIES PASS_REGULAR_EXPRESSION "regexp to match for test to pass" )
+```
+* la commande **enable_testing** permet seulement d'activer la fonction test de CMake
+* la commande **add_test** crée un test qui va lancer la commande indiquée. Cette commande seule ne vérifie rien
+* la commande **set_tests_properties** permet d'ajouter une vérification au test
+
+## Hint
+Si plusieurs tests sont similaires, on peut créer une fonction qui va créer/exécuter le même test plusieurs fois avec des paramètres différents
+```
+function(<nom_fonction> <args...>)
+  add_test(NAME <test_name_${arg}> COMMAND <commande> <args...> ${arg})
+  set_tests_properties(<test_name_${arg}> PROPERTIES PASS_REGULAR_EXPRESSION "regex to match" )
+endfunction()
+
+nom_fonction(param1 param2 ...)
+nom_fonction(param3 param4 ...)
+...
+```
+
+
 # Gestion des dépendances externes
 Find_package
 

@@ -66,12 +66,20 @@ project(modernCpp
 * target_link_libraries(ProgramName PUBLIC LibName): Lie la lib avec l'exécutable
 * target_include_directories(ProgramName PUBLIC path/to/include/files): Inclut le dossier indiqué pour chercher les headers (directive applicable uniquement à la cible indiquée)
   * Voir aussi include_directories
-* target_include_directories(LibName INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}) : Permet de déclarer le dossier indiqué comme contenant les includes d'une lib. Le dossier sera alors automatiquement inclus pour tous les exécutables qui sont linkés avec cette lib.
+* target_include_directories(LibName **INTERFACE** ${CMAKE_CURRENT_SOURCE_DIR}) : Permet de déclarer le dossier indiqué comme contenant les includes d'une lib. Le dossier sera alors automatiquement inclus pour tous les exécutables qui sont linkés avec cette lib.
 * target_compile_definitions(ProgramNale PRIVATE CUSTOM_DEFINE): Permet de créer une definition qui sera utilisable dans le code (#ifdef)
-  * Voir aussi add_compile_definitions 
+  * Voir aussi add_compile_definitions
+* target_compile_feature(<target_name> INTERFACE <requirement>): Exige que le compilateur possède une certaine fonctionalité
+* target_compile_options(<target_name> INTERFACE <options>): Ajoute des options de compilation à la target
+  * On peut créer une cible virtuelle qui possède ces paramètres et ensuite lier cette cible virtuelle à n'importe quelle autre cible réelle (le link se fait alors de la même manière que pour lier une lib)
+  * On peut également spécifier les options pour le build de l'appli uniquement (cf. generator expression et BUILD_INTERFACE). Dans ce cas, les options seront appliquées pour le build de la lib mais pas pour le déploiement.
 * add_subdirectory(path/to/dir/that/contains/another/CMakelists/file): Ajoute un sous-dossier au projet. Le sous-dossier est analysé et le fichier CMakeLists.txt s'y trouvant est interprété immédiatement.
 
-
+# Installation
+* install(TARGETS <targetName> DESTINATION <dir/to/install/files/corresponding/to/target>): Copie les fichiers correspondant à la cible dans le dossier indiqué (Habituellement /usr/bin ou /usr/lib)
+  * A cette étape, la target peut être une liste de plusieurs cibles (ex: une collection de libs).
+  * La liste peut également contenir des cibles virtuelles définies avec `add_library(<target_name> INTERFACE)`. Cette possibilité est surtout intéressant si on a défini des options de compil activées uniquement en config build associées à cette cible virtuelle.
+* install(FILES <files> DESTINATION <dir/where/to/copy/files>): Copie les fichiers indiqués dans le dossier choisi. On s'en sert notamment pour copier les headers d'une lib dans le dossier /usr/include
 
 # Gestion des dépendances externes
 Find_package
@@ -118,8 +126,9 @@ Le test peut être de nature variée: test d'un booléen,
 ```
 add_library(target_compiler_flags INTERFACE)
 target_compile_features(target_compiler_flags INTERFACE cxx_std_11)
+target_compile_options(target_compiler_flags INTERFACE -Wall)
 ```
-Crée une cible virtuelle qui ne génèrera aucun artefact sur le disque. Néanmoins on peut affecter des options à cette cible afin de la réutiliser en la liant aux autres cibles afin d'appliquer les mêmes options.
+Crée une cible virtuelle qui ne génèrera aucun artefact sur le disque. Néanmoins on peut affecter des requirements ou des options à cette cible afin de la réutiliser en la liant aux autres cibles afin d'appliquer les mêmes options.
 
 ## Generator expressions
 Les expressions génératrices permettent de produire des informations spécifiques en fonction de l'environnement et de sa configuration au moment du build. Elles permettent par exemple de définir des options de compilations particulière en fonction du compilateur utilisé.

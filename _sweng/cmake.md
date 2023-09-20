@@ -120,3 +120,45 @@ add_library(target_compiler_flags INTERFACE)
 target_compile_features(target_compiler_flags INTERFACE cxx_std_11)
 ```
 Crée une cible virtuelle qui ne génèrera aucun artefact sur le disque. Néanmoins on peut affecter des options à cette cible afin de la réutiliser en la liant aux autres cibles afin d'appliquer les mêmes options.
+
+## Generator expressions
+Les expressions génératrices permettent de produire des informations spécifiques en fonction de l'environnement et de sa configuration au moment du build. Elles permettent par exemple de définir des options de compilations particulière en fonction du compilateur utilisé.
+
+Une telle expression est de la forme: `$<...>`.
+
+> 💡 Ces expressions peuvent être imbriquées
+
+### Forme élémentaire
+Sa forme la plus élementaire est la suivante:
+```
+$<condition:true_string>
+```
+L'expression retourne "true_string" si la condition est vérifiée. Sinon, elle renvoie une chaine vide. La condition peut être soit une autre expression imbriquée, soit directement une variable. Dans ce cas, on n'oublera pas de rensigner la variable sous la forme `${variable}`.
+
+### Forme avancée
+On retrouvera plus souvent ces expressions avec un opérateur en première position
+```
+$<OPERATOR:parameters>
+```
+CMake propose une liste variée d'opérateurs permettant de vérifier de nombreux paramètres et de les combiner entre eux.
+
+Liste non exhaustive des opérations possibles:
+* IF: Permet de retourner une valeur spécifique selon que la condition soit vérifiée ou non
+* AND: Réaliser un ET logique entre plusieurs conditions
+* OR: Réaliser un OU logique entre plusieurs conditions
+* EQUAL: Compare 2 valeurs numériques
+* STREQUAL: Compare 2 chaines de caractères
+* VERSION_LESS/VERSION_GREATER: Compare 2 numéros de version
+* LOWER_CASE/UPPER_CASE: Transforme une chaine de caractères
+* IN_LIST: Indique si un élément est présent dans une liste
+* LIST:LENGTH: Indique le nombre d'éléments dans une liste
+* LIST:GET: Renvoie un élément d'une liste à une position donnée
+* LIST:APPEND: Ajoute des éléments à une liste
+* PATH:xxx: De nombreuses expressions permettant de manipuler des chemins (cf. doc pour plus d'infos)
+* C_COMPILER_VERSION/CXX_COMPILER_VERSION: Revoie la version du compilateur utilisé
+* COMPILE_LANG_AND_ID: Renvoie 1 si le compilateur utilisé pour le language indiqué figure dans la liste des compilateurs attendus dans l'expression
+* BUILD_INTERFACE: Renvoie les paramètres indiqués uniquement lorsqu'on build la cible. Ne renvoie rien si on installe la cible
+* INSTALL_INTERFACE: Renvoie les paramètres indiqués uniquement lorsqu'on installe la cible. Ne renvoie rien lorsqu'on build la cible
+
+> 👉 Voir la [doc officielle](https://cmake.org/cmake/help/latest/manual/cmake-generator-expressions.7.html#generator-expression-reference) pour plus de détails
+

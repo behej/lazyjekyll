@@ -199,3 +199,25 @@ Liste non exhaustive des opérations possibles:
 
 > 👉 Voir la [doc officielle](https://cmake.org/cmake/help/latest/manual/cmake-generator-expressions.7.html#generator-expression-reference) pour plus de détails
 
+## Introspection
+L'introspection permet à CMake d'effectuer des tests sur le système afin de déterminer si tous les prérequis pour construire notre application sont présents. On peut ainsi adapter la configuration en fonction du système.
+
+Le principe de base est de fournir un petit bout de code (au moins une fonction main()) dans le fichier CMakeLists.txt. Idéalement, cet extrait de code met en oeuvre la fonction ou la lib qu'on veut tester. CMake va alors essayer de compiler ce morceau. Si la compilation réussi, cela signifie que le composant requis est présent et utilisable sur le système. Une variable booléenne est alors positionnée à 1.
+```
+include(CheckCXXSourceCompiles)      # Inclus le module qui permet de tester du code C++. Exite pour d'autres languages
+
+check_cxx_source_compiles("
+#include ...
+int main() {
+   ... Le code qu'on veut tester
+}
+" <result var>)
+```
+On peut ensuite utiliser cette variable booléenne comme toute autre variable. Les usages peuvent être les suivants:
+* déclaration d'un **DEFINE** qui sera utilisé comme compilation conditonner directement dans les fichiers source
+* utilisation dans un bloc **if()** pour activer la compilation et l'installation du module manquant
+* etc.
+
+> ⚠️ Une fois le test effectué, le résultat est gardé en cache et le test n'est plus jamais ré-exécuté, même si le bout de code à tester est modifier. Il faut alors supprimer la variable directement dans le cache ou tout nettoyer.
+
+> 📝 Le comportement de ce test peut être modifié en positionnant l'une ou l'autre des variables suivantes avant d'effectuer le test: CMAKE_REQUIRED_FLAGS, CMAKE_REQUIRED_DEFINITIONS, CMAKE_REQUIRED_LINK_OPTIONS, CMAKE_REQUIRED_LIBRARIES, etc. 

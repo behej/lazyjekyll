@@ -148,6 +148,8 @@ La valeur de la variables est conservée dans le cache.
 
 On peut passer une valeur dans la commande cmake: `cmake . -DMY_VAR=ON`
 
+> 📝 CMake possède également des options internes permettant de modifier le comportement par défaut de certaines commandes. Ces options se gèrent de la même façon. Seul le nom de l'option devra correspondre à l'option retenue.
+
 ## Traitement conditionnel
 ```
 if(<test>)

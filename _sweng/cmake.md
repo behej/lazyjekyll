@@ -64,30 +64,30 @@ project(modernCpp
 
 
 # Compilation
-* add_executable(ProgramName source1 source2): Crée un exécutable en compilant et linkant tous les fichiers source indiqués
-* add_library(LibName source1 source2): Idem mais pour créer une lib
-* target_link_libraries(ProgramName PUBLIC LibName): Lie la lib avec l'exécutable
-* target_include_directories(ProgramName PUBLIC path/to/include/files): Inclut le dossier indiqué pour chercher les headers (directive applicable uniquement à la cible indiquée)
+* **add_executable**(ProgramName source1 source2): Crée un exécutable en compilant et linkant tous les fichiers source indiqués
+* **add_library**(LibName source1 source2): Idem mais pour créer une lib
+* **target_link_libraries**(ProgramName PUBLIC LibName): Lie la lib avec l'exécutable
+* **target_include_directories**(ProgramName PUBLIC path/to/include/files): Inclut le dossier indiqué pour chercher les headers (directive applicable uniquement à la cible indiquée)
   * Voir aussi include_directories
-* target_include_directories(LibName **INTERFACE** ${CMAKE_CURRENT_SOURCE_DIR}) : Permet de déclarer le dossier indiqué comme contenant les includes d'une lib. Le dossier sera alors automatiquement inclus pour tous les exécutables qui sont linkés avec cette lib.
-* target_compile_definitions(ProgramNale PRIVATE CUSTOM_DEFINE): Permet de créer une definition qui sera utilisable dans le code (#ifdef)
+* **target_include_directories**(LibName **INTERFACE** ${CMAKE_CURRENT_SOURCE_DIR}) : Permet de déclarer le dossier indiqué comme contenant les includes d'une lib. Le dossier sera alors automatiquement inclus pour tous les exécutables qui sont linkés avec cette lib.
+* **target_compile_definitions**(ProgramNale PRIVATE CUSTOM_DEFINE): Permet de créer une definition qui sera utilisable dans le code (#ifdef)
   * Voir aussi add_compile_definitions
-* target_compile_feature(<target_name> INTERFACE <requirement>): Exige que le compilateur possède une certaine fonctionalité
-* target_compile_options(<target_name> INTERFACE <options>): Ajoute des options de compilation à la target
+* **target_compile_feature**(\<target_name\> INTERFACE \<requirement\>): Exige que le compilateur possède une certaine fonctionalité
+* **target_compile_options**(\<target_name\> INTERFACE \<options\>): Ajoute des options de compilation à la target
   * On peut créer une cible virtuelle qui possède ces paramètres et ensuite lier cette cible virtuelle à n'importe quelle autre cible réelle (le link se fait alors de la même manière que pour lier une lib)
   * On peut également spécifier les options pour le build de l'appli uniquement (cf. generator expression et BUILD_INTERFACE). Dans ce cas, les options seront appliquées pour le build de la lib mais pas pour le déploiement.
-* add_subdirectory(path/to/dir/that/contains/another/CMakelists/file): Ajoute un sous-dossier au projet. Le sous-dossier est analysé et le fichier CMakeLists.txt s'y trouvant est interprété immédiatement.
-* include(external/file.cmake): Permet d'inclure un autre fichier cmake contenant des cibles ou des options connexes. Ce fichier porte généralement l'extention **.cmake**
-* add_custom_command(OUTPUT <generated_output COMMAND <commande> DEPENDS <dependance>): Permet d'exécuter une commande personnalisée afin de générer des fichiers. Ces fichiers peuvent ensuite être utilisés comme dépendances d'autres cibles
+* **add_subdirectory**(path/to/dir/that/contains/another/CMakelists/file): Ajoute un sous-dossier au projet. Le sous-dossier est analysé et le fichier CMakeLists.txt s'y trouvant est interprété immédiatement.
+* **include**(external/file.cmake): Permet d'inclure un autre fichier cmake contenant des cibles ou des options connexes. Ce fichier porte généralement l'extension **.cmake**
+* **add_custom_command**(OUTPUT \<generated_output\> COMMAND \<commande\> DEPENDS \<dependance\>): Permet d'exécuter une commande personnalisée afin de générer des fichiers. Ces fichiers peuvent ensuite être utilisés comme dépendances d'autres cibles
   * OUTPUT: les fichiers générés par cette commande. On peut ensuite utiliser ces fichiers comme dépendance pour d'autres cibles. Au moment de builder ces autres cibles, la commande personnalisée sera alors exécutée préalablement. Les fichiers générés doivent être ajoutés comme dépendance des autres cibles même si les fichiers générés sont des headers.
   * COMMAND: la commande à exécuter. Eventuellement suivi des arguments nécessaires
   * DEPENDS: les dépendances de cette commande. Si la dépendance est une cible, la cible sera rebuildée avant d'exécuter la commande. Si la dépendance est un fichier, la commande sera automatiquement re-exécutée si le fichier est modifié.
 
 # Installation
-* install(TARGETS <targetName> DESTINATION <dir/to/install/files/corresponding/to/target>): Copie les fichiers correspondant à la cible dans le dossier indiqué (Habituellement /usr/bin ou /usr/lib)
+* **install**(TARGETS \<targetName\> DESTINATION \<dir/to/install/files/corresponding/to/target\>): Copie les fichiers correspondant à la cible dans le dossier indiqué (Habituellement /usr/bin ou /usr/lib)
   * A cette étape, la target peut être une liste de plusieurs cibles (ex: une collection de libs).
   * La liste peut également contenir des cibles virtuelles définies avec `add_library(<target_name> INTERFACE)`. Cette possibilité est surtout intéressant si on a défini des options de compil activées uniquement en config build associées à cette cible virtuelle.
-* install(FILES <files> DESTINATION <dir/where/to/copy/files>): Copie les fichiers indiqués dans le dossier choisi. On s'en sert notamment pour copier les headers d'une lib dans le dossier /usr/include
+* **install**(FILES \<files\> DESTINATION \<dir/where/to/copy/files\>): Copie les fichiers indiqués dans le dossier choisi. On s'en sert notamment pour copier les headers d'une lib dans le dossier /usr/include
 
 # Test
 CMake intègre le module CTest qui permet de lancer des tests. Les commandes ci-dessous permettent de coder les tests directement dans CMakeLists.txt, ce qui n'est pas la meilleure solution.

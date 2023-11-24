@@ -19,19 +19,32 @@ Un container s'exécute tant qu'un process démarré dans le container est en co
 
 # Commandes
 ## Interface avec le Hub
-`docker login`
-* le connecte sur le hub (nécessite un compte)
+**Se connecter sur le hub (nécessite un compte)**
+```sh
+docker login
+```
 
 ## Images 
-**docker images**
-* liste les images présentes en local
+**Liste les images présentes en local**
+```sh
+docker images
+docker image ls [--all]
+```
 
-**docker image build \-\-tag \<tag\> path/to/docker/image**
-* construit une image à partir du Dockerfile.
-  * **\-\-tag dockerID/app:1.0** : syntaxe utile pour pousser vers le Hub
+**Construit une image à partir du Dockerfile**
+```sh
+docker image build --tag <tag> path/to/folder/where/is/dockerfile
+docker image build --tag <tag> -f path/to/file.dockerfile
+```
+* Pour la 1ère syntaxe, le fichier doit impérativement se nommer `Dockerfile`
+* Syntaxe utile pour pousser vers le Hub: `--tag dockerID/app:1.0`
 
-**docker image push \<nomImage\>**
-* pousse l'image vers le Hub. Le nom de l'image doit être constitué de la sorte: `dockerID/nomImage:1.0`. La commande login doit avoir été exécutée au préalable
+**Pousse l'image vers le Hub**
+* Le nom de l'image doit être constitué de la sorte: `dockerID/nomImage:1.0`
+* La commande login doit avoir été exécutée au préalable
+```sh
+docker image push <nomImage>
+```
 
 ## Containers
 **docker container ls**

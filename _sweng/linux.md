@@ -102,7 +102,44 @@ Les tâches en arrière plan restent quand même attachées au shell. Si on ferm
   * `find . <criteria> -exec <command> {} \;`  : execute la commande indiquée sur chaque élément trouvé (la commande est répétée autant de fois que d'éléments trouvés, à cause du `;`): exemple *chmod 666 file1* puis *chmod 666 file2* etc.
   * find . -path "\<pattern\>": Cherche les dossier
   * find . -path "\<pattern\>" -prune -o -name
-* **sed** *TODO*
+* **sed**
+  > **NOTE:** La commande indiquée à sed est délimitée par des quotes ou des double quotes. Si on veut utiliser des variables shell dans les patterns ou les chaines de remplacement, l'utilisation de double quotes est obligatoire.
+  * `sed 'n i\text to insert' file` : **Insert** le texte avant la ligne *n*
+  * `sed 'n a\text to append' file` : **Ajoute** le texte après la ligne *n*
+  * `sed -i 'commands'` : effectue les modifications dans le fichier (***in-place***)
+  * `sed -i .bak 'commands'` : effectue les modifications dans le fichier (***in-place***) mais conserve une sauvegarde suffixée `.bak`
+  * `sed 'N{cmd}'` : Execute la commande sur la Ne ligne
+  * `sed '${cmd}'` : Execute la commande sur la dernière ligne
+  * `sed 'N1,N2{cmd}'` : Execute la commande sur les lignes N1 à N2
+  * `sed 'N1,N2!{cmd}'` : Execute la commande sur toutes les lignes sauf N1 à N2
+  * `sed '/pattern/d'` : **Efface** toutes les lignes qui contienent le pattern indiqué
+  * `sed '/pattern/!d'` : Efface toutes les lignes qui ne contienent pas le pattern indiqué. Globalement, le **point d'exclamation** avant la commande indique qu'il faut exécuter la commande pour les lignes qui **ne correspondent pas** au pattern
+  * `sed '/pattern/{cmd}'` : Permet d'enchainer les commandes. Au lieu d'avoir une commande simple
+    * les accolades permettent d'insérer une commande plus complexe (exemple: `{/pattern/!d}` ou `{s/pattern/repl/g}`)
+    * On peut chainer les commande ainsi: `{/pattern/{another_cmd}}`
+  * `sed 's/pattern/repl/'` : **Remplace** la première occurence de chaque ligne du pattern par la chaine de remplacement. Fonctionne avec des regexp.
+    * La capture s'effectue avec les parenthèses, mais il faut les échapper : `\(pattern\)`
+    * Le groupe capturé est récupéré avec \1, \2, etc.
+  * `sed 's/pattern/repl/g'` : Idem ci-dessus mais pour toutes les occurences de la ligne
+  * `sed '/pattern1/,/pattern2/{cmd}'` : Effectue la commande uniquement dans la section indiquée.
+    * La section commence pas la première ligne qui matche le pattern1 et se termine par la ligne qui matche le pattern 2
+      * *NOTE:* les lignes de début et fin de section sont comprises dans la section
+    * la commande peut soit être une commande directe (ex: `d` pour supprimer les lignes), soit une autre commande plus complexe (ex: `{s/pattern/repl/g}`)
+    * le point d'exclamation sur la commande pour effectuer la commande partout sauf dans la section
+  * `sed 'N'` : La commande N joint la ligne suivante et l'accole à la ligne en cours.
+    * N'a pas d'intérêt seul, mais permet de travailler sur plusieurs lignes à la fois
+    * Pour ensuite effectuer une commande sur ce groupe de lignes, il faut séparer les commandes par un point-virgule: `sed 'N;{cmd}'`
+    * Une utilisation type est de coller la ligne suivant un ligne qui possède un pattern: `sed '/pattern/N;{cmd}'`
+  * `sed ':lbl ; ... ; b lbl ; ...'` : Définition d'une étiquette `lbl` et instruction de saut vers cette étiquette
+    * Utilisation type: `sed ':lbl ; N ; $! b lbl ; {cmd}'`
+    * `:lbl` - Définition d'un label en début de commande
+    * `N` - Colle la ligne suivante ()
+    * `$!` - Si pas la dernière ligne
+    * `b lbl` - Saute au label
+    * La commande joint la ligne suivante jusqu'à atteindre la dernière ligne, puis elle sort de la boucle pour exécuter la dernière commande, qui permet ainsi de travailler sur l'ensemble du fichier. Permet de contourner le fait que sed traite l'entrée ligne par ligne.
+  > More info [here](https://linuxhint.com/remove-lines-file-sed-command/)
+
+
 * **cut** : Découpe une chaine de caractère selon un délimiteur spécifique
   * cut -d; : indique que la chaine doit être découpée à chaque fois qu'un point-virgule est rencontré
   * cut -f2,3 : Renvoie du 2ème au 3ème morceau (numérotation à partir de 1)

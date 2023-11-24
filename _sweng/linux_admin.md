@@ -113,11 +113,71 @@ Pour un montage automatique au démarrage du PC, ajouter les lecteurs à monter 
 * ufw reload : recharge la nouvelle configuration
 
 # Services
-Gérer les services
+## Créer un service
+Créer un fichier myService.service à un des emplacements suivants:
+* /etc/systemd/system - pour que service s'exécute au démarrage du système
+* /etc/systemd/user - pour que le service s'exécute à la connexion de n'importe quel utilisateur
+* ~/.config/systemd/user/ - pour que le service s'exécute à la connexion d'un utilisateur spécifique
+
+```sh
+[Unit]
+Description=Description du service
+After=network.target other_service.service
+Before=<idem after mais avant>
+Wants=<service à démarrer avant. Dépendance faible, ie le service démarre même si la dépendance échoue>
+Requires=<idem Wants mais dépendance dure. ie le service ne démarrera pas si la dépendance a échoué>
+
+[Service]
+Type=simple / forking / oneshot / notify / dbus / idle -> généralement simple ou idle
+User=<optionnel - user spécifique pour exécuter le service>
+Group=<optionnel - group spécifique pour exécuter le service>
+
+Environment=MY_VAR=my_value
+
+ExecStartPre=<commande à exécuter avant ExecStart>
+ExecStartPre=<on peut en mettre plusieurs>
+ExecStart=<commande à exécuter pour le service>
+ExecReload=<optionnel - commande à exécuter en cas de redémarrage du service>
+ExecStartPost=<commande à exécuter après ExecStart>
+
+Restart=no / on-success / on-failure / on-abnormal / on-watchdog / on-abort / always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
+ou
+RequiredBy=<idem WantedBy mais en dépendance dure>
+```
+La section **[Install]** est utilisée pour le démarrage automatique du service (avec la commande `enable`). Indique l'état du système qui va essayer de démarrer le service en automatique. Généralement `multi-user.target` - le système est booté et attend qu'un utilisateur se logge.
+
+### Dépendances
+Pour les options *After*, *Before*, *Wants*, *Requires*, on peut spécifier des dépendances sur
+* un autre service -- Extension `.service`. Exemple: myService.service
+* un état du système atteint durant la phase de boot -- Extension `.target`. Exemple: network.target
+  * poweroff.target : éteint
+  * rescue.target
+  * multi-user.target : le système est démarré, les utilisateurs peuvent se connecter en non graphique
+  * graphical.target : la partie graphique est démarrée
+  * network.target : le réseau est prêt
+
+Pour les options *WantedBy* et *RequiredBy*, on se limite habituellement aux targets
+
+> **Biblio**
+> * https://www.malekal.com/creer-service-linux-systemd/
+> * https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html
+> * https://www.baeldung.com/linux/systemd-target-multi-user
+
+## Gérer les services
+
 * sudo service \<nom du service\> start/restart/status/stop
 * sudo systemctl start/status/restart/stop \<nom du service\>
+* sudo systemctl enable/disable \<nom du service\> : active/désactive le démarrage automatique du service
 * la commande **service** est une commande de plus haut niveau qui peut elle-même faire appel à la commande *systemctl* ou une autre commande selon l'implémentation
 * la commande **systemctl** est une commande de plus bas niveau qui offre plus de possiblités
+* systemctl list-units : liste tous les services
+* systemctl list-units -type=target/service/socket: liste tous les services du type indiqué
+
+
 
 # Journaux système
 ## systemd

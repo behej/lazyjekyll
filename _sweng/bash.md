@@ -3,6 +3,17 @@ title: Bash
 layout: default
 icon: bash.png
 ---
+# Modification du comportement du shell
+Il est possible de modifier le comportement par défaut en positionnant certaines options à l'aide de la commande `set`.
+* **set -e** : exit 1 immédiatement en cas d'erreur (sauf dans les `if`, `&&` et `||`)
+* **set -u** : Retourne une erreur en cas de tentative d'accès à une variable indéfinie
+* **set -v** : Verbose
+* **set -x** : Affiche une trace de l'exécution de chaque commande (utile pour le debug)
+* **set -o \<option\>** : positionne l'option correspondante (certaines options possèdent un raccourci court)
+  * **pipefail** : Renvoie une erreur si une commande dans un pipe renvoie une erreur (ce n'est pas le cas par défaut)
+
+> Plus d'options dans la [documentation](https://www.gnu.org/software/bash/manual/html_node/The-Set-Builtin.html)
+
 # Variables
 ## Variables particulières
 * $# : nombre d'arguments du script ou de la fonction
@@ -38,6 +49,10 @@ icon: bash.png
 
 ## Tableaux & Dictionnaires
 ### Tableaux
+Déclarer un tableau
+```sh
+myList=(item1 item2 item3)
+```
 Affecter une valeur à une case du tableau
 ```sh
 tab[0]='valeur'

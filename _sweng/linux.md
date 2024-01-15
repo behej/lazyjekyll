@@ -156,6 +156,11 @@ Les tâches en arrière plan restent quand même attachées au shell. Si on ferm
 * tar -xzf archive.tar file1 file2 : extrait uniquement certains fichiers de l'archive
 
 ## Divers
+### Changer le pager
+Le pager par défaut est **less**. Il existe également les pager **more** (moins bien) et **most** (similaire à *less* mais avec coloration syntaxique)
+* installer *most*: `sudo apt install most`
+* utiliser *most* par défaut: `export PAGER='most'` (dans *.bashrc* par exemple)
+### PDF
 * `pdfunite file1.pdf file2.pdf output.pdf` : concatène des fichiers pdf
 
 

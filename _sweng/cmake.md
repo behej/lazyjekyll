@@ -3,6 +3,12 @@ title: CMake
 layout: default
 icon: cmake.png
 ---
+# Commandes CMake
+* cmake -B build -S. -G Ninja
+  * -B : dossier dans lequel sera buildé le projet
+  * -S : dossier dans lequel se trouvent les source (et donc le fichier CMakeLists.txt de plus hait niveau)
+  * -G : utilisation d'un générateur (tel Ninja)
+* cmake --build build --config Release --target all
 
 # Projet type
 ```

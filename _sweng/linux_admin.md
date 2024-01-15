@@ -4,6 +4,12 @@ layout: default
 icon: linux.png
 ---
 # Commandes courantes
+## Gestion des paquets
+* sudo apt install \<paquet\> : installe le paquet indiqué
+  * option -y : accepte automatiquement l'installation (utile pour ne pas avoir besoin d'intervention utilisation dans scripts)
+* apt-file search \<lib/bin\> : indique quel(s) paquet(s) installer pour obtenir la lib ou le binaire indiqué
+  * nécessite l'installation du paquet `apt-file` et d'avoir exécuter précédemment la commande `sudo apt-file update`
+  * fonctionne probablement avec n'importe quel type de fichier
 ## Gestion des process
 * ps : affiche tous les processus du terminal en cours
   * ps u : affiche le nom de l'utilisateur

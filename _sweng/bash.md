@@ -3,6 +3,8 @@ title: Bash
 layout: default
 icon: bash.png
 ---
+# Shebang
+#!
 # Modification du comportement du shell
 Il est possible de modifier le comportement par défaut en positionnant certaines options à l'aide de la commande `set`.
 * **set -e** : exit 1 immédiatement en cas d'erreur (sauf dans les `if`, `&&` et `||`)
@@ -19,6 +21,8 @@ Il est possible de modifier le comportement par défaut en positionnant certaine
 * $# : nombre d'arguments du script ou de la fonction
 * $*n* : *n*-ième argument
 * $? : code de retour de la dernière instruction exécutée
+* \$$ : PID courant du script en cours
+* $! : PID du dernier process exécuté en background
 * $LINENO : numéro de ligne courant
 * $PATH : path courant
 

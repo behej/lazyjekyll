@@ -89,5 +89,6 @@ ldconfig -p | grep libxxx
 
 
 # Bibliographie
-* [https://docencia.ac.upc.edu/FIB/USO/Bibliografia/unix-c-libraries.html](https://docencia.ac.upc.edu/FIB/USO/Bibliografia/unix-c-libraries.html)
-* [https://stackoverflow.com/questions/45135/why-does-the-order-in-which-libraries-are-linked-sometimes-cause-errors-in-gcc](https://stackoverflow.com/questions/45135/why-does-the-order-in-which-libraries-are-linked-sometimes-cause-errors-in-gcc)
+* [Building and using static and shared libs](https://docencia.ac.upc.edu/FIB/USO/Bibliografia/unix-c-libraries.html)
+* [Order to link libs does matter](https://stackoverflow.com/questions/45135/why-does-the-order-in-which-libraries-are-linked-sometimes-cause-errors-in-gcc)
+* [Libs versionning and compatibility](https://begriffs.com/posts/2021-07-04-shared-libraries.html)

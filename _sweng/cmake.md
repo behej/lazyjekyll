@@ -6,12 +6,12 @@ icon: cmake.png
 # Commandes CMake
 * cmake -B build -S. -G Ninja
   * -B : dossier dans lequel sera buildé le projet
-  * -S : dossier dans lequel se trouvent les source (et donc le fichier CMakeLists.txt de plus hait niveau)
+  * -S : dossier dans lequel se trouvent les sources (et donc le fichier CMakeLists.txt de plus haut niveau)
   * -G : utilisation d'un générateur (tel Ninja)
 * cmake --build build --config Release --target all
 
 # Projet type
-```
+```cmake
 # Configuration projet
 cmake_minimum_required(VERSION 3.5)
 project(modernCpp
@@ -45,12 +45,12 @@ target_include_directories(ProgramName PUBLIC path/to/include/files)
 
 # Configuration du projet
 ## Indique la version minimum requise pour CMake
-```
+```cmake
 cmake_minimum_required(VERSION 3.5)
 ```
 
 ## Configurer le projet
-```
+```cmake
 project(modernCpp
         VERSION 1.0.0.0
         DESCRIPTION "My amazing project"
@@ -88,6 +88,11 @@ project(modernCpp
   * OUTPUT: les fichiers générés par cette commande. On peut ensuite utiliser ces fichiers comme dépendance pour d'autres cibles. Au moment de builder ces autres cibles, la commande personnalisée sera alors exécutée préalablement. Les fichiers générés doivent être ajoutés comme dépendance des autres cibles même si les fichiers générés sont des headers.
   * COMMAND: la commande à exécuter. Eventuellement suivi des arguments nécessaires
   * DEPENDS: les dépendances de cette commande. Si la dépendance est une cible, la cible sera rebuildée avant d'exécuter la commande. Si la dépendance est un fichier, la commande sera automatiquement re-exécutée si le fichier est modifié.
+* **add_custom_target**(\<target_name\> COMMAND \<commande\>): Déclare une cible virtuelle. Cette cible ne produit pas un fichier nommé comme la cible mais exécute une commande.
+  * Il est possible de créer des dépendance sur cette cible
+  * Différence avec `add_custom_command`:
+    * `add_custom_command`: crée des fichiers. La dépendance pourra se faire sur ces fichiers
+    * `add_custom_target`: Déclare une cible. La dépendance pourra se faire sur la cible complète (qu'elle génère des fichiers ou non)
 
 # Installation
 * **install**(TARGETS \<targetName\> DESTINATION \<dir/to/install/files/corresponding/to/target\>): Copie les fichiers correspondant à la cible dans le dossier indiqué (Habituellement /usr/bin ou /usr/lib)
@@ -100,7 +105,7 @@ CMake intègre le module CTest qui permet de lancer des tests. Les commandes ci-
 
 CMake offre également une bonne compatibilité avec d'autres suites de tests, comme [GoogleTest](https://cmake.org/cmake/help/latest/module/GoogleTest.html#module:GoogleTest) par exemple. 
 
-```
+```cmake
 enable_testing()
 add_test(NAME <test case name> COMMAND <command to launch>)
 set_tests_properties(<test case name> PROPERTIES PASS_REGULAR_EXPRESSION "regexp to match for test to pass" )
@@ -111,7 +116,7 @@ set_tests_properties(<test case name> PROPERTIES PASS_REGULAR_EXPRESSION "regexp
 
 ## Hint
 Si plusieurs tests sont similaires, on peut créer une fonction qui va créer/exécuter le même test plusieurs fois avec des paramètres différents
-```
+```cmake
 function(<nom_fonction> <args...>)
   add_test(NAME <test_name_${arg}> COMMAND <commande> <args...> ${arg})
   set_tests_properties(<test_name_${arg}> PROPERTIES PASS_REGULAR_EXPRESSION "regex to match" )
@@ -136,7 +141,7 @@ Find_package
 # Options avancées
 ## Copie et modification de fichiers
 Cette commande permet de copier des fichiers en les modifiant pour y insérer des variables issues de la config CMake.
-```
+```cmake
 configure_file(<input file> <output file>)
 ```
 Copie le fichier *input* et le renomme en *output*. Lors de la copie, CMake remplace toutes les variables identifiées `@VAR@`, `${VAR}` ou encore `$ENV{VAR}` par leur valeur qui doit avoir **préalablement** été définie dans le fichier CMkakeLists.txt.
@@ -144,8 +149,8 @@ Copie le fichier *input* et le renomme en *output*. Lors de la copie, CMake remp
 
 > 💡 Les fichiers seront copiés dans le dossier de build. Il ne faudra pas oublier d'ajouter ce dossier à la liste des répertoires à inclure
 
-## Création d'un option
-```
+## Création d'une option
+```cmake
 option(MyOption "Description" ON)
 ```
 Permet de définir une variable qui pourra être configurée différement à l'appel de la commande cmake. Cette variable peut ensuite être réutilisée dans le fichier pour des traitements conditionnels par exemple.
@@ -157,7 +162,7 @@ On peut passer une valeur dans la commande cmake: `cmake . -DMY_VAR=ON`
 > 📝 CMake possède également des options internes permettant de modifier le comportement par défaut de certaines commandes. Ces options se gèrent de la même façon. Seul le nom de l'option devra correspondre à l'option retenue.
 
 ## Traitement conditionnel
-```
+```cmake
 if(<test>)
     ...
 else()
@@ -167,7 +172,7 @@ endif()
 Le test peut être de nature variée: test d'un booléen, 
 
 ## Lib interface
-```
+```cmake
 add_library(target_compiler_flags INTERFACE)
 target_compile_features(target_compiler_flags INTERFACE cxx_std_11)
 target_compile_options(target_compiler_flags INTERFACE -Wall)
@@ -183,14 +188,14 @@ Une telle expression est de la forme: `$<...>`.
 
 ### Forme élémentaire
 Sa forme la plus élementaire est la suivante:
-```
+```cmake
 $<condition:true_string>
 ```
 L'expression retourne "true_string" si la condition est vérifiée. Sinon, elle renvoie une chaine vide. La condition peut être soit une autre expression imbriquée, soit directement une variable. Dans ce cas, on n'oublera pas de rensigner la variable sous la forme `${variable}`.
 
 ### Forme avancée
 On retrouvera plus souvent ces expressions avec un opérateur en première position
-```
+```cmake
 $<OPERATOR:parameters>
 ```
 CMake propose une liste variée d'opérateurs permettant de vérifier de nombreux paramètres et de les combiner entre eux.
@@ -215,11 +220,48 @@ Liste non exhaustive des opérations possibles:
 
 > 👉 Voir la [doc officielle](https://cmake.org/cmake/help/latest/manual/cmake-generator-expressions.7.html#generator-expression-reference) pour plus de détails
 
+## Imported target
+Les cibles importées sont des cibles qui représentent des dépendances pré-existantes, généralement une lib présente dans l'espace de travail avec laquelle il suffit de s'interfacer.
+```cmake
+add_library(myLib STATIC|SHARED IMPORTED GLOBAL)
+
+set_property(TARGET myLib
+    PROPERTY IMPORTED_LOCATION path/to/find/myLib.a)
+target_include_directories(myLib INTERFACE path/to/include/)
+```
+* par défaut, la cible n'est visible que dans le fichier où elle est déclarée. Le mot clé `GLOBAL` permet de rendre cette cible visible partout
+* la propriété `IMPORTED_LOCATION` indique le path pour accéder au fichier de la cible. Cette propriété doit mentionner explicitement le nom du fichier (et pas uniquement le dossier)
+* on définit les dossier d'include et autres propriétés comme pour une cible classique.
+
+
+### FetchContent
+Permet de récupérer du contenu tiers depuis une source externe. La source peut être une URL, une repo git, un repo SVN, etc.
+
+
+```cmake
+include(FetchContent)
+
+FetchContent_Declare(
+  googletest_url
+  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+)
+
+FetchContent_Declare(
+  googletest_git
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG        703bd9caab50b139428cea1aaff9974ebee5742e # release-1.10.0
+)
+
+FetchContent_MakeAvailable(googletest_url)
+FetchContent_MakeAvailable(googletest_git)
+```
+> 👉 Voir la [doc officielle](https://cmake.org/cmake/help/latest/module/FetchContent.html)
+
 ## Introspection
 L'introspection permet à CMake d'effectuer des tests sur le système afin de déterminer si tous les prérequis pour construire notre application sont présents. On peut ainsi adapter la configuration en fonction du système.
 
 Le principe de base est de fournir un petit bout de code (au moins une fonction main()) dans le fichier CMakeLists.txt. Idéalement, cet extrait de code met en oeuvre la fonction ou la lib qu'on veut tester. CMake va alors essayer de compiler ce morceau. Si la compilation réussi, cela signifie que le composant requis est présent et utilisable sur le système. Une variable booléenne est alors positionnée à 1.
-```
+```cmake
 include(CheckCXXSourceCompiles)      # Inclus le module qui permet de tester du code C++. Exite pour d'autres languages
 
 check_cxx_source_compiles("

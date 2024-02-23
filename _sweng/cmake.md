@@ -10,6 +10,45 @@ icon: cmake.png
   * -G : utilisation d'un générateur (tel Ninja)
 * cmake --build build --config Release --target all
 
+# Modern CMake
+Une syntaxe moderne de CMake consiste à ne plus manipuler des variables mais de déclarer des cibles et propriétés, puis de gérer les dépendances enre les différentes cibles.
+
+Ainsi, plutôt que de manipuler difficilement les include_directories pour accéder aux headers d'une autre lib, on utilisera avantageusement l'interface de la lib et on créera une dépendance. Idem pour les options et autres.
+
+Plutôt que de modifier la variable `CMAKE_CXX_FLAGS` pour y ajouter le flag `-std=c++11`, préférons la commande `target_compile_features(myTarget PRIVATE cxx_std_11)`
+
+## Private, Interface et Public
+* **PRIVATE** : Les propriétés privées sont des propriétés applicables uniquement pour la cible elle-même, typiquement lorsqu'on va la compiler.
+  * Des répertoires d'include qui ne sont utilisés que la cible elle-même (des headers qu'on ne veut surtout pas exposer aux utilisateurs de la lib)
+  * des options de compil utilisées uniquement pour compiler la cible (on pour vouloir compiler la lib avec -Werror, mais sans vouloir l'imposer aux utilisateurs de la lib)
+* **INTERFACE** : Les propriétés interface sont aplicables uniquement pour les utilisateurs de la lib. Un répertoire d'include, une feature requise, ...
+* **PUBLIC** : les propriétés publiques sont propagées à la fois pour la lib elle-même, mais aussi pour les utilisateurs de la lib.
+  * `PUBLIC = PRIVATE + INTERFACE`
+
+## Transitivité des dépendances
+Grâce à la transitivités des dépendances, il est possible qu'une lib remonte ses propres dépendances à un utilisateur de la lib.
+
+**Exemple**
+
+* Une lib A utilise 2 autres libs: lib B et lib C
+* lib B est utilisée uniquement en interne de la lib A
+  * on créera une dépendance PRIVEE &rarr; `target_link_library(libA PRIVATE libB)`
+* lib C est utilisée par la lib A mais sur son interface public (ie une méthode de l'interface publique retourne ou utilise un objet d'un type déclaré dans la lib C)
+  * Tout utilisateur de la lib A devra également connaitre la lib C (puisqu'il devra gérer un objet d'un type déclaré dans lib C)
+  * on créera une dépendance PUBLIC &rarr; `target_link_library(libA PUBLIC libC)`
+  * tout utilisateur de lib A, sera donc aussi utilisateur de lib C
+  
+**Conclusion**:
+
+si mon appli utilise la lib A
+* l'appli sera linkée avec lib A
+* l'appli ne sera pas linkée avec lib B
+* l'appli sera linkée avec lib C (même sans le spécifier explicitement, juste parce que lib C est en lien public avec lib B)
+
+
+
+> 👉 Voir [ce site](https://pabloariasal.github.io/2018/02/19/its-time-to-do-cmake-right/) qui explique très bien le principe de transitivité des dépendances.
+
 # Projet type
 ```cmake
 # Configuration projet

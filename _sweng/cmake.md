@@ -133,6 +133,10 @@ project(modernCpp
     * `add_custom_command`: crée des fichiers. La dépendance pourra se faire sur ces fichiers
     * `add_custom_target`: Déclare une cible. La dépendance pourra se faire sur la cible complète (qu'elle génère des fichiers ou non)
 
+## Cross compilation
+> 👉 Voir [Cross compilation for embedded](https://kubasejdak.com/how-to-cross-compile-for-embedded-with-cmake-like-a-champ)
+
+
 # Installation
 * **install**(TARGETS \<targetName\> DESTINATION \<dir/to/install/files/corresponding/to/target\>): Copie les fichiers correspondant à la cible dans le dossier indiqué (Habituellement /usr/bin ou /usr/lib)
   * A cette étape, la target peut être une liste de plusieurs cibles (ex: une collection de libs).

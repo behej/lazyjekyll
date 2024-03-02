@@ -4,11 +4,11 @@ layout: default
 icon: cmake.png
 ---
 # Commandes CMake
-* cmake -B build -S. -G Ninja
+* `cmake -B build -S . -G Ninja`
   * -B : dossier dans lequel sera buildé le projet
   * -S : dossier dans lequel se trouvent les sources (et donc le fichier CMakeLists.txt de plus haut niveau)
-  * -G : utilisation d'un générateur (tel Ninja)
-* cmake --build build --config Release --target all
+  * -G : utilisation d'un générateur (tel Ninja ou Unix Makefiles)
+* `cmake --build build --config Release --target all`
 
 # Modern CMake
 Une syntaxe moderne de CMake consiste à ne plus manipuler des variables mais de déclarer des cibles et propriétés, puis de gérer les dépendances enre les différentes cibles.

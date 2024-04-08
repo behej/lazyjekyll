@@ -333,7 +333,20 @@ class NomClasse:     # Création d'une classe
 class ClasseFille(ClasseMere1, ClasseMere2):
 ```
 
-* Le constructeur de la classe mère doit être appelé explicitement. Sinon, il n'est pas appelé et tous les attributs présents dans le constructeur de la classe mère mais pas celui de la classe fille ne seront pas créés
+⚠️ Le constructeur de la classe mère doit être appelé explicitement. Sinon, il n'est pas appelé et tous les attributs présents dans le constructeur de la classe mère mais pas celui de la classe fille ne seront pas créés
+
+```python
+class ClasseFille(ClasseMere):
+  def __init__(self, args):
+    super().__init__(self, args)
+    # Other initialisations
+
+  def myMethod(self):
+    super().myMethod(self)
+    # Alternative syntax:
+    # ClasseMere.myMethod(self)
+```
+
 * `issubclass(ClasseFille, ClasseMere)`: Renvoie true si ClasseFille hérite de ClasseMere
 * `isinstance`(monObjet, MaClasse): Renvoie true si monObjet est un instance de MaClasse (ou d'une classe dérivée)
 

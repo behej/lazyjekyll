@@ -80,7 +80,7 @@ except typeException as objetException:
 * Définir du code si aucune exception n'est levée: cela se fait avec le mot `else`
 ```python
 try:
-except ...:
+  except ...:
 else:
   code
 ```
@@ -117,75 +117,71 @@ class MonException(Exception):
 
 # Fonctions de base
 
-| Fonction | Description |
-|----------|-------------|
-| // | Division entière |
-| type(var) | Donne le type de la variable |
-| print(var1, var2) | Affiche une variable à l'écran |
-| break | Abandonne la boucle en cours |
-| continue | Abandonne l'itération de la boucle en cours et exécute immédiatement l'itération suivante |
-| def nomFonction(param1, param2): | Définition d'une fonction. **Note:** on peut appeler la fonction fonction(2, 3) ou encore fonction(param1=2, param2=3). La 2e syntaxe permet d'identifier le paramètre si beaucoup de paramètres
-| def nomFonction(param1=val1, param2): | Affectation d'une valeur par défaut pour un paramètre |
-| return param | Renvoie une valeur en retour d'une fonction |
-| return 'param1, param2 | Renvoie un tuple constitué de param1 et param2 |
-| f=lambda param1, param2: code avec param1 et param2 sur une seule ligne | Crée une fonction lambda: une fonction très courte pouvant sécrire sur une seule ligne. Plus simple et plus rapide que d'écrire une fonction avec def |
-| def fonction(*parametres) | Définit une fonction qui admet un nombre variable de paramètres. La variable ''parametres'' est en réalité un tuple qui contient la ou les variables passées à la fonction. |
-| def fonction(**parametres) | Définit une fonction qui admet un nombre variable de paramètres nommés. La variable ''parametres'' est en réalité un dictionnaire. |
-| def fonction(*parNonNommes, **parNommes) | Définit une fonction qui admet n'importe quoi comme paramètres. parNonNommes est un tuple qui contient tous les paramètres non nommés et parNommes est un dictionnaire qui contient tous les paramètres nommés |
-| fonction(*myList) | Fourniture d'une liste en tant que paramètres d'une fonction |
-| fonction(**myDict) | Fourniture d'un dictionnaire en tant que paramètres d'une fonction |
-| fonction(*myList, **myDict) | Fourniture d'une liste et d'un dictionnaire en tant que paramètres d'une fonction |
-| global maVar | Déclare la variable *maVar* comme variable globale. Cette instruction est placée dans une fonction et maVar est définie en dehors de toute fonction. Par convention, l'instruction *global* est placée immédiatement après le docstring  |
+| Fonction                                                                | Description                                                                                                                                                                                                                             |
+| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| //                                                                      | Division entière                                                                                                                                                                                                                        |
+| type(var)                                                               | Donne le type de la variable                                                                                                                                                                                                            |
+| print(var1, var2)                                                       | Affiche une variable à l'écran                                                                                                                                                                                                          |
+| break                                                                   | Abandonne la boucle en cours                                                                                                                                                                                                            |
+| continue                                                                | Abandonne l'itération de la boucle en cours et exécute immédiatement l'itération suivante                                                                                                                                               |
+| def nomFonction(param1, param2):                                        | Définition d'une fonction. **Note:** on peut appeler la fonction fonction(2, 3) ou encore fonction(param1=2, param2=3). La 2e syntaxe permet d'identifier le paramètre si beaucoup de paramètres                                        |
+| def nomFonction(param1=val1, param2):                                   | Affectation d'une valeur par défaut pour un paramètre                                                                                                                                                                                   |
+| return param                                                            | Renvoie une valeur en retour d'une fonction                                                                                                                                                                                             |
+| return 'param1, param2                                                  | Renvoie un tuple constitué de param1 et param2                                                                                                                                                                                          |
+| f=lambda param1, param2: code avec param1 et param2 sur une seule ligne | Crée une fonction lambda: une fonction très courte pouvant sécrire sur une seule ligne. Plus simple et plus rapide que d'écrire une fonction avec def                                                                                   |
+| def fonction(*parametres)                                               | Définit une fonction qui admet un nombre variable de paramètres. La variable ''parametres'' est en réalité un tuple qui contient la ou les variables passées à la fonction.                                                             |
+| def fonction(**parametres)                                              | Définit une fonction qui admet un nombre variable de paramètres nommés. La variable ''parametres'' est en réalité un dictionnaire.                                                                                                      |
+| def fonction(*parNonNommes, **parNommes)                                | Définit une fonction qui admet n'importe quoi comme paramètres. parNonNommes est un tuple qui contient tous les paramètres non nommés et parNommes est un dictionnaire qui contient tous les paramètres nommés                          |
+| fonction(*myList)                                                       | Fourniture d'une liste en tant que paramètres d'une fonction                                                                                                                                                                            |
+| fonction(**myDict)                                                      | Fourniture d'un dictionnaire en tant que paramètres d'une fonction                                                                                                                                                                      |
+| fonction(*myList, **myDict)                                             | Fourniture d'une liste et d'un dictionnaire en tant que paramètres d'une fonction                                                                                                                                                       |
+| global maVar                                                            | Déclare la variable *maVar* comme variable globale. Cette instruction est placée dans une fonction et maVar est définie en dehors de toute fonction. Par convention, l'instruction *global* est placée immédiatement après le docstring |
 
 ## Classe str
 Les méthodes suivantes s'appliquent sur les objets de la classe  `str` (chaines de caractères)
 
-| Méthode | Description |
-|---------|-------------|
-| upper() | Mettre en majuscules |
-| lower() | Mettre en minuscules |
-| strip()  | Supprime les espaces inutiles en début et fin de chaine |
-| "ma chaine {}".format(var) | Remplace les occurences de {} par les variables indiquées dans *format* |
-| "ma chaine {0}".format(var) | Idem ci-dessus mais le numéro entre accolades précise l'ordre des variables. Les variables peuvent être placées dans n'importe quel ordre |
-| "ma chaine {var1}".format(var1=valeurVar) | Idem ci-dessus mais on peut donner des noms explicites aux variables à insérer |
-| chaine1 + chaine2 | Concaténation de 2 chaines |
-| chaine[n] | Accède au n-ième élément de la chaine. Si n est négatif, on part de la fin de la chaine. **Important**: on ne pas modifier une lettre ainsi. chaine[i] = 'a' est interdit. |
-| chaine[n:p] | Renvoie le morceau de *chaine* entre le n-ième et le (p-1)-ième élément. Noter que l'indice *p* est exclus. |
-| chaine[n:]  | Renvoie l'extrait de la chaine du début jusqu'à l'élément n-1 |
-| chaine[:n] | Renvoie l'extrait de la chaine de l'élément n à la fin |
-| len(chaine) | Renvoie la longueur de la chaine |
-| count | |
-| find | |
-| replace | |
-| split(car) | Sépare une chaine en éléments délimités par '*car* |
-| chaine.join(liste) | Crée une chaine contenant tous les éléments de liste séparés par *chaine*. Exemple: `" ".join(['Hello', 'World', '!'])` |
+| Méthode                                   | Description                                                                                                                               |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| upper()                                   | Mettre en majuscules                                                                                                                      |
+| lower()                                   | Mettre en minuscules                                                                                                                      |
+| strip()                                   | Supprime les espaces inutiles en début et fin de chaine                                                                                   |
+| "ma chaine {}".format(var)                | Remplace les occurences de {} par les variables indiquées dans *format*                                                                   |
+| "ma chaine {0}".format(var)               | Idem ci-dessus mais le numéro entre accolades précise l'ordre des variables. Les variables peuvent être placées dans n'importe quel ordre |
+| "ma chaine {var1}".format(var1=valeurVar) | Idem ci-dessus mais on peut donner des noms explicites aux variables à insérer                                                            |
+| f"ma chaine {var1}"                       | f-string: la variable est directement insérée dans la chaine                                                                              |
+| len(chaine)                               | Renvoie la longueur de la chaine                                                                                                          |
+| count                                     |                                                                                                                                           |
+| find                                      |                                                                                                                                           |
+| replace                                   |                                                                                                                                           |
+| split(car)                                | Sépare une chaine en éléments délimités par '*car*                                                                                        |
+| chaine.join(liste)                        | Crée une chaine contenant tous les éléments de liste séparés par *chaine*. Exemple: `" ".join(['Hello', 'World', '!'])`                   |
 
 
 
 ## Listes
 Une liste peut contenir des éléments de types différents.
 
-| Méthode | Description |
-|---------|-------------|
-| list() | Crée un liste |
-| [] | Crée un liste |
-| [a, b, ...] | Crée un liste |
-| maListe[i] | Accède au i-ème élément. On peut le modifier. |
-| append(a) | Ajoute a à la fin de la liste |
-| insert(pos, elem) | Insert l'élément *elem* à la position *pos* |
-| liste1.extend(liste2)  | Concaténation de listes |
-| liste1 += liste2  | Concaténation de listes |
-| liste.remove(i) | Supprime le i-ème élément de la liste |
-| del(liste[i]) | Supprime le i-ème élément de la liste |
-| [fonction(elem) for elem in sequence] | Parcourt chaque élément d'une liste et applique la fonction. Cette instruction ne modifie par la liste parcourue mais en crée une nouvelle. |
-| [fonction(elem) for elem in sequence if condition] | Parcourt chaque élément d'une liste. Si la condition est vraie, la fonction est exécutée sur l'élément courant et le résultat est placé dans liste de retour. Si la condition est fausse, l'élément et ignoré. |
-| liste2 = liste1  | Crée une nouvelle référence sur une liste. Liste2 est en faite une référence à liste1. Les 2 listes pointent sur la même liste |
-| liste2 = list(liste1) | Crée une nouvelle liste à partir des valeurs de liste1. Les 2 listes référencent des listes distinctes |
-| liste1 == liste2 | Compare les contenus des listes |
-| liste1 is liste2 | Compare les références des listes |
-| liste1.sort() | Trie la liste. Ceci implique que python sache comparer les 2 objets. Cela peut passer par une surcharge de l'opérateur < |
-| liste1.sort(key) | Trie la liste selon la clé indiquée (le paramètre key est une fonction). La clé peut être définie par une fonction lambda. Ex `key=lambda x:x[n]` si les objets sont des tuples ou encore `key=lambda x:x.attr` pour trier selon un attribut particulier de l'objet x |
-| liste1.sort(reverse=True/False) | Tri inversé de la liste |
+| Méthode                                            | Description                                                                                                                                                                                                                                                           |
+| -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| list()                                             | Crée un liste                                                                                                                                                                                                                                                         |
+| []                                                 | Crée un liste                                                                                                                                                                                                                                                         |
+| [a, b, ...]                                        | Crée un liste                                                                                                                                                                                                                                                         |
+| maListe[i]                                         | Accède au i-ème élément. On peut le modifier.                                                                                                                                                                                                                         |
+| append(a)                                          | Ajoute a à la fin de la liste                                                                                                                                                                                                                                         |
+| insert(pos, elem)                                  | Insert l'élément *elem* à la position *pos*                                                                                                                                                                                                                           |
+| liste1.extend(liste2)                              | Concaténation de listes                                                                                                                                                                                                                                               |
+| liste1 += liste2                                   | Concaténation de listes                                                                                                                                                                                                                                               |
+| liste.remove(i)                                    | Supprime le i-ème élément de la liste                                                                                                                                                                                                                                 |
+| del(liste[i])                                      | Supprime le i-ème élément de la liste                                                                                                                                                                                                                                 |
+| [fonction(elem) for elem in sequence]              | Parcourt chaque élément d'une liste et applique la fonction. Cette instruction ne modifie par la liste parcourue mais en crée une nouvelle.                                                                                                                           |
+| [fonction(elem) for elem in sequence if condition] | Parcourt chaque élément d'une liste. Si la condition est vraie, la fonction est exécutée sur l'élément courant et le résultat est placé dans liste de retour. Si la condition est fausse, l'élément et ignoré.                                                        |
+| liste2 = liste1                                    | Crée une nouvelle référence sur une liste. Liste2 est en faite une référence à liste1. Les 2 listes pointent sur la même liste                                                                                                                                        |
+| liste2 = list(liste1)                              | Crée une nouvelle liste à partir des valeurs de liste1. Les 2 listes référencent des listes distinctes                                                                                                                                                                |
+| liste1 == liste2                                   | Compare les contenus des listes                                                                                                                                                                                                                                       |
+| liste1 is liste2                                   | Compare les références des listes                                                                                                                                                                                                                                     |
+| liste1.sort()                                      | Trie la liste. Ceci implique que python sache comparer les 2 objets. Cela peut passer par une surcharge de l'opérateur <                                                                                                                                              |
+| liste1.sort(key)                                   | Trie la liste selon la clé indiquée (le paramètre key est une fonction). La clé peut être définie par une fonction lambda. Ex `key=lambda x:x[n]` si les objets sont des tuples ou encore `key=lambda x:x.attr` pour trier selon un attribut particulier de l'objet x |
+| liste1.sort(reverse=True/False)                    | Tri inversé de la liste                                                                                                                                                                                                                                               |
 
 ### Trier des listes
 Python permet des fonctions poussées permettant le tri de listes.
@@ -199,16 +195,16 @@ Se référer aux points suivants:
 ## Dictionnaires
 Un dictionnaire est comme une liste mais les différents éléments sont référencés à l'aide d'une clé (ie une variables qui sert d'indice plutôt qu'un entier dans le cas des listes)
 
-| Méthode | Description |
-|---------|-------------|
-| dict() | Crée un dictionnaire |
-| {} | Crée un dictionnaire |
-| {"cle1":val1, "cle2":val2, ...} | Crée un dictionnaire |
-| monDico["cle"] = valeur  | Crée ou remplace la valeur d'un élément |
-| monDico.pop("cle") | Retire l'élément correspondant à la clé et renvoie la valeur associée |
-| monDico.keys() | Renvoie la liste des clés du dictionnaire (en réalité, ce n'est pas vraiment une liste mais se parcourt de la même manière |
-| monDico.values() | Renvoie la liste des valeurs du dictionnaire (en réalité, ce n'est pas vraiment une liste mais se parcourt de la même manière |
-| (cle, valeur) in monDico.items() | Récupère un tuple issu du dictionnaire. Utile surtout pour parcourir simultanément clé et valeur |
+| Méthode                          | Description                                                                                                                   |
+| -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| dict()                           | Crée un dictionnaire                                                                                                          |
+| {}                               | Crée un dictionnaire                                                                                                          |
+| {"cle1":val1, "cle2":val2, ...}  | Crée un dictionnaire                                                                                                          |
+| monDico["cle"] = valeur          | Crée ou remplace la valeur d'un élément                                                                                       |
+| monDico.pop("cle")               | Retire l'élément correspondant à la clé et renvoie la valeur associée                                                         |
+| monDico.keys()                   | Renvoie la liste des clés du dictionnaire (en réalité, ce n'est pas vraiment une liste mais se parcourt de la même manière    |
+| monDico.values()                 | Renvoie la liste des valeurs du dictionnaire (en réalité, ce n'est pas vraiment une liste mais se parcourt de la même manière |
+| (cle, valeur) in monDico.items() | Récupère un tuple issu du dictionnaire. Utile surtout pour parcourir simultanément clé et valeur                              |
 
 ## Tuples
 > TODO
@@ -218,42 +214,42 @@ Un dictionnaire est comme une liste mais les différents éléments sont référ
 * import re
 * Pour les regex, il faut échapper le backslash pour les caractère spéciaux (\n, \t, etc.). `\n` devient donc `\\n`. Pour simplifier l'écriture, on fait précéder la chaine de la lettre 'r' (pour *raw*). Ainsi "\n" devient r"\n"
 
-| Fonction | Description |
-|----------|-------------|
-| re.search(regex, chaine) | Cherche la regex dans chaine. Renvoi un objet si trouvé, None sinon |
-| re.sub(regex, repl, chaine) | Remplace tous les patterns qui matchent la regex par *repl*. **Note:** Si on utilise des groupes de capture (avec les parenthèses), ils sont référés en tant que \n (avec n le numéro de groupe). **Note:** On peut nommer les groupes de capture: (`?P<id>groupe`) dans la regex. `\g<id>` dans la chaine de remplacement |
-| re.compile(regex) | Compile une regex pour améliorer le temps d'exécution |
-| regexCompilee.search(chaine) | Utilisation d'une regex compilée pour chercher la regex dans la chaine |
-| regexCompilee.sub(repl, chaine) | Utilisation d'une regex compilée pour remplacer des patterns de regex dans la chaine |
+| Fonction                        | Description                                                                                                                                                                                                                                                                                                                |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| re.search(regex, chaine)        | Cherche la regex dans chaine. Renvoi un objet si trouvé, None sinon                                                                                                                                                                                                                                                        |
+| re.sub(regex, repl, chaine)     | Remplace tous les patterns qui matchent la regex par *repl*. **Note:** Si on utilise des groupes de capture (avec les parenthèses), ils sont référés en tant que \n (avec n le numéro de groupe). **Note:** On peut nommer les groupes de capture: (`?P<id>groupe`) dans la regex. `\g<id>` dans la chaine de remplacement |
+| re.compile(regex)               | Compile une regex pour améliorer le temps d'exécution                                                                                                                                                                                                                                                                      |
+| regexCompilee.search(chaine)    | Utilisation d'une regex compilée pour chercher la regex dans la chaine                                                                                                                                                                                                                                                     |
+| regexCompilee.sub(repl, chaine) | Utilisation d'une regex compilée pour remplacer des patterns de regex dans la chaine                                                                                                                                                                                                                                       |
 
 ## Time
 * import time
 * import datetime
 
-| Fonction | Description |
-|----------|-------------|
-| time.time() | Retourne le timestamp courant |
-| time.localtime([timestamp]) | Convertit un timestamp en *struct_time*, unobjet contenant l'année (tm_year), le mois (tm_mon), le jour du mois (tm_mday), le jour de la semaine (tm_wday), le jour de l'année (tm_yday), l'heure (tm_hour), les minutes (tm_min) et les secondes (tm_sec). Si aucun timestamp n'est précisé, la date et l'heure courante sont utilisées |
-| time.mktime(struct_time) | Convertit un struct_time en timestamp |
-| sleep(x) | Met le programme en pause pendant x secondes |
-| time.strftime(format, struct_time) | Convertit une structure de temps en chaine de caractère formatée selon les indications données dans la chaine *format*. %Y année, %B nom du mois, %d jour du mois, %H heure, %M minutes, %S secondes, etc.) |
-| datetime.date(annee, mois, jour) | Crée un objet date |
-| datetime.time(heure, minutes, secondes, microsecondes, timeZoneInfo) | Crée un objet time |
-| datetime.datetime(A, M, J, H, m, S, ms) | Crée un objet datetime |
-| datetime.now() | Crée un objet datetime à l'horodate courante |
-| datetime.fromtimestamp(timestamp) | Crée un objet datetime à partir d'un timestamp |
+| Fonction                                                             | Description                                                                                                                                                                                                                                                                                                                              |
+| -------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| time.time()                                                          | Retourne le timestamp courant                                                                                                                                                                                                                                                                                                            |
+| time.localtime([timestamp])                                          | Convertit un timestamp en *struct_time*, unobjet contenant l'année (tm_year), le mois (tm_mon), le jour du mois (tm_mday), le jour de la semaine (tm_wday), le jour de l'année (tm_yday), l'heure (tm_hour), les minutes (tm_min) et les secondes (tm_sec). Si aucun timestamp n'est précisé, la date et l'heure courante sont utilisées |
+| time.mktime(struct_time)                                             | Convertit un struct_time en timestamp                                                                                                                                                                                                                                                                                                    |
+| sleep(x)                                                             | Met le programme en pause pendant x secondes                                                                                                                                                                                                                                                                                             |
+| time.strftime(format, struct_time)                                   | Convertit une structure de temps en chaine de caractère formatée selon les indications données dans la chaine *format*. %Y année, %B nom du mois, %d jour du mois, %H heure, %M minutes, %S secondes, etc.)                                                                                                                              |
+| datetime.date(annee, mois, jour)                                     | Crée un objet date                                                                                                                                                                                                                                                                                                                       |
+| datetime.time(heure, minutes, secondes, microsecondes, timeZoneInfo) | Crée un objet time                                                                                                                                                                                                                                                                                                                       |
+| datetime.datetime(A, M, J, H, m, S, ms)                              | Crée un objet datetime                                                                                                                                                                                                                                                                                                                   |
+| datetime.now()                                                       | Crée un objet datetime à l'horodate courante                                                                                                                                                                                                                                                                                             |
+| datetime.fromtimestamp(timestamp)                                    | Crée un objet datetime à partir d'un timestamp                                                                                                                                                                                                                                                                                           |
 
 # Fichiers
 
-| Fonction | Description |
-|----------|-------------|
-| monFichier = open("fichier.txt", 'r') | Ouvre un fichier en lecture. Il existe également les mode w, a, rb, wb et ab |
-| monFichier.close() | Ferme le fichier |
-| monFichier.read() | Lit l'intégralité du fichier |
-| monFichier.write("texte a ecrire") | Ecrit dans le fichier |
+| Fonction                                     | Description                                                                                                                                                                                                                                                                                                                         |
+| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| monFichier = open("fichier.txt", 'r')        | Ouvre un fichier en lecture. Il existe également les mode w, a, rb, wb et ab                                                                                                                                                                                                                                                        |
+| monFichier.close()                           | Ferme le fichier                                                                                                                                                                                                                                                                                                                    |
+| monFichier.read()                            | Lit l'intégralité du fichier                                                                                                                                                                                                                                                                                                        |
+| monFichier.write("texte a ecrire")           | Ecrit dans le fichier                                                                                                                                                                                                                                                                                                               |
 | with open("fichier.txt", 'r') as monFichier: | Définit un gestionnaire de contexte. L'instruction *open* est exécutée et l'objet retourné est référencé en tant que variable *monFichier*. Après cette ligne de code, on écrit un *bloc* d'instructions. A la fin du bloc, monFichier est automatiquement fermé (que le bloc se soit terminé normalement ou suite à une exception) |
-| pickle.Pickler | Permet de sauvegarder un objet dans un fichier. Requiert la classe *Pickler** du module 'pickle'. Le fichier doit être ouvert en mode binaire. Cet objet enregistre sur le disque le dictionnaire des attributs de l'objet à sauvegarder. Ce dictionnaire peut être obtenu avec la méthode spéciale `__dict__` de l'objet |
-| pickle.Unpickler | Permet de restaurer un objet depuis un fichier. Requiert la classe *Unpickler* du module 'pickle'. Le fichier doit être ouvert en mode binaire. |
+| pickle.Pickler                               | Permet de sauvegarder un objet dans un fichier. Requiert la classe *Pickler** du module 'pickle'. Le fichier doit être ouvert en mode binaire. Cet objet enregistre sur le disque le dictionnaire des attributs de l'objet à sauvegarder. Ce dictionnaire peut être obtenu avec la méthode spéciale `__dict__` de l'objet           |
+| pickle.Unpickler                             | Permet de restaurer un objet depuis un fichier. Requiert la classe *Unpickler* du module 'pickle'. Le fichier doit être ouvert en mode binaire.                                                                                                                                                                                     |
 
 # Modules & packages
 ## Modules 
@@ -378,37 +374,53 @@ class NomClasse:
   * la méthode appelée lorsqu'on veut supprimer l'attribut
   * la méthode lorsqu'on demande l'aide associée à l'attribut
 
+### dataclass
+
+Le module `dataclasses` fournit un décorateur très utiles pour les classes "conteneurs", çàd qui ne contiennent que des données et ne possèdent pas de méthodes.
+
+```python
+from dataclasses import dataclass
+
+@dataclass
+class MyContainer:
+  name: str
+  item1: int
+  item2: float
+```
+
+* la méthode `__repr__` est automatiquement générée. Ce qui signifie qu'une demande d'affichage d'un objet de cette classe sera lisible, contrairement à l'affichage d'un objet d'une classe standard.
+
 ## Méthodes spéciales
 
-| Méthode | Description |
-|---------|-------------|
-| `__repr__(self)` | Méthode appelée lorsqu'on demande à afficher l'objet depuis l'éditeur. Elle est également appelée si on appelle la commande print sur l'objet et que la méthode `__str__` n'est pas définie. return type: str |
-| `__str__(self)` | Méthode appelée lorsqu'on exécuter la commande print sur l'objet ou lorsqu'on veut convertir l'objet en string. return type: str |
-| `__getattr__(self, nomAttr)` | Méthode appelée si on tente d'accéder à un attribut inexistant. return type: ce qu'on veut comme valeur retour d'un paramètre inexistant |
-| `__setattr__(self, nomAttr, valeur)` | Méthode appelée lorsqu'on modifie un attribut. Cette méthode se substitue à la méthode par défaut (héritée de la classe *object*. Pour réellement modifier le valeur de lattribut, il faut explicitement appeler la méthode de la classe mère `object.__setattr__(self, nomAttr, valeur)` |
-| `__delattr__(self, nomAttr)` | Méthode appelée lorsqu'on supprimer un attribut. Pour réellement supprimer l'attribut, appeler la méthode de la classe mère `object.__delattr__(self, nomAttr)` |
-| `__getitem__(self, index)` | Méthode appelée lorsqu'on veut accéder à un élément d'un conteneur. Par exemple lorsqu'on fait `monObjet[index]` |
-| `__setitem__(self, index, valeur)` | Méthode appelée lorsqu'on veut modifier un élément d'un conteneur. Par exemple lorsqu'on fait `monObjet[index] = valeur` |
-| `__delitem__(self, index)` | Méthode appelée lorsqu'on veut supprimer un élément d'un conteneur. Par exemple lorsqu'on fait `del monObjet[index` |
-| `__contains__(self, valeur)` | Méthode appelée lorsqu'on écrit `valeur in monObjet`. return type: True/False |
-| `__len__(self)` | Méthode appelée lorsqu'on écrit `len(monObjet)`. return type: int |
-| `__add__(self, valeur)` | Surcharge de l'opérateur +. Cette méthode est appelée lorsqu'on écrit `monObjet + valeur`. **Note:** Charge à cette méthode de gérer les différents types pour *valeur*
-| `__sub__` | Surcharge de l'opérateur - |
-| `__mul__` | Surcharge de l'opérateur * |
-| `__truediv__` | Surcharge de l'opérateur / |
-| `__floordiv__` | Surcharge de l'opérateur // |
-| `__mod__` | Surcharge de l'opérateur % |
-| `__pow__` | Surcharge de l'opérateur ** (puissance) |
-| `__radd__` | Lorsqu'on écrit `valeur + monObjet`, cela suppose que la classe de *valeur* sache comment additionner *monObjet*, ce qui n'est pas le cas si valeur est d'un type standard. Dans ce cas, pyhton tente d'appeler la méthode `__radd__` (qui revient à `monObjet + valeur`). en général: return monObjet + valeur. Permet notamment d'appeler l'opération `sum` sur une collection d'objets. Dans ce cas, le premier appel correspond à `0 + premierObjetDeLaListe`. **Note:** s'applique pour toutes les méthodes mathématiques ci-dessus |
-| `__iadd__` | Surcharge de l'opérateur +=. **Note:** valable pour tous les opérateurs (-=, *=, etc.). Il suffit de rajouter un ***i*** |
-| `__eq__(self, objetAComparer)` | Surcharge de l'opérateur ==. return type: True/False |
-| `__ne__(self, objetAComparer)` | Surcharge de l'opérateur != . return type: True/False |
-| `__gt__(self, objetAComparer)` | Surcharge de l'opérateur >. return type: True/False. **Note:** Si python n'arrive pas a exécuter objet1 < objet2, il va automatiquement tenter d'exécuter l'opération inverse: objet2 >= objet1 |
-| `__ge__(self, objetAComparer)` | Surcharge de l'opérateur >=/. return type: True/False |
-| `__lt__(self, objetAComparer)` | Surcharge de l'opérateur <. return type: True/False |
-| `__le__(self, objetAComparer)` | Surcharge de l'opérateur <=. return type: True/False  |
-| `__getstate__(self)` | Cette méthode est appelée juste avant l'enregistrement de l'objet à l'aide de la classe Pickle. Cette méthode sert à récupérer le dictionnaire des attributs de l'objet. Il faut donc obtenir le dictionnaire de l'objet avec `dict(self, __dict__)`, éventuellement modifier ce dictionnaire et enfin de renvoyer en tant que donnée retour de la méthode. |
-| `__setstate__(self, dictAttr)` | Cette méthode est appelée juste après le chargement d'un objet à l'aide de la classe Unpickle. Cette méthode doit se charger de mettre à jour le dictionnaire des attributs de l'objet: `self.__dict__ = dictAttr` |
+| Méthode                              | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `__repr__(self)`                     | Méthode appelée lorsqu'on demande à afficher l'objet depuis l'éditeur. Elle est également appelée si on appelle la commande print sur l'objet et que la méthode `__str__` n'est pas définie. return type: str                                                                                                                                                                                                                                                                                                                            |
+| `__str__(self)`                      | Méthode appelée lorsqu'on exécuter la commande print sur l'objet ou lorsqu'on veut convertir l'objet en string. return type: str                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `__getattr__(self, nomAttr)`         | Méthode appelée si on tente d'accéder à un attribut inexistant. return type: ce qu'on veut comme valeur retour d'un paramètre inexistant                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `__setattr__(self, nomAttr, valeur)` | Méthode appelée lorsqu'on modifie un attribut. Cette méthode se substitue à la méthode par défaut (héritée de la classe *object*. Pour réellement modifier le valeur de lattribut, il faut explicitement appeler la méthode de la classe mère `object.__setattr__(self, nomAttr, valeur)`                                                                                                                                                                                                                                                |
+| `__delattr__(self, nomAttr)`         | Méthode appelée lorsqu'on supprimer un attribut. Pour réellement supprimer l'attribut, appeler la méthode de la classe mère `object.__delattr__(self, nomAttr)`                                                                                                                                                                                                                                                                                                                                                                          |
+| `__getitem__(self, index)`           | Méthode appelée lorsqu'on veut accéder à un élément d'un conteneur. Par exemple lorsqu'on fait `monObjet[index]`                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `__setitem__(self, index, valeur)`   | Méthode appelée lorsqu'on veut modifier un élément d'un conteneur. Par exemple lorsqu'on fait `monObjet[index] = valeur`                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `__delitem__(self, index)`           | Méthode appelée lorsqu'on veut supprimer un élément d'un conteneur. Par exemple lorsqu'on fait `del monObjet[index`                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `__contains__(self, valeur)`         | Méthode appelée lorsqu'on écrit `valeur in monObjet`. return type: True/False                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `__len__(self)`                      | Méthode appelée lorsqu'on écrit `len(monObjet)`. return type: int                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `__add__(self, valeur)`              | Surcharge de l'opérateur +. Cette méthode est appelée lorsqu'on écrit `monObjet + valeur`. **Note:** Charge à cette méthode de gérer les différents types pour *valeur*                                                                                                                                                                                                                                                                                                                                                                  |
+| `__sub__`                            | Surcharge de l'opérateur -                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `__mul__`                            | Surcharge de l'opérateur *                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `__truediv__`                        | Surcharge de l'opérateur /                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `__floordiv__`                       | Surcharge de l'opérateur //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `__mod__`                            | Surcharge de l'opérateur %                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `__pow__`                            | Surcharge de l'opérateur ** (puissance)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `__radd__`                           | Lorsqu'on écrit `valeur + monObjet`, cela suppose que la classe de *valeur* sache comment additionner *monObjet*, ce qui n'est pas le cas si valeur est d'un type standard. Dans ce cas, pyhton tente d'appeler la méthode `__radd__` (qui revient à `monObjet + valeur`). en général: return monObjet + valeur. Permet notamment d'appeler l'opération `sum` sur une collection d'objets. Dans ce cas, le premier appel correspond à `0 + premierObjetDeLaListe`. **Note:** s'applique pour toutes les méthodes mathématiques ci-dessus |
+| `__iadd__`                           | Surcharge de l'opérateur +=. **Note:** valable pour tous les opérateurs (-=, *=, etc.). Il suffit de rajouter un ***i***                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `__eq__(self, objetAComparer)`       | Surcharge de l'opérateur ==. return type: True/False                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `__ne__(self, objetAComparer)`       | Surcharge de l'opérateur != . return type: True/False                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `__gt__(self, objetAComparer)`       | Surcharge de l'opérateur >. return type: True/False. **Note:** Si python n'arrive pas a exécuter objet1 < objet2, il va automatiquement tenter d'exécuter l'opération inverse: objet2 >= objet1                                                                                                                                                                                                                                                                                                                                          |
+| `__ge__(self, objetAComparer)`       | Surcharge de l'opérateur >=/. return type: True/False                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `__lt__(self, objetAComparer)`       | Surcharge de l'opérateur <. return type: True/False                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `__le__(self, objetAComparer)`       | Surcharge de l'opérateur <=. return type: True/False                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `__getstate__(self)`                 | Cette méthode est appelée juste avant l'enregistrement de l'objet à l'aide de la classe Pickle. Cette méthode sert à récupérer le dictionnaire des attributs de l'objet. Il faut donc obtenir le dictionnaire de l'objet avec `dict(self, __dict__)`, éventuellement modifier ce dictionnaire et enfin de renvoyer en tant que donnée retour de la méthode.                                                                                                                                                                              |
+| `__setstate__(self, dictAttr)`       | Cette méthode est appelée juste après le chargement d'un objet à l'aide de la classe Unpickle. Cette méthode doit se charger de mettre à jour le dictionnaire des attributs de l'objet: `self.__dict__ = dictAttr`                                                                                                                                                                                                                                                                                                                       |
 
 # Itérateurs
 Lorsqu'on exécuter le code `for elem in sequence`, python effectue les actions suivantes:
@@ -454,25 +466,25 @@ Avec le mot clé `yield`, la fonction est suspendue et renvoie la valeur spécif
 
 ## Côté serveur
 
-| Instruction | Description |
-|-------------|------------|
-| maConnexion = socket.socket(socket.AF_INET, socket.SOCK_STREAM) | Création d'une socket |
-| maConnexion.bind((hote, port)) | Affecte la connexion à l'interface réseau (nom d'hôte et numéro de port). Mettre hote = '' |
-| maConnexion.listen(backlog) | Placer la connexion en mode d'écoute. Backlog est un chiffre qui indique combien de client peuvent être simultanément en attente de connexion (généralement réglé à 5) |
-| (connexion, infos) = maConnexion.accept() | Accepte une demande de connexion d'un client. Retourne 2 infos: la connexion qui est un socket connecté au client et un tuple contenant les infos de connexion (adresse IP, port de sortie). **Note:** cette méthode est bloquante si aucun client n'a fait de demande de connexion |
-| maConnexion.send(b'Message à envoyer') | Envoie le message indiqué. **important:** Le message est en octets et non une string, d'où le **b** devant la chaine |
-| msg = maConnexion.recv(tailleBuffer) | Réceptionne un message. Le message reçu est limité à la taille indiquée. |
-| connexion.close() | Ferme la connexion |
+| Instruction                                                     | Description                                                                                                                                                                                                                                                                         |
+| --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| maConnexion = socket.socket(socket.AF_INET, socket.SOCK_STREAM) | Création d'une socket                                                                                                                                                                                                                                                               |
+| maConnexion.bind((hote, port))                                  | Affecte la connexion à l'interface réseau (nom d'hôte et numéro de port). Mettre hote = ''                                                                                                                                                                                          |
+| maConnexion.listen(backlog)                                     | Placer la connexion en mode d'écoute. Backlog est un chiffre qui indique combien de client peuvent être simultanément en attente de connexion (généralement réglé à 5)                                                                                                              |
+| (connexion, infos) = maConnexion.accept()                       | Accepte une demande de connexion d'un client. Retourne 2 infos: la connexion qui est un socket connecté au client et un tuple contenant les infos de connexion (adresse IP, port de sortie). **Note:** cette méthode est bloquante si aucun client n'a fait de demande de connexion |
+| maConnexion.send(b'Message à envoyer')                          | Envoie le message indiqué. **important:** Le message est en octets et non une string, d'où le **b** devant la chaine                                                                                                                                                                |
+| msg = maConnexion.recv(tailleBuffer)                            | Réceptionne un message. Le message reçu est limité à la taille indiquée.                                                                                                                                                                                                            |
+| connexion.close()                                               | Ferme la connexion                                                                                                                                                                                                                                                                  |
 
 ## Côté client
 
-| Instruction | Description |
-|-------------|------------|
-| maConnexion = socket.socket(socket.AF_INET, socket.SOCK_STREAM) | Création d'une socket |
-| maConnexion.connect((adresseIp, port)) | Connexion au serveur ayant l'adresse Ip indiquée au port précisé |
-| maConnexion.send(b'Message à envoyer') | Envoie le message indiqué. **important**: Le message est en octets et non une string, d'où le **b** devant la chaine |
-| msg = maConnexion.recv(tailleBuffer)  | Réceptionne un message. Le message reçu est limité à la taille indiquée. |
-| connexion.close()  | Ferme la connexion |
+| Instruction                                                     | Description                                                                                                          |
+| --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| maConnexion = socket.socket(socket.AF_INET, socket.SOCK_STREAM) | Création d'une socket                                                                                                |
+| maConnexion.connect((adresseIp, port))                          | Connexion au serveur ayant l'adresse Ip indiquée au port précisé                                                     |
+| maConnexion.send(b'Message à envoyer')                          | Envoie le message indiqué. **important**: Le message est en octets et non une string, d'où le **b** devant la chaine |
+| msg = maConnexion.recv(tailleBuffer)                            | Réceptionne un message. Le message reçu est limité à la taille indiquée.                                             |
+| connexion.close()                                               | Ferme la connexion                                                                                                   |
 
 ## Autres
 Les méthodes accept et recv sont bloquantes. Pour éviter de bloquer le programme et permettre la gestion de plusieurs clients simultanément, on peut utiliser le module **select**
@@ -528,20 +540,20 @@ Les TU peuvent être appelés:
 * `unittest.main()` dans le module de test
 * commande `python -m inittest` dans le dossier du module
 
-| Assertions de test |
-|--------------------|
-| assertEqual(a, b) |
-| assertNotEqual(a, b) |
-| assertTrue(a) |
-| assertFalse(a) |
-| assertIs(a, b) |
-| assertIsNot(a, b) |
-| assertIsNone(a) |
-| assertIsNotNone(a) |
-| assertIn(a, b) |
-| assertNotIn(a, b) |
-| assertIsInstance(a, b) |
-| assertIsNotInstance(a, b) |
+| Assertions de test                           |
+| -------------------------------------------- |
+| assertEqual(a, b)                            |
+| assertNotEqual(a, b)                         |
+| assertTrue(a)                                |
+| assertFalse(a)                               |
+| assertIs(a, b)                               |
+| assertIsNot(a, b)                            |
+| assertIsNone(a)                              |
+| assertIsNotNone(a)                           |
+| assertIn(a, b)                               |
+| assertNotIn(a, b)                            |
+| assertIsInstance(a, b)                       |
+| assertIsNotInstance(a, b)                    |
 | assertRaises(exception, fonction, arguments) |
 
 La dernière assertion vérifie que l'appel de la fonction lève l'exception attendue

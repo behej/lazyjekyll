@@ -4,7 +4,17 @@ layout: default
 icon: bash.png
 ---
 # Shebang
-#!
+Ligne de commentaire à placer au tout début du fichier. Cette ligne indique à Linux le programme à utiliser pour exécuter le script.
+```sh
+#! /bin/bash 
+```
+* `/bin/bash` : indique le chemin absolu vers le programme à utiliser
+  * Nécessite que le programme soit réellement installé à cet endroit sur la machine cible
+* `/usr/bin/env bash` : Utilise les variables d'environnement pour déterminer automatiquement l'emplacement du programme indiqué. Cette solution est plus portable que la précédente.
+
+
+> Le shebang ne s'applique pas uniquement pour les scripts bash, mais également pour python ou tout autre script.
+ 
 # Modification du comportement du shell
 Il est possible de modifier le comportement par défaut en positionnant certaines options à l'aide de la commande `set`.
 * **set -e** : exit 1 immédiatement en cas d'erreur (sauf dans les `if`, `&&` et `||`)
@@ -20,6 +30,9 @@ Il est possible de modifier le comportement par défaut en positionnant certaine
 ## Variables particulières
 * $# : nombre d'arguments du script ou de la fonction
 * $*n* : *n*-ième argument
+  * $0 étant le nom du script
+* $@ : la liste de tous les arguments du script ou de la fonction sous forme de tableau
+  * l'argument $0 (le nom du script) ne figure pas dans cette liste)
 * $? : code de retour de la dernière instruction exécutée
 * \$$ : PID courant du script en cours
 * $! : PID du dernier process exécuté en background
@@ -148,7 +161,7 @@ if [ -z $maVar ]   # si la variable est vide
 if [ -n $maVar ]   # si la variable est non vide
 if [ -e $fichier ]   # si le fichier/dossier existe
 if [ -d $fichier ]   # si le fichier est un dossier
-if [ -f $fichier ]   # si le fichier est vraiment un fichier
+if [ -f $fichier ]   # si le fichier existe et est vraiment un fichier
 if [ -L $fichier ]   # si le fichier est un lien
 if [ -r/w/x $fichier ]   # si le fichier est accessible en lecture/écriture/exécution
 if [ $fichier1 -nt/ot $fichier2 ]   # si le fichier1 est plus récent/ancien que fichier2 (nt: newer than / ot: older than)
@@ -196,6 +209,37 @@ case $maVar in
         ;;
 esac
 ```
+
+## Parcourir un fichier
+### Option 1
+Le fichier à lire est indiqué au début de la boucle *while*
+```sh
+cat file.txt | while IFS= read var1 var2 ; do
+    echo $var1 $var2
+done
+```
+* IFS (optionnel) permet d'indiquer le séparateur à utiliser pour découper une ligne
+* Chaque morceau découpé de la ligne est affecté aux variables indiquées
+  * Si plus de variables que de morceaux découpés &rarr; les variables restantes sont vides
+  * Si plus de morceaux que de variables &rarr; La dernière variable contient le reste de la ligne, non découpé
+
+### Option 2
+Le fichier à lire est indiqué à la fin de la boucle *while*
+```sh
+while IFS="/" read var1 var2 ; do
+    echo $var1 $var2
+done < file.txt
+```
+
+### Variante: lire 2 fichiers à la fois *(ou plus)*
+```sh
+while read var1 && read var2 <&3 ; do
+    echo $var1 $var2
+done < file1.txt 3< file2.txt
+```
+* La boucle s'arrête dès qu'un des 2 fichiers atteint la fin
+
+
 
 # Itérations
 ```sh
@@ -319,5 +363,5 @@ usage()
 ```
 
 ### Tips
-* Si l'ordre des options a de l'importance, il faut ajouter un tirer avant la première option courte.
+* Si l'ordre des options a de l'importance, il faut ajouter un tiret avant la première option courte.
 > *Exemple:* `getopt -o -hf:v`

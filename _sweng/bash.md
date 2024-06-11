@@ -253,6 +253,28 @@ done
 [ $a -eq 2 ] && funcIfTrue || funcIfFalse      # ici encore, attention aux espaces autour des brackets
 ```
 
+# Here document
+La syntaxe *here document* permet d'insérer un *document* dans un script bash ou directement dans un terminal.
+Typiquement du texte sur plusieurs lignes mais à traiter d'un seul bloc par une seule commande.
+```bash
+cat << EOF > file.txt
+line 1
+line 2
+EOF
+```
+Tout le contenu à partir de la ligne suivante les `<<` sera pris en compte par la commande indiquée (ici `cat`), jusqu'à rencontrer le mot-clé spécifié (ici `EOF`).
+
+> **file1.txt**
+> ```sh
+> line1
+> line2
+> ```
+
+> **Notes:** 
+> * Le mot-clé peut être remplacé par n'importe quel mot
+> * Les variables sont remplacées par leur valeur et les commandes entre *back-quotes* sont exécutées
+> * Si le mot clé est entre quotes ou précédé par un back-slash, les variables ne sont pas remplacées, les back-quotes ne sont pas exécutées
+
 # Faire des calculs
 ```sh
 echo $((4+2))
@@ -264,6 +286,7 @@ echo $(($a+5))
 
 i=$(($i+1))   # equivalent à i++
 ```
+
 
 # bc : calculatrice en ligne de commande
 ```sh

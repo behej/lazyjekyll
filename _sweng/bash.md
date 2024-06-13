@@ -162,6 +162,7 @@ if [ -n $maVar ]   # si la variable est non vide
 if [ -e $fichier ]   # si le fichier/dossier existe
 if [ -d $fichier ]   # si le fichier est un dossier
 if [ -f $fichier ]   # si le fichier existe et est vraiment un fichier
+if [ -s $fichier ]   # si le fichier existe et est non vide
 if [ -L $fichier ]   # si le fichier est un lien
 if [ -r/w/x $fichier ]   # si le fichier est accessible en lecture/écriture/exécution
 if [ $fichier1 -nt/ot $fichier2 ]   # si le fichier1 est plus récent/ancien que fichier2 (nt: newer than / ot: older than)

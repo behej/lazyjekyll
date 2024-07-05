@@ -6,23 +6,23 @@ icon: linux.png
 # Général
 ## 📂 Description du filesystem
 
-|Dossier|Usage|
-|---|---|
-|/bin|Binaires essentiels pour le fonctionnement de l'OS|
-|/boot/|Fichiers nécessaires au démarrage du système (inclus le kernel)|
-|/dev/|Devices. Tous les périphériques sont représentés ici en tant que fichier texte|
-|/etc/|Fichiers de configuration de différents aspects de l'OS ou de programmes|
-|/home/|Répertoires home de tous les utilisateurs|
-|/lib|Shared libraries pour bin et sbin|
-|/opt/|Pour les programmes optionnels. Rarement besoin de naviguer dedans|
-|/proc/|Processes. Ne correspond pas à de vrais fichiers ou des périphérique, mais est créé à la volée par l'OS pour tracker tous les processes exécutés.|
-|/root/|Répertoire home de root|
-|/sbin|System binaries. Binaires essentiellement destinés à être utilisé par root|
-|/tmp/|Dossier temporaire. Est effacé à chaque redémarrage du système|
-|/usr/bin/|Binaires destinés à l'utilisateur final de la machine|
-|/usr/local/bin/|Binaires compilés manuellement et non gérés par le gestionnaire de paquets|
-|/usr/local/lib/| Libs compilées manuellement et non gérées par le gestionnaire de paquets|
-|/var/|Variables files. Fichiers utilisés par l'OS et les app pour stocker des infos en cours d'utilisation.|
+| Dossier         | Usage                                                                                                                                             |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| /bin            | Binaires essentiels pour le fonctionnement de l'OS                                                                                                |
+| /boot/          | Fichiers nécessaires au démarrage du système (inclus le kernel)                                                                                   |
+| /dev/           | Devices. Tous les périphériques sont représentés ici en tant que fichier texte                                                                    |
+| /etc/           | Fichiers de configuration de différents aspects de l'OS ou de programmes                                                                          |
+| /home/          | Répertoires home de tous les utilisateurs                                                                                                         |
+| /lib            | Shared libraries pour bin et sbin                                                                                                                 |
+| /opt/           | Pour les programmes optionnels. Rarement besoin de naviguer dedans                                                                                |
+| /proc/          | Processes. Ne correspond pas à de vrais fichiers ou des périphérique, mais est créé à la volée par l'OS pour tracker tous les processes exécutés. |
+| /root/          | Répertoire home de root                                                                                                                           |
+| /sbin           | System binaries. Binaires essentiellement destinés à être utilisé par root                                                                        |
+| /tmp/           | Dossier temporaire. Est effacé à chaque redémarrage du système                                                                                    |
+| /usr/bin/       | Binaires destinés à l'utilisateur final de la machine                                                                                             |
+| /usr/local/bin/ | Binaires compilés manuellement et non gérés par le gestionnaire de paquets                                                                        |
+| /usr/local/lib/ | Libs compilées manuellement et non gérées par le gestionnaire de paquets                                                                          |
+| /var/           | Variables files. Fichiers utilisés par l'OS et les app pour stocker des infos en cours d'utilisation.                                             |
 
 ## Flux de sortie des processus
 Linux propose une sortie standard (stdout - 1), généralement affichage à l'écran. Et une sortie d'erreur (stderr - 2).
@@ -58,6 +58,9 @@ Les tâches en arrière plan restent quand même attachées au shell. Si on ferm
   * cat file : affiche le fichier
   * cat file* : concatène et affiche tous les fichiers correspondant au pattern
   * cat file1 file2 > file3 : concatène les fichiers 1 et 2 dans le fichier 3 (NB: fonctionne aussi avec des fichiers binaires)
+* **mktemp** : Créer un fichier ou un dossier temporaire (dans le dossier /tmp/)
+  * my_file=\$(mktemp) : on pourra ensuite lire et écrire dans le fichier en utilisant `$my_file`
+  * mktemp -d : créer un dossier temporaire
 * **wc** : compte le nb de lignes, mots et octets d'un fichier
   * wc -l : compte le nb de ligne uniquement
 * **grep**

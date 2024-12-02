@@ -13,6 +13,7 @@ icon: git.png
   * git config \-\-global alias.lg 'log \-\-oneline \-\-graph'
   * git config \-\-global alias.amend 'commit \-\-amend \-\-no-edit'
 * git config \-\-global core.editor 'vim' (ouu n'importe quel éditeur)
+* git config \-\-global pull.rebase true : le comportement par défaut de la commande pull est \-\-rebase
 
 Les alias sont stockés dans le fichier ~/.gitconfig
 
@@ -27,6 +28,7 @@ Les alias sont stockés dans le fichier ~/.gitconfig
   * git diff *\<old\> \<new\>* \-\- *\<file\>* : Affiche les différences d'un fichier précis
   * git diff \-\-name-only
   * git diff \-\-word-diff=color : Affiche les différences sur une seule ligne avec la distinction par couleur
+  * git diff \-\-staged : Affiche les différences  entre ce qui est dans la staging area et le dernier commit
 * git merge-base branche1 branche2 : indique l'ancêtre commun le plus récent des 2 branche. Ne fonctionne que si les 2 branches n'ont pas été mergées.
 
 # Branches

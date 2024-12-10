@@ -149,6 +149,7 @@ Les méthodes suivantes s'appliquent sur les objets de la classe  `str` (chaines
 | "ma chaine {0}".format(var)               | Idem ci-dessus mais le numéro entre accolades précise l'ordre des variables. Les variables peuvent être placées dans n'importe quel ordre |
 | "ma chaine {var1}".format(var1=valeurVar) | Idem ci-dessus mais on peut donner des noms explicites aux variables à insérer                                                            |
 | f"ma chaine {var1}"                       | f-string: la variable est directement insérée dans la chaine                                                                              |
+| "#" * 20                                  | Répète la chaine autant de fois que spécifié. Possibilité avancées comme `"##" * 5 + "." * 4` --> `##########....`                        |
 | len(chaine)                               | Renvoie la longueur de la chaine                                                                                                          |
 | count                                     |                                                                                                                                           |
 | find                                      |                                                                                                                                           |

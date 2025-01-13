@@ -167,8 +167,8 @@ Le pager par défaut est **less**. Il existe également les pager **more** (moin
 * `pdfunite file1.pdf file2.pdf output.pdf` : concatène des fichiers pdf
 
 
-
-# 🕞 Cron
+# 🕞 Plannification
+## 🕞 Cron
 Planification de tâches à heure ou intervalle fixe
 
 ```sh
@@ -189,8 +189,29 @@ A noter qu'un fichier crontab général est existant dans le dosser `/etc/`. On 
 
 Faire attention à bien démarrer le service cron (cron deamon) `crond`
 
-# Réseau
+## at
+La commande at permet de demander l'exécution d'une ou plusieurs commande à un moment précis. Contraitement à Cron, 
+cette tâche ne sera exécutée qu'une seule fois.
 
+* la commande `at` ouvre un éditeur dans lequel on tape les commandes à exécuter. On quitte l'éditeur avec `CTRL+D`.
+* On peut aussi *piper* les commandes dans `at`. exemple: "./myScript.sh | at ..."
+
+Le moment d'exécution peut être défini de plusieurs façons:
+* at 17:00
+* at 15:00 tomorrow
+* at 3PM
+* at 3PM thursday
+* at now +5 minutes
+* at 202407091423 (14h23 le 9 juillet 2024)
+
+
+**Gérer les tâches programmées**
+* atq (ou at -l): liste les tâches programmées
+* atrm <JOB>: annule une tâche programmée (le numéro de JOB est donné par atq)
+* at -c <JOB>: donne les détails d'une tâche particulière
+
+
+# Réseau
 
 ## Scan réseau
 * **nmap** : scan réseau

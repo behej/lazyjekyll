@@ -24,6 +24,7 @@ Les alias sont stockés dans le fichier ~/.gitconfig
 * git log : affiche la liste des derniers commits
   * git log \-\-oneline : affiche chaque commit sur une seule ligne
   * git log \-\-graph : affiche les derniers commits sous forme de graphique
+  * git log \-\-first-parent : affiche uniquement le premier parent (utile pour ne voir que l'historique de *master* sans le détail des branches)
 * git diff *\<old\> \<new\>* :
   * git diff *\<old\> \<new\>* \-\- *\<file\>* : Affiche les différences d'un fichier précis
   * git diff \-\-name-only

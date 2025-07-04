@@ -68,6 +68,7 @@ Les tâches en arrière plan restent quand même attachées au shell. Si on ferm
   * grep -nri
   * grep -a : Force le fichier lu comme un fichier texte
   * grep -v : Renvoie les entrées qui ne matchent PAS le pattern
+  * grep --exclude-dir=\<dir/to/ignore/\>
   * -i : ignore case
   * -I : ignore les fichiers binaires
 * **xargs**: Récupère l'entrée du process et l'utilise en tant qu'arguments de la commande (*exemple:* `cat file | xargs kill`)

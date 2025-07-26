@@ -33,3 +33,34 @@ iface wlan0 inet dhcp
    wpa-ssid <Nom_De_La_Box>
    wpa-psk <Cle_De_Securite>
 ```
+
+# Ecran 3,5" TFT sur GPIO
+
+## Installer les drivers
+```sh
+git clone https://github.com/goodtft/LCD-show.git
+chmod -R 755 LCD-show
+cd LCD-show/
+sudo ./LCD35-show
+```
+
+## Retourner l'écran
+On peut retourner l'écran pour adapter l'affichage selon l'orientation du RPi
+
+```sh
+cd LCD-show
+./rotate.sh 180
+```
+
+## Afficher une image sur l'écran
+Le serveur graphique est rattaché à la session qui démarre en local sur le raspberry (celle qui affiche le bureau sur l'écran), alors que les sessions ssh n'ont pas de serveur graphique.
+
+Si on veut afficher une image depuis une session ssh, il faut indiquer quel écran et quel serveur graphique utiiser.
+
+```sh
+export DISPLAY=:0
+export XAUTHORITY=/home/pi/.Xauthority
+feh --fullscreen /path/to/my/image.jpg &
+``` 
+
+

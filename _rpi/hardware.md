@@ -53,6 +53,9 @@ cd LCD-show
 ```
 
 ## Afficher une image sur l'écran
+### Avec serveur X
+Si on a choisi une image RPi complète, avec un serveur X, tout est beaucoup plus simple puisque l'interface graphique est déjà présente et qu'il suffit de l'utiliser.
+
 Le serveur graphique est rattaché à la session qui démarre en local sur le raspberry (celle qui affiche le bureau sur l'écran), alors que les sessions ssh n'ont pas de serveur graphique.
 
 Si on veut afficher une image depuis une session ssh, il faut indiquer quel écran et quel serveur graphique utiiser.
@@ -62,5 +65,30 @@ export DISPLAY=:0
 export XAUTHORITY=/home/pi/.Xauthority
 feh --fullscreen /path/to/my/image.jpg &
 ``` 
+
+
+### Sans serveur X
+Si on a choisi une image RPi *lite*, càd sans serveur graphique, on peut soit installer un serveur graphique (non traité ici), soit utiliser directement **framebuffer**.
+
+**Installer FBI (framebuffer interface)**
+```sh
+sudo apt install fbi
+```
+
+**Afficher une image**
+```sh
+sudo fbi -T 1 -d /dev/fb1 -noverbose -a /path/to/my/image.jpg
+```
+* `-T 1`: désactive la sortie console sur tty1
+* `-d /dev/fb1`: écrit dans le framebuffer fb1 (généralement, fb0=sortie principale, HDMI, fb1=écran sur GPIO)
+* `-noverbose`: désactive l'affichage du nom du fichier
+* `-a`: autozoom
+
+*Autres options intéressantes*
+* `-u`: lecture aléatoire
+* `-t 5`: change d'image toutes les 5 secondes
+* `/path/to/image/folder/*`: affiche toutes les images du dossier
+
+> note: fbi continue de touner en arrière plan. Pour l'arrêter, il faut faire `sudo pkill fbi`. L'écran continue d'afficher la dernière image (le buffer n'est plus mis à jour mais il n'est pas vidé pour autant).
 
 

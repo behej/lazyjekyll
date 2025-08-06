@@ -142,12 +142,25 @@ Les tâches en arrière plan restent quand même attachées au shell. Si on ferm
     * `b lbl` - Saute au label
     * La commande joint la ligne suivante jusqu'à atteindre la dernière ligne, puis elle sort de la boucle pour exécuter la dernière commande, qui permet ainsi de travailler sur l'ensemble du fichier. Permet de contourner le fait que sed traite l'entrée ligne par ligne.
   > More info [here](https://linuxhint.com/remove-lines-file-sed-command/)
+* **rsync**: synchronisation de données
+  * `rsync -avz /path/to/source/ /path/to/dest/`
+    * `-a` : mode archive (conserve les droits, les liens)
+    * `-v` : verbose
+    * `-z` : active la compression
+  * `--delete`: Efface du dossier de destination, les fichiers qui ont été supprimés du dossier source
+  * `--dry-run` : simule l'opération et affiche ce qui serait transféré ou supprimé
+  * `--progress` : affiche la progression
+  * `--exclude 'pattern'` : exclue des fichiers
+  * `--include 'pattern'` : force l'inclusion d'un fichier qui aurait été exclut
+  * `--exclude-from='excludes.txt'` : Exclue les fichiers spécifiés dans le fichier 'excludes.txt'
+  * `-e ssh`: active la synchro via ssh
+    * `rsync-avz -e ssh /path/to/source/ <user>@<host>:/path/to/dest/`
 
 
 * **cut** : Découpe une chaine de caractère selon un délimiteur spécifique
   * cut -d; : indique que la chaine doit être découpée à chaque fois qu'un point-virgule est rencontré
   * cut -f2,3 : Renvoie du 2ème au 3ème morceau (numérotation à partir de 1)
-  * echo "a;b;c;d" | cut -d';' -f2,3 --> b;c
+  * `echo "a;b;c;d" | cut -d';' -f2,3` --> `b;c`
 * **rev** : Renverse une chaine de caractère
 
 ## 🗜 Archives
@@ -174,8 +187,8 @@ Planification de tâches à heure ou intervalle fixe
 
 ```sh
 min   hour   day   month  weekday  command
-0     *      *     *      *        script   # toutes les heures: n'importe quelle heure, jour quand les minutes sont à 0
-0     2      *     *      *        script   # tous les jours à 2h: n'importe quel jour, mois à 2h00
+0     *      *     *      *        script   # toutes les heures: n'importe quelle heure/jour quand les minutes sont à 0
+0     2      *     *      *        script   # tous les jours à 2h: n'importe quel jour, mais à 2h00
 */15  *      *     *      *        script   # toutes les 15 min
 0     */4    *     *      *        script   # toutes les 4h
 0     5      1     *      *        script   # tous les 1er du mois à 5h

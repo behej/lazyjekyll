@@ -3,6 +3,9 @@ title: CMake
 layout: default
 icon: cmake.png
 ---
+> 💡 [Excellent talk de Daniel Pfeifer lors de C++Now de 2017](https://www.youtube.com/watch?v=bsXLMQ6WgIk)
+
+
 # Commandes CMake
 * `cmake -B build -S . -G Ninja`
   * -B : dossier dans lequel sera buildé le projet
@@ -111,6 +114,9 @@ project(modernCpp
 # Compilation
 * **add_executable**(ProgramName source1 source2): Crée un exécutable en compilant et linkant tous les fichiers source indiqués
 * **add_library**(LibName source1 source2): Idem mais pour créer une lib
+* **file**(GLOB \<list_name\> path/to/files/*.cpp): Permet de lister tous les fichiers avec l'extension .cpp dans le dossier indiqué. Utile pour récupérer la liste exhaustive des fichiers présent de manière automatique, sans besoin de tous les lister explcitement
+  * GLOB_RECURSE: idem mais avec une recherche récursive dans les sous-dossiers du répertoire indiqué
+  * ⚠️ Directive non recommandée: la liste est uniquement établie à l'étape de configuration. Si un fichier est ajouté a posteriori, il ne sera pas détecté et ne sera pas compilé sans passer une nouvelle fois par la configuration (certains IDE relance une configuration de manière systématique à chaque build mais ce n'est pas toujours le cas)
 * **target_link_libraries**(ProgramName PUBLIC LibName): Lie la lib avec l'exécutable
 * **target_include_directories**(ProgramName PUBLIC path/to/include/files): Inclut le dossier indiqué pour chercher les headers (directive applicable uniquement à la cible indiquée)
   * Voir aussi include_directories
@@ -132,6 +138,7 @@ project(modernCpp
   * Différence avec `add_custom_command`:
     * `add_custom_command`: crée des fichiers. La dépendance pourra se faire sur ces fichiers
     * `add_custom_target`: Déclare une cible. La dépendance pourra se faire sur la cible complète (qu'elle génère des fichiers ou non)
+* **execute_process**(COMMAND \<commande\> WORKING_DIRECTORY \<path/to/directory\>): Exécute la commande indiqué au moment de la configuration du projet
 
 ## Cross compilation
 > 👉 Voir [Cross compilation for embedded](https://kubasejdak.com/how-to-cross-compile-for-embedded-with-cmake-like-a-champ)
@@ -177,7 +184,9 @@ Find_package
 # Variables prédéfinies utiles
 * PROJECT_BINARY_DIR: Dossier de build
 * PROJECT_SOURCE_DIR: Dossier parent du projet. Dossier où se trouve le fichier CMakeLists.txt parent de tout le projet
-* CMAKE_CURRENT_SOURCE_DIR: Dossier courrant pour les fichiers en cours de traitement. Sous dossier dans lequel se trouve un CMakeLists.txt enfant
+* CMAKE_CURRENT_SOURCE_DIR: Dossier courant pour les fichiers en cours de traitement. Sous dossier dans lequel se trouve un CMakeLists.txt enfant en cours de traitement. Pour un CMakeLists.txt appelé depuis un autre par la directive `include(path/CMakeLists.txt)`, cette variable réfère toujours au fichier **appelant**
+* CMAKE_CURRENT_LIST_DIR: Dossier courant dans lequel se trouve le fichier CMakeLists.txt qui utilise cette variable. Valable pour les fichiers parcourus soit via `include`, soit via `add_subdirectory`
+* CMAKE_CURRENT_BINARY_DIR: Fait référence au dossier de build correspondant au CMakeLists.txt courant. *i.e.* le dossier de build dans lequel sera généré le code compilé par ce CMakeLists.txt
 
 
 

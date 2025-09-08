@@ -570,3 +570,13 @@ Une sélection de librairies à connaitre en Python
 * [configparser](https://docs.python.org/3/library/configparser.html): Gérer facilement des fichiers de configuration (fichiers .ini)
 * [logging](https://docs.python.org/3/library/logging.html): Créer facilement des fichiers de log (avec niveau de détails des logs, timestamp, etc.)
 * [docx](https://python-docx.readthedocs.io/en/latest/): Manipuler des fichiers Microsoft Word
+
+# Virtual environment
+Les environnements virtuels permettent de spécifier des packages différents à des versions données pour un projet particulier. L'intérêt est que chaque projet peut posséder ses propres dépendances sans se soucier des projets annexes ou encore de l'installation système. Le tout étant portable d'un poste de travail à un autre très simplement.
+
+* pthon -m venv .venv: crée un environnement virtuel. Tous les fichiers de configuration seront placés dans le dossier `.venv`. On peut spécifier un nom différent pour ce dossier
+* source .venv/bin/activate: active l'environnement virtuel
+  * à partir de maintenant, tous les packages installés ne seront disponibles que pour l'environnement actif.
+* deactivate: désactive l'environnement virtuel
+* pip freeze > requirements.txt: dump la liste de tous les packages installés ainsi que leur version dans un fichier requirements.txt
+* pip install -r requirements.txt: installe tous les packages spécifiés dans le fichier requirements.txt

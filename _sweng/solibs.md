@@ -82,6 +82,10 @@ Retourne la liste de tous les symboles d'un objet (programme ou lib). Les symbol
 objdump -p binaire | grep NEEDED
 ```
 
+```sh
+ldd binaire
+```
+
 ## Retrouver une lib
 ```sh
 ldconfig -p | grep libxxx

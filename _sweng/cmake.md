@@ -5,6 +5,8 @@ icon: cmake.png
 ---
 > 💡 [Excellent talk de Daniel Pfeifer lors de C++Now de 2017](https://www.youtube.com/watch?v=bsXLMQ6WgIk)
 
+> 💡 [Bonne pratiques CMake](https://cliutils.gitlab.io/modern-cmake/README.html)
+
 
 # Commandes CMake
 * `cmake -B build -S . -G Ninja`
@@ -12,6 +14,8 @@ icon: cmake.png
   * -S : dossier dans lequel se trouvent les sources (et donc le fichier CMakeLists.txt de plus haut niveau)
   * -G : utilisation d'un générateur (tel Ninja ou Unix Makefiles)
 * `cmake --build build --config Release --target all`
+* `cmake --build build --target install` : installe le programme
+* `cmake --install build` : installe le programme pour CMake 3.15+
 
 # Modern CMake
 Une syntaxe moderne de CMake consiste à ne plus manipuler des variables mais de déclarer des cibles et propriétés, puis de gérer les dépendances enre les différentes cibles.
@@ -55,7 +59,7 @@ si mon appli utilise la lib A
 # Projet type
 ```cmake
 # Configuration projet
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.24) # Eviter de prendre une version trop vieille. <3.5 déconseillé, >3.15 conseillé
 project(modernCpp
         VERSION 1.0.0.0
         DESCRIPTION "My amazing project"
@@ -201,15 +205,25 @@ Copie le fichier *input* et le renomme en *output*. Lors de la copie, CMake remp
 
 > 💡 Les fichiers seront copiés dans le dossier de build. Il ne faudra pas oublier d'ajouter ce dossier à la liste des répertoires à inclure
 
+
+
 ## Création d'une option
 ```cmake
+set(MyVar "Value" CACHE STRING "Description")
 option(MyOption "Description" ON)
 ```
 Permet de définir une variable qui pourra être configurée différement à l'appel de la commande cmake. Cette variable peut ensuite être réutilisée dans le fichier pour des traitements conditionnels par exemple.
 
+* La commande `set` permet de définir des variables de type BOOL, STRING, FILEPATH, PATH ou INTERNAL.
+* la commande `option` ne permet de gérer uniquement des BOOL
+
+> 📝 Le type INTERNAL impose une variable de type STRING et possède l'effet supplémentaire que la variable reste interne et n'est pas proposée dans les outils de configuration graphiques
+
 La valeur de la variables est conservée dans le cache.
 
 On peut passer une valeur dans la commande cmake: `cmake . -DMY_VAR=ON`
+
+On peut aussi utiliser des outils comme **ccmake**
 
 > 📝 CMake possède également des options internes permettant de modifier le comportement par défaut de certaines commandes. Ces options se gèrent de la même façon. Seul le nom de l'option devra correspondre à l'option retenue.
 

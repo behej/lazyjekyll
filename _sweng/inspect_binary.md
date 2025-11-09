@@ -59,6 +59,7 @@ On obtient tous les symboles contenus dans le fichier
 |:---:|--------|
 | -A | affiche toujours le nom du fichier devant l'adresse (pratique lorsqu'on liste les symboles d'une lib qui regroupe plusieurs objets) |
 | -C | demangle des symboles |
+| -D | Affiche uniquement les symbôles dynamiques |
 | -v | trier par nom |
 | -S | trier par taille d'objet |
 | -n | trier par adresse |

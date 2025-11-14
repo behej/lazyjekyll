@@ -277,7 +277,26 @@ Un package est un répertoire dans lequel on peut ranger des modules (des fichie
 Pour importer le module:
 * `from nomPackage.nomModule import *` : importe toutes les fonctions du module du package. Les fonctions s'appellent directement en utilisant le nom de la fonction.
 * `from nomPackage.nomModule import fonction`: importe une seule fonction
-* `import nomPackage.nomModule`: importe le module mais les fonctions devront être appelées *nomPacakge.nomModule.fonction*
+* `import nomPackage.nomModule`: importe le module mais les fonctions devront être appelées *nomPackage.nomModule.fonction*
+
+On peut aussi mieux organiser le module en complétant le fichier `__init__.py`
+```python
+from .fichier1 import fonction
+from .fichier2 import fonction1, fonction2
+
+__all__ = ["fonction", "fonction1", "fonction2"]
+```
+Ainsi, on n'a plus un package qui est constitué de fichiers et qui chacun contient des fonctions/classes. Mais on a un package qui expose des fonctions/classes. On n'a plus besoin de connaitre l'organisation interne.
+
+
+* le point `.` devant les noms de fichiers spécifient explicitement que l'on veut utiliser le fichier local
+* la liste `__all__` liste les fonctions à exporter si l'utilisateur fait `from module import *`
+
+Ainsi on pourra importer le module plus facilement, sans avoir besoin de connaitre les fichiers internes
+* `from nomPackage import fonction`: importe une seule fonction qui s'utilise directement
+* `from nomPackage import *fonction*`: importe toutes les fonctions qui s'utilisent directement
+* `import nomPackage`: importe toutes les fonctions mais s'utilisent `nomPackage.fonction`
+
 
 
 # Orienté Objet
@@ -335,13 +354,13 @@ class ClasseFille(ClasseMere1, ClasseMere2):
 ```python
 class ClasseFille(ClasseMere):
   def __init__(self, args):
-    super().__init__(self, args)
+    super().__init__(args)
     # Other initialisations
 
-  def myMethod(self):
-    super().myMethod(self)
+  def myMethod(self, args):
+    super().myMethod(args)
     # Alternative syntax:
-    # ClasseMere.myMethod(self)
+    # ClasseMere.myMethod(self, args)
 ```
 
 * `issubclass(ClasseFille, ClasseMere)`: Renvoie true si ClasseFille hérite de ClasseMere

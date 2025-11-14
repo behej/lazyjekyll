@@ -476,6 +476,48 @@ Avec le mot clé `yield`, la fonction est suspendue et renvoie la valeur spécif
 * On peut stopper la boucle du générateur avec la méthode `close()`
 * On peut passer une valeur au générateur avec la méthode `send()`
 
+# Décorateurs
+Les décorateurs permettent de modifier ou améliorer le comportement d'une fonction/méthode. Il s'agit d'une fonction qui s'exécute "*autour*" d'une fonction/méthode/classe: elle peut exécuter du code avant/après mais aussi modifier les paramètres.
+
+On ajoute un décorateur à une fonction en ajoutant simplement `@decorator` avant l'implémentation de la fonction.
+
+## Implémentation
+**Définition du décorateur**
+```python
+def my_decorator(func):
+    def wrapper(*args, **kwargs):
+        print(">>> Starting function")
+        # ici on peut modifier les args si on veut
+        func(*args, **kwargs)
+        print(">>> Function finished")
+    return wrapper
+```
+
+**Utilisation**
+```python
+@my_decorator
+def my_function(arg1, arg2):
+  # implem
+```
+
+**Exemple de décorateur de méthode**
+```python
+def my_decorator(func):
+    def wrapper(self, *args, **kwargs):
+        res = func(self, *args, **kwargs)
+        return res
+    return wrapper
+```
+
+
+## Décorateurs utiles à connaitre
+* `staticmethod`: méthode statique de classe
+* `classmethod`: méthode de classe
+* `property`: définit une méthode en tant que propriété. Utile pour encapsuler les attributs et maitriser leur accès à l'aide de getter et setter
+  * `<nomProperty>.setter`: définit une méthode en tant que setter pour la propriété indiquée.
+* `deprecated`: indique une fonction comme dépréciée (nécessite `from warnings import deprecated`)
+
+
 # Interactions avec l'OS
 * Signaux: le programme python est capable d'émettre ou de réceptionner des signaux et d'y associer un traitement spécifique
   * le signal SIGINT est émis lorsqu'on demande au programme de se terminer
@@ -589,6 +631,7 @@ Une sélection de librairies à connaitre en Python
 * [configparser](https://docs.python.org/3/library/configparser.html): Gérer facilement des fichiers de configuration (fichiers .ini)
 * [logging](https://docs.python.org/3/library/logging.html): Créer facilement des fichiers de log (avec niveau de détails des logs, timestamp, etc.)
 * [docx](https://python-docx.readthedocs.io/en/latest/): Manipuler des fichiers Microsoft Word
+* [itertools](https://docs.python.org/3/library/itertools.html): Outils d'itération supers puissants: accumulation, création de toutes les combinaisons possibles entre plusieurs listes, etc.
 
 # Virtual environment
 Les environnements virtuels permettent de spécifier des packages différents à des versions données pour un projet particulier. L'intérêt est que chaque projet peut posséder ses propres dépendances sans se soucier des projets annexes ou encore de l'installation système. Le tout étant portable d'un poste de travail à un autre très simplement.

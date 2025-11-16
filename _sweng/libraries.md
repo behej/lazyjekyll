@@ -26,9 +26,7 @@ Le code appelant doit simplement *avoir connaissance* de la déclaration des sym
 La résolution des symbôles sera effectuée au moment de link final pour produire un code exécutable: soit un .exe, soit une lib dynamique. C'est uniquement à ce moment que tous les symbôles utilisés doivent être définis.
 
 > 📝 Si une lib statique utilise une autre lib statique, elles ne sont pas link entre elles. La première lib statique fera appel à des symbôles non définis et cela restera ainsi jusqu'au link final.
-> 
 > Cela signifie également que si lib1 utilise lib2, le code de lib1 **n'embarque pas** le code de lib2. Ce dernier devra être fourni au moment du link final.
->
 > C'est différent des lib dynamiques ou des exe: si un exe utilise lib1, alors le code de lib1 se retrouve dans l'exécutable.
 
 ## Résolution des symbôles
@@ -60,10 +58,7 @@ target_link_libraries(main PRIVATE tutu toto)    # l'implem de tutu sera utilis�
 ```
 
 > 📝 Cette même logique est applicable si un symbôle est défini plusieurs fois au sein d'une même lib. Le premier symbôle trouvé sera utilisé et les suivants ignorés. L'ordre est défini par l'ordre d'appel des fichiers .o lors de la création de l'archive.
-> ```cmake
-> add_library(toto STATIC file1.c file2.c)
->```
-> Si la même fonction est définie dans file1 et file2, c'est celle de file1 qui sera utilisée
+> `add_library(toto STATIC file1.c file2.c)` : Si la même fonction est définie dans file1 et file2, c'est celle de file1 qui sera utilisée
 
 
 ### 2. Un symbôle n'est pas (encore) utilisé

@@ -633,6 +633,7 @@ Une sélection de librairies à connaitre en Python
 * [logging](https://docs.python.org/3/library/logging.html): Créer facilement des fichiers de log (avec niveau de détails des logs, timestamp, etc.)
 * [docx](https://python-docx.readthedocs.io/en/latest/): Manipuler des fichiers Microsoft Word
 * [itertools](https://docs.python.org/3/library/itertools.html): Outils d'itération supers puissants: accumulation, création de toutes les combinaisons possibles entre plusieurs listes, etc.
+* [abc](https://docs.python.org/fr/3.13/library/abc.html): Abstract Base Class, notamment pour la classe de base `ABC` qui est abstraite et pour les décorateurs `@abstractmethod` pour définir une méthode abstraite à surcharger ([cf. article ici](https://www.geeksforgeeks.org/python/abstract-classes-in-python/))
 
 # Virtual environment
 Les environnements virtuels permettent de spécifier des packages différents à des versions données pour un projet particulier. L'intérêt est que chaque projet peut posséder ses propres dépendances sans se soucier des projets annexes ou encore de l'installation système. Le tout étant portable d'un poste de travail à un autre très simplement.

@@ -14,6 +14,26 @@ icon: python.png
   * Rajouter `#! /usr/bin/python3` en 1ère ligne du fichier (Linux) : indique à Linux le chemin vers python pour exécuter le script
   * Rajouter `#-*-coding:utf-8-*-` en 2e ligne pour indiquer l'encodage. utf-8 pour Linux, Latin-1 pour Windows
 
+# Type annotation
+Python est un langage fortement typé. Néanmoins le type des variables ou des paramètres ne doit pas forcément être spécifié. Le langage détermine le type à l'éxécution.
+
+Mais pour des raisons de lisibilité ou de maintenabilité, une bonne pratique est d'indiquer les types attendus pour les variables, les paramètres ou les valeurs de retour des fonctions.
+Cette indication n'est pas du tout destiné à Python mais plutôt aux développeurs et éventuellement aux IDE qui peuvent aider à vérifier la cohérence du code.
+
+La plupart des instructions utile est dispo dans la lib `typing`.
+
+```python
+def my_func(param1: int, param2: str = "") -> float:
+    my_var: int = 5
+    ...
+```
+
+Parmi les entrées existantes dans le module `typing`, on notera les éléments suivants particulièrement utiles:
+* **Any**: n'importe quel type
+* **Callable**: une fonction *appelable*.
+  * `Callable[[int, int], float]`: Premier paramètre: la liste des arguments de la fonction, Second paramètre, le type de retour. Ici en l'occurence une fonction qui admet 2 int en entrée et retourne 1 float.
+
+
 # Instructions de base
 * del: Détruit un objet
 * Mots clé pour les tests: `and`, `or` et `not`

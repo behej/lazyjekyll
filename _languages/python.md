@@ -654,6 +654,8 @@ Une sélection de librairies à connaitre en Python
 * [docx](https://python-docx.readthedocs.io/en/latest/): Manipuler des fichiers Microsoft Word
 * [itertools](https://docs.python.org/3/library/itertools.html): Outils d'itération supers puissants: accumulation, création de toutes les combinaisons possibles entre plusieurs listes, etc.
 * [abc](https://docs.python.org/fr/3.13/library/abc.html): Abstract Base Class, notamment pour la classe de base `ABC` qui est abstraite et pour les décorateurs `@abstractmethod` pour définir une méthode abstraite à surcharger ([cf. article ici](https://www.geeksforgeeks.org/python/abstract-classes-in-python/))
+* [dataclasses](https://docs.python.org/3/library/dataclasses.html): Pour définir une classe qui ne fait que du stockage de donnée et pas du code comportemental. On utilisera surtout le décorateur `@dataclass` ainsi que la fonction `field` (incidence sur la valeur par défaut, la présence du champ dans la méthode `__repr__` ou un constructeur par défaut - `default_factory`)
+* [functools](https://docs.python.org/3/library/functools.html): Fonctions d'ordre supérieur pour s'appliquer sur des fonctions. Notamment pour le décorateur `@cache` qui permet de mettre en cache le résultat d'une fonction qui serait appelée beaucoup de fois ou qui prend du temps. Ainsi, le cache est utilisé plutôt que d'exécuter la fonction à chaque fois.
 
 # Virtual environment
 Les environnements virtuels permettent de spécifier des packages différents à des versions données pour un projet particulier. L'intérêt est que chaque projet peut posséder ses propres dépendances sans se soucier des projets annexes ou encore de l'installation système. Le tout étant portable d'un poste de travail à un autre très simplement.

@@ -95,3 +95,135 @@ Dans le cas où on ne veut pas synchroniser l'intégralité du dossier gdrive, R
 * `rclone copyto <nom_remote>:directory/file dest/dir/`: copy un ficher de la source vers la destination indiqué
 
 
+# Afficher les photos
+## Option fbi
+**fbi** (FrameBuffer Imageviewer) est un utilitaire qui permet de s'interfacer directement avec le framebuffer sans requérir de serveur graphique.
+
+```sh
+# Installation
+sudo apt install -y fbi
+
+# Afficher une image
+sudo fbi -d /dev/fb0 -T 1 -a --noverbose -1 /path/to/image.jpg
+
+# Afficher un diaporama
+sudo fbi -d /dev/fb0 -T 1 -a --noverbose -1 /path/to/folder/*
+sudo fbi -d /dev/fb0 -T 1 -a --noverbose -1 /path/to/image1.jpg /path/to/image2.jpg ...
+sudo fbi -d /dev/fb0 -T 1 -a --noverbose -1 -l /path/to/list.txt
+
+# Quitter proprement fbi
+sudo killall -QUIT fbi
+sudo pkill -QUIT fbi
+sudo pkill -QUIT -f fbi
+
+# Force le vidage de framebuffer
+sudo dd if=/dev/zero of=/dev/fb0 bs=1024 count=7680
+
+# Affiche un message sur le terminal depuis ssh
+echo "Test" | sudo tee /dev/tty1
+# L'utilisation de "sudo tee" car l'utilisateur ssh n'a pas le droit d'écrire directement dans /dev/tty1
+```
+
+* sudo: requit parce qu'on veut accéder à `/dev/fb0`, ce qui requiert des privilèges.
+* -d: device. On veut afficher sur `/deb/fb0` qui correspond généralement à l'écran branché en HDMI
+* -T 1: démarre sur la console virtuelle #1
+* -a: autozoom
+* --noverbose: n'affiche pas le bandeau avec les détails de la photo en bas d'écran
+* -t <duration>: durée pendant laquelle affichée la photo avant de passer à la suivante
+* -l <list_file>: Utilise un fichier texte qui contient la liste des images à afficher
+
+
+## Option mpv
+**mpv** est un player vidéo. Dans le cas présent il est détourné pour le faire afficher des photos.
+
+```sh
+mpv --vo=drm  --image-display-duration=inf -v /path/to/pic.jpg
+```
+
+Dans le cas du diaporama, on va le lancer d'une façon un peu différente. Le logiciel mpv va se lancer mais rester en attente. Et on va lui envoyer quelle photo afficher par un message *ipc* (Inter-Process Communication).
+```sh
+mpv --idle --input-ipc-server=/tmp/mpv-socket --fullscreen --vo=drm --osd-level=0
+```
+
+Le but de cette manoeuvre était de tenter de supprimer le glitch qui apparaissait avec **fbi** (la console était brièvement affichée entre 2 photos avec les logs qui apparaissaient).
+
+Dans la pratique, bien que compliquée, cette méthode fonctionnait plutôt bien. Mais quelque photos n'arrivaient pas à être affichées correctement. Ces mêmes photos s'affichaient bien avec un appel direct à mpv. Je n'ai jamais réussi à comprendre ce qui ne marchait pas bien.
+
+## Option feh
+
+Requiert un serveur graphique minimal.
+
+
+# Preprocessing des photos
+## Reduction de la taille des images
+Pour cela, on utilise un outil de retouche d'image en ligne de commande bien connu: **imagemagick**.
+
+```sh
+# Installation
+sudo apt install -y imagemagick
+
+# Réduction de la résolution des images
+convert "/path/to/pic.jpg" -resize "1024x600" -quality 80 -strip "/path/to/dest/file.jpg"
+# -resize: change la résolution
+# -quality: baisse la qualité
+```
+
+
+# Installation d'un service
+Créer un fichier `diaporama.service` dans le dossier `/etc/systemd/system/` et y copier les lignes ci-dessous (les adapter).
+
+
+```sh
+
+[Unit]
+Description=Photo slideshow service
+After=multi-user.target
+
+[Service]
+User=<user>
+WorkingDirectory=/home/<user>/
+ExecStart=/usr/bin/python3 /path/to/script.py
+Restart=always
+RestartSec=10
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Activer le service:
+```sh
+sudo systemctl daemon-reload
+sudo systemctl enable diaporama.service
+```
+
+Redémarrer le rpi ou démarrer le service manuellement avec `sudo systemctl start diaporama.service`
+
+
+# Rechargement de la liste des photos
+Principe de fonctionnement:
+1. Le diaporama est lancé automatiquement au démarrage du rpi. Il liste toutes les photos présentes dans un dossier et les affiche successivement.
+2. Périodiquement (chaque nuit), un script de synchro est lancé:
+   1. Il récupère les nouvelles photos depuis gdrive et supprime celles qui ont été supprimées
+   2. Il redimensionne les photos et les place dans le dossier utilisé par le diaporama
+
+Afin que le diaporama prenne en compte la nouvelle liste de photos, il faut sigaler au diaporama qu'il doit se mettre à jour une fois que la synchro a été effectuée.
+
+Pour cela, on utilise le mécanisme des signaux entre processes.
+* On envoie un signal `HUP` au diaporama
+* le signal est récupéré et déclenche une nouveau scan des photos à afficher
+
+## Envoyer un signal
+```sh
+sudo pkill -HUP -f diaporama.py
+```
+
+## Ecouter le signal depuis python
+```python
+import signal
+
+def handler_signal(signum, frame):
+    do_sommething()
+
+signal.signal(signal.SIGHUP, handler_signal)
+```

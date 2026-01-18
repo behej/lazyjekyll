@@ -88,3 +88,10 @@ crontab -e
 */10 * * * * /usr/bin/rclone sync <nom_remote>:photoframe/ /home/pi/pictures/
 ```
 
+## Autres options de rclone
+Dans le cas où on ne veut pas synchroniser l'intégralité du dossier gdrive, Rclone permet des commandes plus fines
+* `rclone ls <nom_remote>:directory/`: liste les fichiers présents et leur taille dans le dossier indiqué
+* `rclone lsf <nom_remote>:directory/`: liste les fichiers présents dans le dossier indiqué. Le format de sortie est particulièrement adapté pour ensuite faire du parsing sur la liste des fichiers
+* `rclone copyto <nom_remote>:directory/file dest/dir/`: copy un ficher de la source vers la destination indiqué
+
+

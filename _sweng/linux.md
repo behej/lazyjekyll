@@ -44,6 +44,12 @@ Lorsqu'on lance une commande dans le terminal, on ne récupère la main qu'à la
 * `bg` : relance la commande interrompue en la basculant en arrière plan
 * `jobs` : liste toutes les tâches qui tournent en arrière plan
 * `fg %n` : ramène une tâche de l'arrière plan vers le premier plan (la valeur *n* est donnée par la commande jobs)
+* `kill <pid>` : tue le process
+  * `kill -9` : SIGKILL
+*  `kill -KILL` : SIGKILL (existe aussi QUIT, HUP, INT)
+* `pkill <process name>` : tue le process indiqué par le nom (dès qu'un process qui contient le mot indiqué, il est tué)
+  * `pkill -f <name>`: full matching
+* `killall <name>` : idem `pkill -f`
 
 Les tâches en arrière plan restent quand même attachées au shell. Si on ferme le shell, les tâches sont arrêtées. On peut détacher une tâche du shell pour qu'elle s'exécute de manière autonome.
 * `disown -h %n` : détache le job du shell. On peut remplacer *%n* par le pid de la tâche

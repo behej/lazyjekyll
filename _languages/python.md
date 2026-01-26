@@ -601,6 +601,9 @@ with verrou:
 ```
 
 # Tests unitaires
+## Module unittest
+> ⚠️ Le module unittest est aujourd'hui avantageusement remplacé par pytest
+
 * Placer les TU d'une classe dans un module dédié qui doit impérativement s'appeler **test\***
 * Importer le module `unittest`
 * Créer une classe qui hérite de `unittest.TestCase`
@@ -644,6 +647,53 @@ Les TU peuvent être appelés:
 | assertRaises(exception, fonction, arguments) |
 
 La dernière assertion vérifie que l'appel de la fonction lève l'exception attendue
+
+
+## Pytest
+Pytest permet de découvrir tout seul tous les tests présents dans le projet si les règles suivantes sont respectées
+* les fichiers de test doivent commencer par `test_`
+* les fonctions de test doivent commencer par `test_`
+* les classes de test (si ou souhaite regrouper les cas de test par familles) doivent commencer par `Test`
+
+Pour lancer les tests:
+* pytest: lancer tous les tests
+* pytest -v : mode verbose
+
+
+### Marker
+Les marker permettent d'associer des *tags* aux tests pour pouvoir n'exécuter qu'une sous-catégorie de tests (exemple: des tests lents, des tests pour une fonctionnalité données, etc.)
+
+```python
+@pytest.mark.slow
+@pytest.mark.feature1
+def test_my_feature():
+  ...
+```
+
+* pytest -m "slow": ne lance que les tests lents
+* pytest -m "not slow": lance tous les tests sauf les lents
+* pytest -m "feature1 and not slow": lance uniquement les tests non lents pour la feature1
+
+**Marker spéciaux**
+* `pytest.mark.skip(reason="pourquoi")`: Skip le test. La raison est optionnelle
+* `pytest.mark.xfail(reason="pourquoi")`: On s'attend à ce que le test échoue
+
+
+### Parametrize
+Plutôt que de multiplier les fonctions de test ou de faire des itérations à l'intérieur des tests, on peut les paramétrer avec le décorateur `parametrize`
+```python
+@pytest.mark.parametrize("a, b, result", [(1, 1, 2), (100, 200, 300), (-1, 1, 0)])
+def test_addition(a, b, result):
+  assert (a+b == result)
+```
+
+On indique directement tous les cas de tests pour une même fonction de test dans le décorateur.
+* le 1er paramètre est une string qui contient les noms de tous les paramètres qui seront passés à la fonction. Les noms doivent correspondre
+* le 2e paramètre est une liste de tuples.
+  * chaque tuple correspond à 1 cas de test
+  * les valeurs du tuple correspondent aux valeurs des paramètres
+
+
 
 
 # Librairies utiles

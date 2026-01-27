@@ -674,6 +674,15 @@ def test_my_feature():
 * pytest -m "not slow": lance tous les tests sauf les lents
 * pytest -m "feature1 and not slow": lance uniquement les tests non lents pour la feature1
 
+Les markers doivent être déclarés dans un fichier de configuration `pytest.ini`
+```ini
+[pytest]
+marker =
+    slow: Tests lents
+    feature1: Tests de la feature trucmuche
+    ...
+```
+
 **Marker spéciaux**
 * `pytest.mark.skip(reason="pourquoi")`: Skip le test. La raison est optionnelle
 * `pytest.mark.xfail(reason="pourquoi")`: On s'attend à ce que le test échoue
@@ -692,7 +701,20 @@ On indique directement tous les cas de tests pour une même fonction de test dan
 * le 2e paramètre est une liste de tuples.
   * chaque tuple correspond à 1 cas de test
   * les valeurs du tuple correspondent aux valeurs des paramètres
+* 3e paramètre optionnel: `ids=["Test case 1", "Test case 2", etc.]`. Pour donner un manuellement un ID à chaque cas de test. Peut être utile pour s'y retrouver parmi tous les tests
 
+Dans l'exemple ci-dessus, la fontion de test génère l'exécution de 3 tests. Ces 3 tests possèdent les même caractéristiques.
+
+Si on veut générer des caractéristiques différentes, il faut utiliser `pytest.param`
+```python
+@pytest.mark.parametrize("a, b, result", [
+    (1, 1, 2), 
+    pytest.param(2, 2, 5, marks=pytest.mark.xfail),
+    pytest.param(-1, -1, -2, marks=pytest.mark.skip, id="Negative values")])
+def test_addition(a, b, result):
+  assert (a+b == result)
+```
+Ainsi, on peut définir des markers différents selon les cas tests et donc filtrer les tests avec la puissance des markers.
 
 
 

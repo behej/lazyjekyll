@@ -64,6 +64,10 @@ Les tâches en arrière plan restent quand même attachées au shell. Si on ferm
   * cat file : affiche le fichier
   * cat file* : concatène et affiche tous les fichiers correspondant au pattern
   * cat file1 file2 > file3 : concatène les fichiers 1 et 2 dans le fichier 3 (NB: fonctionne aussi avec des fichiers binaires)
+* **paste** : concatène des fichiers mais en colonne au lieu de l'un après l'autre
+  * paste file1 file2 : affiche file1 et file2 côte à côte
+  * paste -d\<char\> file1 file2 : spécifie le caractère de séparation
+  * paste -s file1 file2 : renverse les colonnes
 * **mktemp** : Créer un fichier ou un dossier temporaire (dans le dossier /tmp/)
   * my_file=\$(mktemp) : on pourra ensuite lire et écrire dans le fichier en utilisant `$my_file`
   * mktemp -d : créer un dossier temporaire

@@ -14,8 +14,15 @@ icon: git.png
   * git config \-\-global alias.amend 'commit \-\-amend \-\-no-edit'
 * git config \-\-global core.editor 'vim' (ouu n'importe quel éditeur)
 * git config \-\-global pull.rebase true : le comportement par défaut de la commande pull est \-\-rebase
+* git config \-\-global -e : ouvre le fichier de configuration avec l'éditeur par défaut
 
 Les alias sont stockés dans le fichier ~/.gitconfig
+
+La configuration peut être soit globale à tous les projets avec l'option `--global`, soit locale au projet courant avec l'option `--local` (Dans ce cas, la config est stockée dans le fichier `<projet>/.git/config`)
+
+## Configs occasionnelles
+* git config \-\-global url."new_url".insteadOf "url_pattern" : Remplace le pattern indiqué par la nouvelle string pour chaque url. Utile pour intercepter les références à des repos et les remplacer par d'autre repos. Ou par exemple pour remplacer des configurations ssh par des accès https.
+
 
 # Status
 * git status : affiche le statut courant (fichiers modifiés, synchro avec le remote, etc.)
@@ -140,6 +147,15 @@ Se reporter à la commande diff pour plus de détails.
 * git apply *\<patch\>* : Applique le patch mais ne commit pas les changements
 * git am \-\-signoff *\<patch-file\>* : Applique le patch et crée les commits associés avec l'identité de l'auteur du patch. Option signoff ajoute un message avec l'identité de celui qui a appliqué le patch.
   * Note: cette commande ne fonctionne qu'avec les patch créé à l'aide de la commande **format-patch**.
+
+# Submodules
+* git submodule add \<url_du_depot\> \<nom_du_dossier\> : Ajoute un repo existant en tant que sous-module du projet courant
+* git submodule update \-\-init \-\-recursive: initialise les sous-modules la première fois
+* git submodule update \-\-recursive: Met à jour les sous-modules
+
+A l'intérieur du sous-module, il se gère comme un repo normal. On peut commiter, créer des branches, etc.
+
+Dans le projet parent, le sous-module se gère comme un fichier. Tout changement du commit utilisé pour le sous-module dans le projet parent doit être commité. Le changement du sous-module se voit comme un changement du hash à utiliser.
 
 # Divers
 * git reflog : affiche l'historique des dernière commandes

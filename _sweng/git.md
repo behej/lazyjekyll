@@ -120,6 +120,43 @@ A--B--C--D--E  (master)
 
 * git rebase \-\-onto master branche_1 branche_2 : Déplace la branche_2 (depuis son départ de la branche_1) vers la branche master
 
+# Bisect
+Permet de repérer quel commit a introduit un bug
+ 
+## Méthode manuelle
+```sh
+git bisect start
+git bisect good <commit sans bug>
+git bisect bad <commit avec bug>
+```
+A partir de là, git va choisir automatiquement un commit entre les 2.
+
+Il suffit de lui indiquer si le commit contient le bug ou non
+```sh
+git bisect good   # le bug n'est pas présent
+git bisect bad    # le bug est pas présent
+```
+Il va répéter l'opération jusqu'à ce que git identifie le commit fautif
+
+> Abandonner un bisect en cours: `git bisect reset`
+
+
+## Méthode automatique
+L'initialisation du bisect est identique:
+1. Démarrer le bisect
+2. Identifier un commit good
+3. Identifier un commit bad
+
+Créer un script qui teste automatiquement le bug
+* le script renvoie 0 si le commit est *good*
+* le script renvoie 1 si le commit est *bad*
+
+Lancer le **bisect auto**
+```sh
+git bisect run ./my_script.sh [args]
+```
+
+
 # Patch
 ## Créer un patch
 ### format-patch

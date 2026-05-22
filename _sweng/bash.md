@@ -82,6 +82,12 @@ Afficher toutes les valeurs du tableau
 ```sh
 echo ${tab[@]}
 ```
+
+Afficher le nombre d'élements dans le tableau
+```sh
+echo ${#tab[@]}
+```
+
 Afficher toutes les clés du tableau
 ```sh
 echo ${!tab[@]}
